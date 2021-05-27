@@ -28,7 +28,7 @@ contract Manufacturer {
     return manufacturersList.hasRole(_account);
   }
 
-  function addManufacturer(address _account) public {
+  function addManufacturer(address _account ) public {
     manufacturersList.addRole(_account);
     emit ManufacturerAdded(_account);
   }
