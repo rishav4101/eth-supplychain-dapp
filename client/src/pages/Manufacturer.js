@@ -36,7 +36,7 @@ export default function Manufacturer(props){
 
     const handleAddManufacturerRole = async () => {
         console.log(roleInput);
-        await manufacturerContract.methods.addManufacturer(accounts[6]).send({ from: accounts[4], gas:100000 })
+        await supplyChainContract.methods.addManufacturerRole(accounts[6]).send({ from: accounts[4], gas:100000 })
         .then(console.log);
       
         setRoleInput("");
@@ -57,7 +57,7 @@ export default function Manufacturer(props){
     const fetchManufacturedProduct = async () => {
         // const nm = await supplyChainContract.methods.fetchProductCount().call();
         // console.log(nm);
-        const test = await supplyChainContract.methods.fetchProductPart1(1).call().then(console.log);
+        const test = await supplyChainContract.methods.fetchProductPart1(90, "product", 0).call().then(console.log);
         console.log(test);
     }
 
