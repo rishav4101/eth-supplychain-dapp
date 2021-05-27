@@ -3,10 +3,9 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 export default function Manufacturer(props){
-    const web3 = props.web3;
+    // const web3 = props.web3;
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
-    const manufacturerContract = props.manufacturerContract;
 
     const [roleInput, setRoleInput] = React.useState("");
     const [manuForm, setManuForm] = React.useState({
@@ -51,13 +50,13 @@ export default function Manufacturer(props){
 
     const handleSubmitManufacturerForm = async () => {
         console.log(parseInt(manuForm.id));
-        await supplyChainContract.methods.manufactureProduct(parseInt(manuForm.id), manuForm.manufacturerName, manuForm.manufacturerDetails, manuForm.manufacturerLongitude, manuForm.manufacturerLatitude, manuForm.productName, parseInt(manuForm.productCode), parseInt(manuForm.productPrice), manuForm.productCategory).send({ from: accounts[6], gas:999999 }).then(console.log);
+        await supplyChainContract.methods.manufactureProduct( manuForm.manufacturerName, manuForm.manufacturerDetails, manuForm.manufacturerLongitude, manuForm.manufacturerLatitude, manuForm.productName, parseInt(manuForm.productCode), parseInt(manuForm.productPrice), manuForm.productCategory).send({ from: accounts[6], gas:999999 }).then(console.log);
     }
 
     const fetchManufacturedProduct = async () => {
         // const nm = await supplyChainContract.methods.fetchProductCount().call();
         // console.log(nm);
-        const test = await supplyChainContract.methods.fetchProductPart1(90, "product", 0).call().then(console.log);
+        const test = await supplyChainContract.methods.fetchProductPart1(3, "product", 0).call().then(console.log);
         console.log(test);
     }
 

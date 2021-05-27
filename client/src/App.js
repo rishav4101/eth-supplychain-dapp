@@ -6,12 +6,14 @@ import { Router, Switch, Route } from "react-router-dom";
 import {createBrowserHistory} from 'history';
 import getWeb3 from "./getWeb3";
 
-import Manufacturer from "./pages/Manufacturer/Manufacturer";
+import Manufacturer from "./pages/Manufacturer/Manufacture";
+import AllManufacture from "./pages/Manufacturer/AllManufacture";
+
 
 import "./App.css";
 
 class App extends Component {
-  state = { web3: null, accounts: null, contract: null, manufacturerContract: null };
+  state = { web3: null, accounts: null, contract: null };
 
   componentDidMount = async () => {
     try {
@@ -25,16 +27,10 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      const deployedNetwork2 = ManufacturerContract.networks[networkId];
-      const instance2 = new web3.eth.Contract(
-        ManufacturerContract.abi,
-        deployedNetwork2 && deployedNetwork2.address,
-      );
-
       // instance2.options.address = accounts[0];
       // instance.options.address = accounts[0];
 
-      this.setState({ web3, accounts, contract: instance, manufacturerContract: instance2 }, this.runExample);
+      this.setState({ web3, accounts, contract: instance }, this.runExample);
     } catch (error) {
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
@@ -66,7 +62,10 @@ class App extends Component {
         <Router history={createBrowserHistory()}>
           <Switch>
             <Route exact path="/">
-              <Manufacturer web3={this.state.web3} accounts={this.state.accounts} supplyChainContract={this.state.contract} manufacturerContract={this.state.manufacturerContract}/>
+              <Manufacturer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/allManufacture">
+              <AllManufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
           </Switch>
         </Router>

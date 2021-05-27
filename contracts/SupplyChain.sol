@@ -171,7 +171,6 @@ contract SupplyChain {
 
   ///@dev STEP 1 : Manufactured a product.
   function manufactureProduct (
-      uint _uid,
       string memory manufacturerName,
       string memory manufacturerDetails,
       string memory manufacturerLongitude,
@@ -180,9 +179,9 @@ contract SupplyChain {
       uint productCode,
       uint productPrice,
       string memory productCategory
-
       ) public  {
         require(hasManufacturerRole(msg.sender));
+        uint _uid = uid;
         Structure.Product memory product;
         product.sku = sku;
         product.uid = _uid;
