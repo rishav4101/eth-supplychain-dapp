@@ -40,7 +40,7 @@ contract SupplyChain {
     roles[_account].Manufacturer = true;
   }
   
-    function hasThirdPartyRole(address _account)
+  function hasThirdPartyRole(address _account)
     public
     view
     returns (bool)
@@ -70,28 +70,10 @@ contract SupplyChain {
     public
   {
     require(_account != address(0));
-    require(!hasDeliveryHubRole(role, _account));
+    require(!hasDeliveryHubRole(_account));
 
     roles[_account].DeliveryHub = true;
   }
-    function hasCustomerRole(address _account)
-    public
-    view
-    returns (bool)
-  {
-    require(_account != address(0));
-    return roles[_account].Customer;
-  }
-
-  function addCustomerRole(address _account) 
-    public
-  {
-    require(_account != address(0));
-    require(!hasCustomerRole(role, _account));
-
-    roles[_account].Customer = true;
-  }
-
     
   constructor() public payable{
     owner = msg.sender;
@@ -200,6 +182,7 @@ contract SupplyChain {
       string memory productCategory
 
       ) public  {
+        require(hasManufacturerRole(msg.sender));
         Structure.Product memory product;
         product.sku = sku;
         product.uid = _uid;
@@ -237,7 +220,8 @@ contract SupplyChain {
   ///@dev STEP 2 : Purchase of manufactured product by Third Party.
   function purchaseByThirdParty(
     uint _uid
-  ) public onlyThirdparty() manufactured(_uid) {
+  ) public manufactured(_uid) {
+    require(hasThirdPartyRole(msg.sender));
     products[_uid].thirdparty.thirdParty = msg.sender;
     products[_uid].productState = Structure.State.PurchasedByThirdParty;
     productHistory[_uid].history.push(products[_uid]);
@@ -248,7 +232,8 @@ contract SupplyChain {
   ///@dev STEP 3 : Shipping of purchased product to Third Party.
   function shipToThirdParty(
     uint _uid
-  ) public onlyManufacturer()  verifyAddress(products[_uid].manufacturer.manufacturer) {
+  ) public verifyAddress(products[_uid].manufacturer.manufacturer) {
+    require(hasManufacturerRole(msg.sender));
     products[_uid].productState = Structure.State.ShippedByManufacturer;
     productHistory[_uid].history.push(products[_uid]);
 
@@ -260,7 +245,8 @@ contract SupplyChain {
     uint _uid,
     string memory thirdPartyLongitude,
     string memory thirdPartyLatitude
-  ) public onlyThirdparty() shippedByManufacturer(_uid) verifyAddress(products[_uid].thirdparty.thirdParty) {
+  ) public shippedByManufacturer(_uid) verifyAddress(products[_uid].thirdparty.thirdParty) {
+    require(hasThirdPartyRole(msg.sender));
     products[_uid].owner = msg.sender;
     products[_uid].thirdparty.thirdPartyLongitude = thirdPartyLongitude;
     products[_uid].thirdparty.thirdPartyLatitude = thirdPartyLatitude;
@@ -273,7 +259,7 @@ contract SupplyChain {
   ///@dev STEP 5 : Purchase of a product at third party by Customer.
   function purchaseByCustomer(
     uint _uid
-  ) public onlyCustomer() receivedByThirdParty(_uid) {
+  ) public receivedByThirdParty(_uid) {
     products[_uid].customer = msg.sender;
     products[_uid].productState = Structure.State.PurchasedByCustomer;
     productHistory[_uid].history.push(products[_uid]);
@@ -283,7 +269,8 @@ contract SupplyChain {
   ///@dev STEP 7 : Shipping of product by third party purchased by customer.
   function shipByThirdParty(
     uint _uid
-  ) public onlyThirdparty()  verifyAddress(products[_uid].owner) verifyAddress(products[_uid].thirdparty.thirdParty) {
+  ) public  verifyAddress(products[_uid].owner) verifyAddress(products[_uid].thirdparty.thirdParty) {
+    require(hasThirdPartyRole(msg.sender));
     products[_uid].productState = Structure.State.ShippedByThirdParty;
     productHistory[_uid].history.push(products[_uid]);
 
@@ -296,7 +283,8 @@ contract SupplyChain {
     uint _uid,
     string memory deliveryHubLongitude,
     string memory deliveryHubLatitude
-  ) public onlyDeliveryHub() shippedByDeliveryHub(_uid) {
+  ) public shippedByDeliveryHub(_uid) {
+    require(hasDeliveryHubRole(msg.sender));
     products[_uid].owner = msg.sender;
     products[_uid].deliveryhub.deliveryHub = msg.sender;
     products[_uid].deliveryhub.deliveryHubLongitude = deliveryHubLongitude;
@@ -310,7 +298,8 @@ contract SupplyChain {
   ///@dev STEP 9 : Shipping of product by delivery hub purchased by customer.
   function shipByDeliveryHub(
     uint _uid
-  ) public onlyDeliveryHub() receivedByDeliveryHub(_uid) verifyAddress(products[_uid].owner) verifyAddress(products[_uid].deliveryhub.deliveryHub) {
+  ) public receivedByDeliveryHub(_uid) verifyAddress(products[_uid].owner) verifyAddress(products[_uid].deliveryhub.deliveryHub) {
+    require(hasDeliveryHubRole(msg.sender));
     products[_uid].productState = Structure.State.ShippedByDeliveryHub;
     productHistory[_uid].history.push(products[_uid]);
 
@@ -320,7 +309,7 @@ contract SupplyChain {
   ///@dev STEP 10 : Shipping of product by delivery hub purchased by customer.
   function receiveByCustomer(
     uint _uid
-  ) public onlyCustomer() shippedByDeliveryHub(_uid) verifyAddress(products[_uid].customer) {
+  ) public shippedByDeliveryHub(_uid) verifyAddress(products[_uid].customer) {
     products[_uid].owner = msg.sender;
     products[_uid].productState = Structure.State.ReceivedByCustomer;
     productHistory[_uid].history.push(products[_uid]);

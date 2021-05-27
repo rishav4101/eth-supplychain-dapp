@@ -14,7 +14,7 @@ library Structure{
     ShippedByDeliveryHub,
     ReceivedByCustomer
     }
-      struct ManufactureDetails{
+  struct ManufactureDetails{
       address manufacturer;
       string manufacturerName;
       string manufacturerDetails;
@@ -58,6 +58,5 @@ library Structure{
     bool Manufacturer;
     bool ThirdParty;
     bool DeliveryHub;
-    bool Customer;
   }
 }
