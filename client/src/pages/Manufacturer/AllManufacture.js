@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../../components/Navbar"
 
 export default function AllManufacture(props){
     const accounts = props.accounts;
@@ -27,10 +28,9 @@ export default function AllManufacture(props){
 
     }, [count])
 
-
-
     return(
         <>
+        <Navbar/>
         <h1>All Manufactured Products</h1>
         <h2>Total : {count}</h2>
           {allManufacture.length !== 0 ? (allManufacture.map((prod) => (

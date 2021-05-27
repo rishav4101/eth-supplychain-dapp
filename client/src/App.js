@@ -8,9 +8,12 @@ import getWeb3 from "./getWeb3";
 
 import Manufacturer from "./pages/Manufacturer/Manufacture";
 import AllManufacture from "./pages/Manufacturer/AllManufacture";
-
+import AllProductsTP from "./pages/ThirdParty/AllProductsTP";
+import SoldManufacture from "./pages/Manufacturer/SoldManufacture";
 
 import "./App.css";
+import ReceiveThirdParty from "./pages/ThirdParty/ReceiveThirdParty";
+import PurchaseCustomer from "./pages/Customer/PurchaseCustomer";
 
 class App extends Component {
   state = { web3: null, accounts: null, contract: null };
@@ -66,6 +69,18 @@ class App extends Component {
             </Route>
             <Route exact path="/allManufacture">
               <AllManufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/manufacturer/sold">
+              <SoldManufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/ThirdParty/allProducts">
+              <AllProductsTP accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/ThirdParty/receive">
+              <ReceiveThirdParty accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/Customer/buy">
+              <PurchaseCustomer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
           </Switch>
         </Router>

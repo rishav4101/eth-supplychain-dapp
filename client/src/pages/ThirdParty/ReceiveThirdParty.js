@@ -1,13 +1,16 @@
-import React from "react";
-import Navbar from "../../components/Navbar"
+import React, { useState } from "react";
+import Navbar from "../../components/Navbar";
 import Button from "@material-ui/core/Button";
+import ProductModal from "../../components/Modal";
 
-export default function SoldManufacture(props){
+export default function ReceiveThirdParty(props){
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
 
     const [count, setCount] = React.useState(0);
-    const [allSoldProducts, setAllSoldProducts] = React.useState([]);
+    const [allReceiveProducts, setAllReceiveProducts] = React.useState([]);
+    const [modalData, setModalData] = useState([]);
+    const [open, setOpen] = useState(false);
 
     React.useEffect(() => {
         (async () => {
@@ -21,29 +24,39 @@ export default function SoldManufacture(props){
             for(var i = 1; i<count; i++){
                 var a = await supplyChainContract.methods.fetchProductPart1(i, 'product', 0).call();
                 var b = await supplyChainContract.methods.fetchProductPart2(i, 'product', 0).call();
-                if(b[5] == "1"){
+                if(b[5] == "2"){
                     const ar = [];
                     ar.push(a); ar.push(b);
                     arr.push(ar);
                 }
             }
-            await setAllSoldProducts(arr);
+            await setAllReceiveProducts(arr);
             
             }) ();
 
     }, [count])
 
-    const handleShipButton = async id => {
-        await supplyChainContract.methods.shipToThirdParty(id).send({ from: accounts[6], gas:1000000 }).then(console.log);
+    const handleReceiveButton = async (id, long, lat) => {
+        await supplyChainContract.methods.receiveByThirdParty(parseInt(id), long, lat).send({ from: accounts[8], gas:1000000 }).then(console.log);
         setCount(0);
     }
+
+    const handleClose = () => setOpen(false);
+
+    const handleClick = async (prod) => {
+      await setModalData(prod);
+      console.log(modalData);
+      setOpen(true);
+    };
 
     return(
         <>
         <Navbar/>
+        <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
+
         <h1>All Products To be Shipped</h1>
         <h2>Total : {count}</h2>
-          {allSoldProducts.length !== 0 ? (allSoldProducts.map((prod) => (
+          {allReceiveProducts.length !== 0 ? (allReceiveProducts.map((prod) => (
                 <>
                     <div>
                     <p>Universal ID : {prod[0][0]}</p>
@@ -60,9 +73,9 @@ export default function SoldManufacture(props){
                 type="submit"
                 variant="contained"
                 color="primary"
-                onClick={() => handleShipButton(prod[0][0])}
+                onClick={() => handleClick(prod)}
             >
-                SHIP
+                Recieve
             </Button>
                     </div>
                     

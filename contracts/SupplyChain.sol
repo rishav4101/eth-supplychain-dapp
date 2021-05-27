@@ -265,6 +265,7 @@ contract SupplyChain {
 
     emit PurchasedByCustomer(_uid);
   }
+
   ///@dev STEP 7 : Shipping of product by third party purchased by customer.
   function shipByThirdParty(
     uint _uid
@@ -329,7 +330,7 @@ contract SupplyChain {
       string memory  
   )
   {  
-    Structure.Product memory product;
+    Structure.Product storage product = products[_uid];
     if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
       product = products[_uid];
     }
@@ -360,7 +361,7 @@ contract SupplyChain {
       address,
       string memory
   ){
-    Structure.Product memory product;
+    Structure.Product storage product = products[_uid];
     if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
       product = products[_uid];
     }
@@ -379,29 +380,29 @@ contract SupplyChain {
     );
   }
 
-  // function fetchProductPart3(uint _uid,string memory _type,uint i) public view returns
-  // (
-  //     string memory,
-  //     address,
-  //     string memory,
-  //     string memory,
-  //     address
-  // ){
-  //   Structure.Product memory product;
-  //   if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
-  //     product = products[_uid];
-  //   }
-  //    if(keccak256(bytes(_type)) == keccak256(bytes("history"))){
-  //     product = productHistory[_uid].history[i];
-  //   }
-  //   return (
-  //    product.thirdparty.thirdPartyLatitude,
-  //    product.deliveryhub.deliveryHub,
-  //    product.deliveryhub.deliveryHubLongitude,
-  //    product.deliveryhub.deliveryHubLatitude,
-  //    product.customer
-  //   );
-  // }
+  function fetchProductPart3(uint _uid,string memory _type,uint i) public view returns
+  (
+      string memory,
+      address,
+      string memory,
+      string memory,
+      address
+  ){
+    Structure.Product storage product = products[_uid];
+    if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
+      product = products[_uid];
+    }
+     if(keccak256(bytes(_type)) == keccak256(bytes("history"))){
+      product = productHistory[_uid].history[i];
+    }
+    return (
+     product.thirdparty.thirdPartyLatitude,
+     product.deliveryhub.deliveryHub,
+     product.deliveryhub.deliveryHubLongitude,
+     product.deliveryhub.deliveryHubLatitude,
+     product.customer
+    );
+  }
 
   function fetchProductCount() public view returns (uint) 
   {
@@ -411,5 +412,10 @@ contract SupplyChain {
   function fetchProductHistoryLength(uint _uid) public view returns (uint)
   {
     return productHistory[_uid].history.length;
+  }
+
+  function fetchProductState(uint _uid) public view returns (Structure.State) 
+  {
+    return products[_uid].productState;
   }
 }
