@@ -277,5 +277,153 @@ contract SupplyChain is Customer,DeliveryHub,Manufacturer,SortationHub,Thirdpart
 
     emit PurchasedByCustomer(_uid);
   }
+  ///@dev STEP 8 : Shipping of product by third party purchased by customer.
+  function shipByThirdParty(
+    uint _uid
+  ) public onlyThirdparty()  verifyAddress(products[_uid].owner) verifyAddress(products[_uid].thirdparty.thirdParty) {
+    products[_uid].productState = State.ShippedByThirdParty;
+    productHistory[_uid].history.push(products[_uid]);
 
+    emit ShippedByThirdParty(_uid);
+  }
+
+
+  ///@dev STEP 11 : Receiveing of product by delivery hub purchased by customer.
+  function receiveByDeliveryHub(
+    uint _uid,
+    string memory deliveryHubLongitude,
+    string memory deliveryHubLatitude
+  ) public onlyDeliveryHub() shippedByDeliveryHub(_uid) {
+    products[_uid].owner = msg.sender;
+    products[_uid].deliveryhub.deliveryHub = msg.sender;
+    products[_uid].deliveryhub.deliveryHubLongitude = deliveryHubLongitude;
+    products[_uid].deliveryhub.deliveryHubLatitude = deliveryHubLatitude;
+    products[_uid].productState = State.ReceivedByDeliveryHub;
+    productHistory[_uid].history.push(products[_uid]);
+
+    emit ReceivedByDeliveryHub(_uid);
+  }
+
+  ///@dev STEP 12 : Shipping of product by delivery hub purchased by customer.
+  function shipByDeliveryHub(
+    uint _uid
+  ) public onlyDeliveryHub() receivedByDeliveryHub(_uid) verifyAddress(products[_uid].owner) verifyAddress(products[_uid].deliveryhub.deliveryHub) {
+    products[_uid].productState = State.ShippedByDeliveryHub;
+    productHistory[_uid].history.push(products[_uid]);
+
+    emit ShippedByDeliveryHub(_uid);
+  }
+
+  ///@dev STEP 13 : Shipping of product by delivery hub purchased by customer.
+  function receiveByCustomer(
+    uint _uid
+  ) public onlyCustomer() shippedByDeliveryHub(_uid) verifyAddress(products[_uid].customer) {
+    products[_uid].owner = msg.sender;
+    products[_uid].productState = State.ReceivedByCustomer;
+    productHistory[_uid].history.push(products[_uid]);
+
+    emit ReceivedByCustomer(_uid);
+  }
+  
+  function fetchProductPart1(uint _uid,string memory _type,uint i) public view returns
+  (
+      uint,
+      uint,
+      address,
+      address,
+      string memory,
+      string memory,
+      string memory,
+      string memory  
+  )
+  {  
+    Product memory product;
+    if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
+      product = products[_uid];
+    }
+     if(keccak256(bytes(_type)) == keccak256(bytes("history"))){
+      product = productHistory[_uid].history[i];
+    }
+    return (
+     product.uid,
+     product.sku,
+     product.owner,
+     product.manufacturer.manufacturer,
+     product.manufacturer.manufacturerName,
+     product.manufacturer.manufacturerDetails,
+     product.manufacturer.manufacturerLongitude,
+     product.manufacturer.manufacturerLatitude
+    );
+  }
+
+  ///@dev Fetch product 
+  // function fetchProductPart2(uint _uid,string memory _type,uint i) public view returns 
+  // (   
+  //     uint256,
+  //     string memory,
+  //     uint,
+  //     uint,
+  //     string memory,
+  //     State,
+  //     address,
+  //     string memory
+  // ){
+  //   Product memory product;
+  //   if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
+  //     product = products[_uid];
+  //   }
+  //    if(keccak256(bytes(_type)) == keccak256(bytes("history"))){
+  //     product = productHistory[_uid].history[i];
+  //   }
+  //   return(
+  //    product.manufacturer.manufacturedDate,
+  //    product.productdet.productName,
+  //    product.productdet.productCode,
+  //    product.productdet.productPrice,
+  //    product.productdet.productCategory,
+  //    product.productState,
+  //    product.thirdparty.thirdParty,
+  //    product.thirdparty.thirdPartyLongitude
+  //   );
+  // }
+
+  // function fetchProductPart3(uint _uid,string memory _type,uint i) public view returns
+  // (
+  //     string memory,
+  //     address,
+  //     string memory,
+  //     string memory,
+  //     address,
+  //     string memory,
+  //     string memory,
+  //     address
+  // ){
+  //   Product memory product;
+  //   if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
+  //     product = products[_uid];
+  //   }
+  //    if(keccak256(bytes(_type)) == keccak256(bytes("history"))){
+  //     product = productHistory[_uid].history[i];
+  //   }
+  //   return (
+  //    product.thirdparty.thirdPartyLatitude,
+  //    product.sortationhub.sortationHub,
+  //    product.sortationhub.sortationHubLongitude,
+  //    product.sortationhub.sortationHubLatitude,
+  //    product.deliveryhub.deliveryHub,
+  //    product.deliveryhub.deliveryHubLongitude,
+  //    product.deliveryhub.deliveryHubLatitude,
+  //    product.customer
+  //   );
+  // }
+
+  function fetchProductCount() public view returns (uint) 
+  {
+    return uid;
+  }
+
+  function fetchProductHistoryLength(uint _uid) public view returns (uint)
+  {
+    return productHistory[_uid].history.length;
+  }
 }
