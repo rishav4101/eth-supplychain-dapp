@@ -6,7 +6,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import {createBrowserHistory} from 'history';
 import getWeb3 from "./getWeb3";
 
-import Manufacturer from "./pages/Manufacturer";
+import Manufacturer from "./pages/Manufacturer/Manufacturer";
 
 import "./App.css";
 
