@@ -9,7 +9,7 @@ import './rolesUtils/Thirdparty.sol';
 
 contract SupplyChain is Customer,DeliveryHub,Manufacturer,SortationHub,Thirdparty{
   //product code
-uint uid;
+  uint uid;
 
   uint sku;
 
@@ -144,5 +144,138 @@ uint uid;
     require(products[_uid].productState == State.ReceivedByCustomer);
     _;
   }
+  function manufactureEmptyInitialize(Product memory product) internal pure {
+      address thirdParty;
+      string memory thirdPartyLongitude;
+      string memory thirdPartyLatitude;
+      address sortationHub;
+      string memory sortationHubLongitude;
+      string memory sortationHubLatitude;
+      address deliveryHub;
+      string memory deliveryHubLongitude;
+      string memory deliveryHubLatitude;
+      address customer;
+
+      product.thirdparty.thirdParty = thirdParty;
+      product.thirdparty.thirdPartyLongitude = thirdPartyLongitude;
+      product.thirdparty.thirdPartyLatitude = thirdPartyLatitude;
+      product.sortationhub.sortationHub = sortationHub;
+      product.sortationhub.sortationHubLongitude = sortationHubLongitude;
+      product.sortationhub.sortationHubLatitude = sortationHubLatitude;
+      product.deliveryhub.deliveryHub = deliveryHub;
+      product.deliveryhub.deliveryHubLongitude = deliveryHubLongitude;
+      product.deliveryhub.deliveryHubLatitude = deliveryHubLatitude;
+      product.customer = customer;
+  }
+
+  function manufactureProductInitialize(
+    
+    Product memory product,
+    string memory productName,
+    uint productCode,
+    uint productPrice,
+    string memory productCategory
+  ) internal pure {
+    product.productdet.productName = productName;
+    product.productdet.productCode = productCode;
+    product.productdet.productPrice = productPrice;
+    product.productdet.productCategory = productCategory;
+  }
+
+  ///@dev STEP 1 : Manufactured a product.
+  function manufactureProduct (
+    uint _uid,
+      string memory manufacturerName,
+      string memory manufacturerDetails,
+      string memory manufacturerLongitude,
+      string memory manufacturerLatitude,
+      string memory productName,
+      uint productCode,
+      uint productPrice,
+      string memory productCategory
+
+      ) public  {
+        // uint _uid = uid;
+        // require(isManufacturer(msg.sender));
+        Product memory product;
+        product.sku = sku;
+        product.uid = _uid;
+        product.manufacturer.manufacturerName = manufacturerName;
+        product.manufacturer.manufacturerDetails = manufacturerDetails;
+        product.manufacturer.manufacturerLongitude = manufacturerLongitude;
+        product.manufacturer.manufacturerLatitude = manufacturerLatitude;
+        product.manufacturer.manufacturedDate = block.timestamp;
+        
+        product.owner = msg.sender;
+        product.manufacturer.manufacturer = msg.sender;
+        
+        manufactureEmptyInitialize(product);
+        
+        product.productState = State.Manufactured;
+        
+        manufactureProductInitialize(
+          product,
+          productName,
+          productCode,
+          productPrice,
+          productCategory
+        );
+      
+        products[_uid] = product;
+
+        productHistory[_uid].history.push(product);
+        
+        sku ++;
+        uid = uid + 1;
+        
+        emit Manufactured(_uid);
+      }
+
+  ///@dev STEP 2 : Purchase of manufactured product by Third Party.
+  function purchaseByThirdParty(
+    uint _uid
+  ) public onlyThirdparty() manufactured(_uid) {
+    products[_uid].thirdparty.thirdParty = msg.sender;
+    products[_uid].productState = State.PurchasedByThirdParty;
+    productHistory[_uid].history.push(products[_uid]);
+
+    emit PurchasedByThirdParty(_uid);
+  }
   
-  
+  ///@dev STEP 3 : Shipping of purchased product to Third Party.
+  function shipToThirdParty(
+    uint _uid
+  ) public onlyManufacturer()  verifyAddress(products[_uid].manufacturer.manufacturer) {
+    products[_uid].productState = State.ShippedByManufacturer;
+    productHistory[_uid].history.push(products[_uid]);
+
+    emit ShippedByManufacturer(_uid);
+  }
+
+  ///@dev STEP 4 : Received the purchased product shipped by Manufacturer.
+  function receiveByThirdParty(
+    uint _uid,
+    string memory thirdPartyLongitude,
+    string memory thirdPartyLatitude
+  ) public onlyThirdparty() shippedByManufacturer(_uid) verifyAddress(products[_uid].thirdparty.thirdParty) {
+    products[_uid].owner = msg.sender;
+    products[_uid].thirdparty.thirdPartyLongitude = thirdPartyLongitude;
+    products[_uid].thirdparty.thirdPartyLatitude = thirdPartyLatitude;
+    products[_uid].productState = State.ReceivedByThirdParty;
+    productHistory[_uid].history.push(products[_uid]);
+
+    emit ReceivedByThirdParty(_uid);
+  }
+
+  ///@dev STEP 5 : Purchase of a product at third party by Customer.
+  function purchaseByCustomer(
+    uint _uid
+  ) public onlyCustomer() receivedByThirdParty(_uid) {
+    products[_uid].customer = msg.sender;
+    products[_uid].productState = State.PurchasedByCustomer;
+    productHistory[_uid].history.push(products[_uid]);
+
+    emit PurchasedByCustomer(_uid);
+  }
+
+}
