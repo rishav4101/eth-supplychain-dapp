@@ -35,11 +35,64 @@ contract SupplyChain {
     public
   {
     require(_account != address(0));
-    require(!hasManufacturerRole(role, _account));
+    require(!hasManufacturerRole(_account));
 
     roles[_account].Manufacturer = true;
   }
+  
+    function hasThirdPartyRole(address _account)
+    public
+    view
+    returns (bool)
+  {
+    require(_account != address(0));
+    return roles[_account].ThirdParty;
+  }
 
+  function addThirdPartyRole(address _account) 
+    public
+  {
+    require(_account != address(0));
+    require(!hasThirdPartyRole(_account));
+
+    roles[_account].ThirdParty = true;
+  }
+    function hasDeliveryHubRole(address _account)
+    public
+    view
+    returns (bool)
+  {
+    require(_account != address(0));
+    return roles[_account].DeliveryHub;
+  }
+
+  function addDeliveryHubRole(address _account) 
+    public
+  {
+    require(_account != address(0));
+    require(!hasDeliveryHubRole(role, _account));
+
+    roles[_account].DeliveryHub = true;
+  }
+    function hasCustomerRole(address _account)
+    public
+    view
+    returns (bool)
+  {
+    require(_account != address(0));
+    return roles[_account].Customer;
+  }
+
+  function addCustomerRole(address _account) 
+    public
+  {
+    require(_account != address(0));
+    require(!hasCustomerRole(role, _account));
+
+    roles[_account].Customer = true;
+  }
+
+    
   constructor() public payable{
     owner = msg.sender;
     sku = 1;
