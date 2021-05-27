@@ -1,5 +1,4 @@
 var SupplyChainContract = artifacts.require("./SupplyChain.sol");
-var FetchContract = artifacts.require("./FetchContract.sol");
 var RolesContract = artifacts.require("./rolesUtils/Roles.sol")
 var ManufacturerContract = artifacts.require("./rolesUtils/Manufacturer.sol");
 
