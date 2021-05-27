@@ -11,7 +11,7 @@
     <img src="https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg">
        
   </a>
-  <a href="https://github.com/rishav4101/eth-supplychain/issues"><img src="https://img.shields.io/github/issues/rishav4101/eth-supplychain.svg"></a>
+  <a href="https://github.com/rishav4101/eth-supplychain-dapp/issues"><img src="https://img.shields.io/github/issues/rishav4101/eth-supplychain-dapp.svg"></a>
   
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/license-MIT-green.svg">
@@ -34,7 +34,7 @@ blockchain to ensure a transparent and secure transfer of product from the manuf
 ## Flow
 <p align="centre">
   <a>
-    <img src="https://github.com/rishav4101/eth-supplychain/blob/main/images/flow.jpeg?raw=true">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/flow.jpeg?raw=true">
   </a>
 </p>
 
@@ -42,13 +42,13 @@ blockchain to ensure a transparent and secure transfer of product from the manuf
 ### Activity Diagram
 <p align="centre">
   <a>
-    <img src="https://github.com/rishav4101/eth-supplychain/blob/main/images/activity.png?raw=true">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/activity.png?raw=true">
   </a>
 </p>
 ### Sequence Diagram
 <p align="centre">
   <a>
-    <img src="https://github.com/rishav4101/eth-supplychain/blob/main/images/sequence.png?raw=true">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/sequence.png?raw=true">
   </a>
 </p>
 
