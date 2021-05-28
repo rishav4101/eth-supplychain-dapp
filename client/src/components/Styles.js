@@ -35,11 +35,11 @@ export const useStyles = makeStyles({
         color:"#1a237e"
     },
     TableHead:{
-        backgroundColor:"#1a237e",
-        color:"#fff"
+        backgroundColor:"#1a237e !important",
+        color:"#fff !important"
     },
     TableCell: {
-        color:"#1a237e"
+        color:"#1a237e !important"
     },
 
     FormWrap:{
