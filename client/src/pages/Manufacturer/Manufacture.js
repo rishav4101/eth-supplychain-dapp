@@ -1,11 +1,13 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { RoleDataContext } from "../../context/RoleDataContext";
 
 export default function Manufacture(props){
     // const web3 = props.web3;
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
+    const { roles, setRoles } = React.useContext(RoleDataContext);
 
     const [roleInput, setRoleInput] = React.useState("");
     const [manuForm, setManuForm] = React.useState({
@@ -19,6 +21,14 @@ export default function Manufacture(props){
         productPrice: 0,
         productCategory: ""
     });
+    const [roleData, setRoleData] = React.useState({
+        manufacturer : "",
+        thirdparty : "",
+        deliveryhub : "",
+        customer : "",
+    });
+    // await writeJsonFile('roles.json', roleData);
+
     const [manuProds, setManuProds] = React.useState([]);
 
     // React.useEffect(() => {
@@ -33,10 +43,46 @@ export default function Manufacture(props){
         setRoleInput(target.value);
     }
 
+    const handleRoleChange =  async e => {
+        setRoleData({
+            ...roleData,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const updateManufacturerRole = async () => {
+        if(roleData.manufacturer !== "") {
+            
+        }
+        if(roleData.thirdparty !== "") {
+            setRoles({
+                ...roles, 
+                thirdparty : roleData.thirdparty
+            })
+        }
+        if(roleData.deliveryhub !== "") {
+            setRoles({
+                ...roles, 
+                deliveryhub : roleData.deliveryhub
+            })
+        }
+        if(roleData.customer !== "") {
+            setRoles({
+                ...roles, 
+                customer : roleData.customer
+            })
+        }
+    }
+
     const handleAddManufacturerRole = async () => {
         console.log(roleInput);
-        await supplyChainContract.methods.addManufacturerRole(accounts[6]).send({ from: accounts[4], gas:100000 })
+        await supplyChainContract.methods.addManufacturerRole(manufacturerInput).send({ from: accounts[4], gas:100000 })
         .then(console.log);
+
+        setRoles({
+            ...roles, 
+            manufacturer : roleData.manufacturer
+        })
       
         setRoleInput("");
     }

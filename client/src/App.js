@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SupplyChainContract from "./contracts/SupplyChain.json";
-import ManufacturerContract from "./contracts/Manufacturer.json"; 
 import { Router, Switch, Route } from "react-router-dom";
 // import history from "./history";
 import {createBrowserHistory} from 'history';
@@ -17,7 +16,7 @@ import ShipThirdParty from "./pages/ThirdParty/ShipThirdParty";
 import ReceiveDeliveryHub from "./pages/DeliveryHub/ReceiveDeliveryHub";
 import ShipDeliveryHub from "./pages/DeliveryHub/ShipDeliveryHub";
 import ReceiveCustomer from "./pages/Customer/ReceiveCustomer";
-import ReceivedByCustomer from "./pages/Customer/ReceivedByCustomer";
+import ReceivedByCustomer from "./pages/Cust`omer/ReceivedByCustomer";
 import PurchaseThirdParty from "./pages/ThirdParty/PurshaseThirdParty";
 
 class App extends Component {
@@ -35,9 +34,6 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      // instance2.options.address = accounts[0];
-      // instance.options.address = accounts[0];
-
       this.setState({ web3, accounts, contract: instance }, this.runExample);
     } catch (error) {
       alert(
@@ -50,15 +46,6 @@ class App extends Component {
   runExample = async () => {
     const { contract } = this.state;
     console.log(contract);
-
-    // // Stores a given value, 5 by default.
-    // await contract.methods.set(5).send({ from: accounts[0] });
-
-    // // Get the value from the contract to prove it worked.
-    // const response = await contract.methods.get().call();
-
-    // // Update state with the result.
-    // this.setState({ storageValue: response });
   };
 
   render() {
