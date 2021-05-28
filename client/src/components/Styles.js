@@ -48,5 +48,9 @@ export const useStyles = makeStyles({
       padding:20,
       borderRadius:10,
       boxShadow:"2px 2px 10px #9fa8da"
+    },
+
+    RoleForm:{
+      display:"flex", alignItems:"center", margin:"20px auto"
     }
   });

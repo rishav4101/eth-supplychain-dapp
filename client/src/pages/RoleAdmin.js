@@ -2,17 +2,8 @@ import React from 'react';
 import ResponsiveDrawer from "../components/Navbar";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
 import { useRole } from "../context/RoleDataContext";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: "20px auto",
-      width: "60%",
-    },
-  },
-}));
+import { useStyles } from "../components/Styles";
 
 function RoleAdmin(props) {
   const accounts = props.accounts;
@@ -24,6 +15,7 @@ function RoleAdmin(props) {
   const [thirdPartyRole, setThirdPartyRole] = React.useState("");
   const [deliveryHubRole, setDeliveryHubRole] = React.useState("");
   const [customerRole, setCustomerRole] = React.useState("");
+  const navItem = [];
 
   const handleAddManufacturerRole = async () => {
     await supplyChainContract.methods.addManufacturerRole(manufacturerRole).send({ from: accounts[0], gas:100000 })
@@ -84,106 +76,95 @@ function RoleAdmin(props) {
 
   return (
     <div>
-      <ResponsiveDrawer>
-
-      <h1>Add Roles</h1>
+      <ResponsiveDrawer navItems={navItem}>
+      <div className={classes.FormWrap}>
+      <h1 className={classes.pageHeading}>Add Roles</h1>
       {console.log(roles)}
       
       <form className={classes.root} noValidate autoComplete="off">
-        <div style={{ marginLeft: "25%", marginTop: "60px" }}>
+        <div className={classes.RoleForm} >
           <TextField
             id="manufacturerRole"
             label="Enter Manufacturer Address"
             variant="outlined"
             value={manufacturerRole}
             onChange={(e) => setManufacturerRole(e.target.value)}
+            style={{width:"70%"}}
           />
           <Button
             variant="contained"
             color="primary"
             onClick={handleAddManufacturerRole}
-            style={{
-              marginLeft: "30px",
-              marginTop: "14px",
-              fontSize: "01.275rem",
-            }}
+            style={{width:"30%", marginLeft:"10px"}}
           >
-            Submit
+            Add Manufacturer
           </Button>
         </div>
       </form>
 
       <form className={classes.root} noValidate autoComplete="off">
-        <div style={{ marginLeft: "25%", marginTop: "40px" }}>
+        <div className={classes.RoleForm} >
           <TextField
             id="thirdPartyRole"
             label="Enter Third Party Address "
             variant="outlined"
             value={thirdPartyRole}
             onChange={(e) => setThirdPartyRole(e.target.value)}
+            style={{width:"70%"}}
           />
           <Button
             variant="contained"
             color="primary"
             onClick={handleAddThirdPartyRole}
-            style={{
-              marginLeft: "30px",
-              marginTop: "14px",
-              fontSize: "01.275rem",
-            }}
+            style={{width:"30%", marginLeft:"10px"}}
           >
-            Submit
+            Add third party
           </Button>
         </div>
       </form>
 
       <form className={classes.root} noValidate autoComplete="off">
-        <div style={{ marginLeft: "25%", marginTop: "40px" }}>
+        <div className={classes.RoleForm} >
           <TextField
             id="deliveryHubRole"
             label="Enter Delivery Hub Address"
             variant="outlined"
             value={deliveryHubRole}
             onChange={(e) => setDeliveryHubRole(e.target.value)}
+            style={{width:"70%"}}
           />
           <Button
             variant="contained"
             color="primary"
             onClick={handleAddDeliveryHubRole}
-            style={{
-              marginLeft: "30px",
-              marginTop: "14px",
-              fontSize: "01.275rem",
-            }}
+            style={{width:"30%", marginLeft:"10px"}}
           >
-            Submit
+            add delivery hub
           </Button>
         </div>
       </form>
 
       <form className={classes.root} noValidate autoComplete="off">
-        <div style={{ marginLeft: "25%", marginTop: "40px" }}>
+        <div className={classes.RoleForm} >
           <TextField
             id="customerRole"
             label=" Enter Customer Address"
             variant="outlined"
             value={customerRole}
             onChange={(e) => setCustomerRole(e.target.value)}
+            style={{width:"70%"}}
           />
           <Button
             variant="contained"
             color="primary"
             onClick={handleAddCustomerRole}
-            style={{
-              marginLeft: "30px",
-              marginTop: "14px",
-              fontSize: "01.275rem",
-            }}
+            style={{width:"30%", marginLeft:"10px"}}
           >
-            Submit
+            add customer
           </Button>
         </div>
       </form>
+      </div>
       </ResponsiveDrawer>
     </div>
   );
