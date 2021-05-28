@@ -24,6 +24,7 @@ import RoleAdmin from "./pages/RoleAdmin";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./components/Theme";
 
+import Explorer from './pages/Explorer';
 class App extends Component {
   state = { web3: null, accounts: null, contract: null, mRole: null, tpRole: null, dhRole: null, cRole: null };
 
@@ -128,6 +129,9 @@ class App extends Component {
             {this.state.cRole !== "" ?
               <ReceivedByCustomer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
               : <h1>Assign Customer Role at /RoleAdmin</h1> }
+            </Route>
+            <Route exact path="/">
+              <Explorer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
           </Switch>
         </Router>
