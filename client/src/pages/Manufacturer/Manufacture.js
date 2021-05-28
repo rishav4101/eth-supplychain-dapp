@@ -2,6 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useRole } from "../../context/RoleDataContext";
+import Navbar from "../../components/Navbar"
 
 export default function Manufacture(props){
     const accounts = props.accounts;
@@ -42,6 +43,7 @@ export default function Manufacture(props){
 
     return (
         <>
+        <Navbar>
         <br/>
 
         <h2>Manufacture Prod Form</h2>
@@ -128,6 +130,7 @@ export default function Manufacture(props){
             >
                 TEST FETCH
             </Button>
+            </Navbar>
         </>
     );
 }

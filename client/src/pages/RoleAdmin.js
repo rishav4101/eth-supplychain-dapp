@@ -84,7 +84,7 @@ function RoleAdmin(props) {
 
   return (
     <div>
-      <ResponsiveDrawer />
+      <ResponsiveDrawer>
 
       <h1>Add Roles</h1>
       {console.log(roles)}
@@ -184,6 +184,7 @@ function RoleAdmin(props) {
           </Button>
         </div>
       </form>
+      </ResponsiveDrawer>
     </div>
   );
 }

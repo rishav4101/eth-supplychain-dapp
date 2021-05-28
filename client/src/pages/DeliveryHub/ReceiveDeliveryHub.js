@@ -53,7 +53,7 @@ export default function ReceiveDeliveryHub(props){
 
     return(
         <>
-        <Navbar/>
+        <Navbar>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
         <h1>All Products To be Receive</h1>
@@ -83,6 +83,7 @@ export default function ReceiveDeliveryHub(props){
                     
                 </>
           ))) : <> </>}
+          </Navbar>
         </>
     )
 }

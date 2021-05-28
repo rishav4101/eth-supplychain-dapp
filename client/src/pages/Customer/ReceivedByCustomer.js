@@ -36,7 +36,7 @@ export default function ReceivedByCustomer(props){
 
     return(
         <>
-        <Navbar/>
+        <Navbar>
         <h1>All Received Products</h1>
         <h2>Total : {count}</h2>
           {allReceived.length !== 0 ? (allReceived.map((prod) => (
@@ -54,6 +54,7 @@ export default function ReceivedByCustomer(props){
                     
                 </>
           ))) : <> </>}
+          </Navbar>
         </>
     )
 }

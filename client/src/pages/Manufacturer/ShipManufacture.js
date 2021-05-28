@@ -41,7 +41,7 @@ export default function ShipManufacture(props){
 
     return(
         <>
-        <Navbar/>
+        <Navbar>
         <h1>All Products To be Shipped</h1>
         <h2>Total : {count}</h2>
           {allSoldProducts.length !== 0 ? (allSoldProducts.map((prod) => (
@@ -69,6 +69,7 @@ export default function ShipManufacture(props){
                     
                 </>
           ))) : <> </>}
+          </Navbar>
         </>
     )
 }

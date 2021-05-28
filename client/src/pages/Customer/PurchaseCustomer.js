@@ -41,7 +41,7 @@ export default function PurchaseCustomer(props){
 
     return(
         <>
-        <Navbar/>
+        <Navbar>
         <h1>All Products</h1>
         <h2>Total : {count}</h2>
           {allProducts.length !== 0 ? (allProducts.map((prod) => (
@@ -69,6 +69,7 @@ export default function PurchaseCustomer(props){
                     
                 </>
           ))) : <> </>}
+          </Navbar>
         </>
     )
 }
