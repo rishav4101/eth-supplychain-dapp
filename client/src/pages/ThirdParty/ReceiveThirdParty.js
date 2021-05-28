@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Button from "@material-ui/core/Button";
 import ProductModal from "../../components/Modal";
+import { useRole } from "../../context/RoleDataContext";
 
 export default function ReceiveThirdParty(props){
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
-
+    const { roles } = useRole();
     const [count, setCount] = React.useState(0);
     const [allReceiveProducts, setAllReceiveProducts] = React.useState([]);
     const [modalData, setModalData] = useState([]);
@@ -37,7 +38,7 @@ export default function ReceiveThirdParty(props){
     }, [count])
 
     const handleReceiveButton = async (id, long, lat) => {
-        await supplyChainContract.methods.receiveByThirdParty(parseInt(id), long, lat).send({ from: accounts[8], gas:1000000 }).then(console.log);
+        await supplyChainContract.methods.receiveByThirdParty(parseInt(id), long, lat).send({ from: roles.thirdparty, gas:1000000 }).then(console.log);
         setCount(0);
         setOpen(false);
     }
@@ -52,7 +53,7 @@ export default function ReceiveThirdParty(props){
 
     return(
         <>
-        <Navbar/>
+        <Navbar>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
         <h1>All Products To be Shipped</h1>
@@ -82,6 +83,7 @@ export default function ReceiveThirdParty(props){
                     
                 </>
           ))) : <> </>}
+          </Navbar>
         </>
     )
 }

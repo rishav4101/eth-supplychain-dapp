@@ -75,6 +75,24 @@ contract SupplyChain {
     roles[_account].DeliveryHub = true;
   }
     
+    function hasCustomerRole(address _account)
+    public
+    view
+    returns (bool)
+  {
+    require(_account != address(0));
+    return roles[_account].Customer;
+  }
+
+  function addCustomerRole(address _account) 
+    public
+  {
+    require(_account != address(0));
+    require(!hasDeliveryHubRole(_account));
+
+    roles[_account].Customer = true;
+  }
+
   constructor() public payable{
     owner = msg.sender;
     sku = 1;
@@ -259,6 +277,7 @@ contract SupplyChain {
   function purchaseByCustomer(
     uint _uid
   ) public receivedByThirdParty(_uid) {
+    require(hasCustomerRole(msg.sender));
     products[_uid].customer = msg.sender;
     products[_uid].productState = Structure.State.PurchasedByCustomer;
     productHistory[_uid].history.push(products[_uid]);
@@ -310,6 +329,7 @@ contract SupplyChain {
   function receiveByCustomer(
     uint _uid
   ) public shippedByDeliveryHub(_uid) verifyAddress(products[_uid].customer) {
+    require(hasCustomerRole(msg.sender));
     products[_uid].owner = msg.sender;
     products[_uid].productState = Structure.State.ReceivedByCustomer;
     productHistory[_uid].history.push(products[_uid]);

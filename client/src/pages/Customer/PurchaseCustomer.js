@@ -1,11 +1,12 @@
 import React from "react";
 import Navbar from "../../components/Navbar"
 import Button from "@material-ui/core/Button";
+import { useRole } from "../../context/RoleDataContext";
 
 export default function PurchaseCustomer(props){
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
-
+    const { roles } = useRole();
     const [count, setCount] = React.useState(0);
     const [allProducts, setAllProducts] = React.useState([]);
 
@@ -34,13 +35,13 @@ export default function PurchaseCustomer(props){
     }, [count])
 
     const handleBuyButton = async id => {
-        await supplyChainContract.methods.purchaseByCustomer(id).send({ from: accounts[9], gas:1000000 }).then(console.log);
+        await supplyChainContract.methods.purchaseByCustomer(id).send({ from: roles.customer, gas:1000000 }).then(console.log);
         setCount(0);
     }
 
     return(
         <>
-        <Navbar/>
+        <Navbar>
         <h1>All Products</h1>
         <h2>Total : {count}</h2>
           {allProducts.length !== 0 ? (allProducts.map((prod) => (
@@ -68,6 +69,7 @@ export default function PurchaseCustomer(props){
                     
                 </>
           ))) : <> </>}
+          </Navbar>
         </>
     )
 }

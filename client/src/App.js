@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SupplyChainContract from "./contracts/SupplyChain.json";
-import ManufacturerContract from "./contracts/Manufacturer.json"; 
 import { Router, Switch, Route } from "react-router-dom";
+import { RoleDataContextProvider } from "./context/RoleDataContext";
 // import history from "./history";
 import {createBrowserHistory} from 'history';
 import getWeb3 from "./getWeb3";
@@ -19,10 +19,14 @@ import ShipDeliveryHub from "./pages/DeliveryHub/ShipDeliveryHub";
 import ReceiveCustomer from "./pages/Customer/ReceiveCustomer";
 import ReceivedByCustomer from "./pages/Customer/ReceivedByCustomer";
 import PurchaseThirdParty from "./pages/ThirdParty/PurshaseThirdParty";
+<<<<<<< HEAD
 import Explorer from "./pages/Explorer";
+=======
+import RoleAdmin from "./pages/RoleAdmin";
+>>>>>>> 78211015901729d55565056341eaf8fb8392c4e7
 
 class App extends Component {
-  state = { web3: null, accounts: null, contract: null };
+  state = { web3: null, accounts: null, contract: null, mRole: null, tpRole: null, dhRole: null, cRole: null };
 
   componentDidMount = async () => {
     try {
@@ -36,10 +40,12 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      // instance2.options.address = accounts[0];
-      // instance.options.address = accounts[0];
+      const mRole = localStorage.getItem("mRole");
+      const tpRole = localStorage.getItem("tpRole");
+      const dhRole = localStorage.getItem("dhRole");
+      const cRole = localStorage.getItem("cRole");
 
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState({ web3, accounts, contract: instance, mRole: mRole, tpRole: tpRole, dhRole: dhRole, cRole: cRole }, this.runExample);
     } catch (error) {
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
@@ -51,15 +57,6 @@ class App extends Component {
   runExample = async () => {
     const { contract } = this.state;
     console.log(contract);
-
-    // // Stores a given value, 5 by default.
-    // await contract.methods.set(5).send({ from: accounts[0] });
-
-    // // Get the value from the contract to prove it worked.
-    // const response = await contract.methods.get().call();
-
-    // // Update state with the result.
-    // this.setState({ storageValue: response });
   };
 
   render() {
@@ -68,8 +65,13 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <RoleDataContextProvider mRole={this.state.mRole} tpRole={this.state.tpRole} dhRole={this.state.dhRole} cRole={this.state.cRole}>
         <Router history={createBrowserHistory()}>
           <Switch>
+            <Route exact path="/roleAdmin">
+              <RoleAdmin accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+
             <Route exact path="/manufacturer/manufacture">
               <Manufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
@@ -108,6 +110,7 @@ class App extends Component {
             </Route>
           </Switch>
         </Router>
+        </RoleDataContextProvider>
       </div>
     );
   }

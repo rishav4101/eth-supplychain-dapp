@@ -1,13 +1,17 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { useRole } from "../../context/RoleDataContext";
+import Navbar from "../../components/Navbar"
 
 export default function Manufacture(props){
-    // const web3 = props.web3;
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
 
-    const [roleInput, setRoleInput] = React.useState("");
+    const { roles } = useRole();
+
+    console.log(roles);
+
     const [manuForm, setManuForm] = React.useState({
         id: 0,
         manufacturerName: "",
@@ -19,41 +23,6 @@ export default function Manufacture(props){
         productPrice: 0,
         productCategory: ""
     });
-    const [manuProds, setManuProds] = React.useState([]);
-
-    // React.useEffect(() => {
-    //     (async () => {
-    //     const val = await supplyChainContract.methods.fetchManufacturedProduct().send({ from: accounts[0], gas:100000 })
-    //     setManuProds(val)
-    //     console.log(manuProds)
-    //     }) ()
-    // }, [])
-
-    const handleRoleFieldChange = async ({target}) => {
-        setRoleInput(target.value);
-    }
-
-    const handleAddManufacturerRole = async () => {
-        console.log(roleInput);
-        await supplyChainContract.methods.addManufacturerRole(accounts[6]).send({ from: accounts[4], gas:100000 })
-        .then(console.log);
-      
-        setRoleInput("");
-    }
-
-    const handleAddThirdPartyRole = async () => {
-        await supplyChainContract.methods.addThirdPartyRole(accounts[8]).send({ from: accounts[4], gas:100000 })
-        .then(console.log);
-      
-        setRoleInput("");
-    }
-
-    const handleAddDeliveryHubRole = async () => {
-        await supplyChainContract.methods.addDeliveryHubRole(accounts[2]).send({ from: accounts[4], gas:100000 })
-        .then(console.log);
-      
-        setRoleInput("");
-    }
 
     const handleChangeManufacturerForm = async (e) => {
         setManuForm({
@@ -64,28 +33,17 @@ export default function Manufacture(props){
 
     const handleSubmitManufacturerForm = async () => {
         console.log(parseInt(manuForm.id));
-        await supplyChainContract.methods.manufactureProduct( manuForm.manufacturerName, manuForm.manufacturerDetails, manuForm.manufacturerLongitude, manuForm.manufacturerLatitude, manuForm.productName, parseInt(manuForm.productCode), parseInt(manuForm.productPrice), manuForm.productCategory).send({ from: accounts[6], gas:999999 }).then(console.log);
+        await supplyChainContract.methods.manufactureProduct( manuForm.manufacturerName, manuForm.manufacturerDetails, manuForm.manufacturerLongitude, manuForm.manufacturerLatitude, manuForm.productName, parseInt(manuForm.productCode), parseInt(manuForm.productPrice), manuForm.productCategory).send({ from: roles.manufacturer, gas:999999 }).then(console.log);
     }
 
     const fetchManufacturedProduct = async () => {
-        // const nm = await supplyChainContract.methods.fetchProductCount().call();
-        // console.log(nm);
         const test = await supplyChainContract.methods.fetchProductPart1(3, "product", 0).call().then(console.log);
         console.log(test);
     }
 
     return (
         <>
-        <h1>Add role to manufac</h1>
-        <input 
-            type="text" 
-            name="roleInput"
-            value={ roleInput }
-            onChange={ handleRoleFieldChange }
-        />
-        <button onClick={handleAddManufacturerRole}>ADD ROLE</button>
-        <button onClick={handleAddThirdPartyRole}>ADD TP ROLE</button>
-        <button onClick={handleAddDeliveryHubRole}>ADD DH ROLE</button>
+        <Navbar>
         <br/>
 
         <h2>Manufacture Prod Form</h2>
@@ -172,6 +130,7 @@ export default function Manufacture(props){
             >
                 TEST FETCH
             </Button>
+            </Navbar>
         </>
     );
 }

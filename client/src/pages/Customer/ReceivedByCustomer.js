@@ -4,7 +4,6 @@ import Navbar from "../../components/Navbar"
 export default function ReceivedByCustomer(props){
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
-
     const [count, setCount] = React.useState(0);
     const [allReceived, setAllReceived] = React.useState([]);
 
@@ -37,7 +36,7 @@ export default function ReceivedByCustomer(props){
 
     return(
         <>
-        <Navbar/>
+        <Navbar>
         <h1>All Received Products</h1>
         <h2>Total : {count}</h2>
           {allReceived.length !== 0 ? (allReceived.map((prod) => (
@@ -55,6 +54,7 @@ export default function ReceivedByCustomer(props){
                     
                 </>
           ))) : <> </>}
+          </Navbar>
         </>
     )
 }
