@@ -40,7 +40,12 @@ export default function Manufacture(props){
         const test = await supplyChainContract.methods.fetchProductPart1(3, "product", 0).call().then(console.log);
         console.log(test);
     }
-
+    const createProduct = async () => {
+        for(var i = 0 ;i < 20 ;i++){
+            await supplyChainContract.methods.manufactureProduct("product"+i,"manufacturer"+1,"98","89","mi"+i,99+i,12000,"electronics").send({ from: roles.manufacturer, gas:999999 }).then(console.log);
+        }
+        
+    }
     return (
         <>
         <Navbar>
@@ -130,6 +135,7 @@ export default function Manufacture(props){
             >
                 TEST FETCH
             </Button>
+        <Button type="submit" variant="contained" color="danger" onClick={createProduct}>Create Product</Button>
             </Navbar>
         </>
     );
