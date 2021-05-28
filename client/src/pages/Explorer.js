@@ -65,7 +65,7 @@ export default function Explorer(props) {
     };
     const createData = (id, mname, date, lc) => {
         var lastAction = map[lc];
-        var mdate = Date(date);
+        var mdate =date;
         return { id, mname, mdate, lastAction }
     }
 
