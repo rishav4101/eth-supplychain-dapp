@@ -13,7 +13,11 @@ export default function Manufacture(props){
     const { roles } = useRole();
 
     console.log(roles);
-
+    const navItem = [
+        ["Add Product","/manufacturer/manufacture"],
+        ["Ship Product", "manufacturer/ship"],
+        ["All Products","/manufacturer/allManufacture"]
+      ];
     const [manuForm, setManuForm] = React.useState({
         id: 0,
         manufacturerName: "",
@@ -47,7 +51,7 @@ export default function Manufacture(props){
 
     return (
         <>
-        <Navbar>
+        <Navbar navItems={navItem}>
         <div className={classes.FormWrap}>
         <h1 className={classes.pageHeading}>Manufacture Product</h1>
         <Grid container spacing={3}>

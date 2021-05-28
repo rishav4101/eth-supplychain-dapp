@@ -21,7 +21,11 @@ export default function ShipManufacture(props) {
   const classes = useStyles();
   const [count, setCount] = React.useState(0);
   const [allSoldProducts, setAllSoldProducts] = React.useState([]);
-
+  const navItem = [
+    ["Add Product","/manufacturer/manufacture"],
+    ["Ship Product", "/manufacturer/ship"],
+    ["All Products","/manufacturer/allManufacture"]
+  ];
   React.useEffect(() => {
     (async () => {
       const cnt = await supplyChainContract.methods.fetchProductCount().call();
@@ -89,8 +93,8 @@ export default function ShipManufacture(props) {
   };
 
   return (
-    <div classname={classes.pageWrap}>
-      <Navbar>
+    <div className={classes.pageWrap}>
+       <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} />
         <h1 className={classes.pageHeading}>All Products To be Shipped</h1>
         <h3 className={classes.tableCount}>Total : {allSoldProducts.length}</h3>

@@ -21,7 +21,11 @@ export default function PurchaseCustomer(props){
     const { roles } = useRole();
     const [count, setCount] = React.useState(0);
     const [allProducts, setAllProducts] = React.useState([]);
-
+    const navItem = [
+        ["Purchase Product","/Customer/buy"],
+        ["Receive Product", "/Customer/receive"],
+        ["All Products","/Customer/allReceived"]
+      ];
     React.useEffect(() => {
         (async () => {
         const cnt = await supplyChainContract.methods.fetchProductCount().call();
@@ -89,7 +93,7 @@ export default function PurchaseCustomer(props){
     return(
         <>
          <div classname={classes.pageWrap}>
-        <Navbar>
+        <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} />
 
         <h1 className={classes.pageHeading}>All Products</h1>

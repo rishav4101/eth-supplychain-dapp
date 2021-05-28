@@ -21,7 +21,11 @@ export default function PurchaseThirdParty(props){
     const { roles } = useRole();
     const [count, setCount] = React.useState(0);
     const [allProducts, setAllProducts] = React.useState([]);
-
+    const navItem = [
+      ["Add Product","/ThirdParty/allProducts"],
+      ["Receive Product", "/ThirdParty/receive"],
+      ["Ship Products","/ThirdParty/ship"]
+    ];
     React.useEffect(() => {
         (async () => {
         const cnt = await supplyChainContract.methods.fetchProductCount().call();
@@ -87,7 +91,7 @@ export default function PurchaseThirdParty(props){
 
     return(
         <div classname={classes.pageWrap}>
-        <Navbar>
+        <Navbar navItems={navItem}> 
         <ProductModal prod={modalData} open={open} handleClose={handleClose} />
 
         <h1 className={classes.pageHeading}>All Products</h1>

@@ -22,7 +22,10 @@ export default function ShipDeliveryHub(props){
     const { roles } = useRole();
     const [count, setCount] = React.useState(0);
     const [allSoldProducts, setAllSoldProducts] = React.useState([]);
-
+    const navItem = [
+        ["Receive Product","/DeliveryHub/ship"],
+        ["Ship Product", "/DeliveryHub/receive"],
+      ];
     React.useEffect(() => {
         (async () => {
         const cnt = await supplyChainContract.methods.fetchProductCount().call();
@@ -89,7 +92,7 @@ export default function ShipDeliveryHub(props){
     return(
         <>
         <div classname={classes.pageWrap}>
-      <Navbar>
+      <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} />
         <h1 className={classes.pageHeading}>All Products To be Shipped</h1>
         <h3 className={classes.tableCount}>Total : {allSoldProducts.length}</h3>

@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -77,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft({children}) {
+export default function PersistentDrawerLeft({navItems,children}) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
@@ -130,22 +131,20 @@ export default function PersistentDrawerLeft({children}) {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+          {navItems.length !== 0 ?
+          navItems.map((item) => (
+            <Link to={item[1]} style={{textDecoration:"none"}}>
+            <ListItem button key={item[0]}>
+              <ListItemText primary={item[0]} />
             </ListItem>
-          ))}
+            </Link>
+          ))
+          :
+          <> </>
+        }
+          
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
       <main
         className={clsx(classes.content, {

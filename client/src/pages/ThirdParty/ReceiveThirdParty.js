@@ -23,7 +23,11 @@ export default function ReceiveThirdParty(props){
     const [modalData, setModalData] = useState([]);
     const [open, setOpen] = useState(false);
     const classes = useStyles();
-
+    const navItem = [
+      ["Add Product","/ThirdParty/allProducts"],
+      ["Receive Product", "/ThirdParty/receive"],
+      ["Ship Products","/ThirdParty/ship"]
+    ];
     React.useEffect(() => {
         (async () => {
         const cnt = await supplyChainContract.methods.fetchProductCount().call();
@@ -88,7 +92,7 @@ export default function ReceiveThirdParty(props){
 
     return(
         <div classname={classes.pageWrap}>
-        <Navbar>
+        <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
         <h1 className={classes.pageHeading}>All Products to be Received.</h1>

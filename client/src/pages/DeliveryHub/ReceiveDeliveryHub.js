@@ -23,7 +23,10 @@ export default function ReceiveDeliveryHub(props){
     const [modalData, setModalData] = useState([]);
     const [open, setOpen] = useState(false);
     const classes = useStyles();
-
+    const navItem = [
+      ["Receive Product","/DeliveryHub/ship"],
+      ["Ship Product", "/DeliveryHub/receive"],
+    ];
     React.useEffect(() => {
         (async () => {
         const cnt = await supplyChainContract.methods.fetchProductCount().call();
@@ -89,7 +92,7 @@ export default function ReceiveDeliveryHub(props){
 
     return(
         <div classname={classes.pageWrap}>
-        <Navbar>
+        <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
         <h1 className={classes.pageHeading}>All Products To be Receive</h1>

@@ -18,7 +18,11 @@ export default function ReceivedByCustomer(props) {
     const supplyChainContract = props.supplyChainContract;
     const [count, setCount] = React.useState(0);
     const [allReceived, setAllReceived] = React.useState([]);
-
+    const navItem = [
+        ["Purchase Product","/Customer/buy"],
+        ["Receive Product", "/Customer/receive"],
+        ["All Products","/Customer/allReceived"]
+      ];
     React.useEffect(() => {
         (async () => {
             const cnt = await supplyChainContract.methods.fetchProductCount().call();
@@ -81,7 +85,7 @@ export default function ReceivedByCustomer(props) {
     return (
         <>
             <div classname={classes.pageWrap}>
-                <Navbar>
+                <Navbar navItems={navItem}>
                     <ProductModal prod={modalData} open={open} handleClose={handleClose} />
                     <h1 className={classes.pageHeading}>All Manufactured Products</h1>
                     <h3 className={classes.tableCount}>Total : {allReceived.length}</h3>
