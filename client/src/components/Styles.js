@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles({
     pageWrap:{
         textAlign:"center",
-        color:"#1a237e"
+        color:"#1a237e",
     },
     pageHeading:{
         textAlign:"center",
@@ -40,7 +40,13 @@ export const useStyles = makeStyles({
     },
     TableCell: {
         color:"#1a237e"
+    },
+
+    FormWrap:{
+    maxWidth: 700,
+      margin:"30px auto",
+      padding:20,
+      borderRadius:10,
+      boxShadow:"2px 2px 10px #9fa8da"
     }
-
-
   });
