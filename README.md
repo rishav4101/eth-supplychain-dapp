@@ -42,13 +42,13 @@ blockchain to ensure a transparent and secure transfer of product from the manuf
 ### Activity Diagram
 <p align="centre">
   <a>
-    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/activity.png?raw=true">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/activitydiagram.png?raw=true">
   </a>
 </p>
-### Sequence Diagram
+<h3> Sequence Diagram</h3>
 <p align="centre">
   <a>
-    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/sequence.png?raw=true">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/sequencediagram.png?raw=true">
   </a>
 </p>
 
