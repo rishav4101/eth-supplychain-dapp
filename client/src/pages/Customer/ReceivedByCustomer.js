@@ -87,7 +87,7 @@ export default function ReceivedByCustomer(props) {
             <div classname={classes.pageWrap}>
                 <Navbar navItems={navItem}>
                     <ProductModal prod={modalData} open={open} handleClose={handleClose} />
-                    <h1 className={classes.pageHeading}>All Manufactured Products</h1>
+                    <h1 className={classes.pageHeading}>Your Products</h1>
                     <h3 className={classes.tableCount}>Total : {allReceived.length}</h3>
                     <>
                         <div>

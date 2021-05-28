@@ -95,7 +95,7 @@ export default function ReceiveDeliveryHub(props){
         <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
-        <h1 className={classes.pageHeading}>All Products To be Receive</h1>
+        <h1 className={classes.pageHeading}>Products To be Received</h1>
         <h3 className={classes.tableCount}>Total : {allReceiveProducts.length}</h3>
 
         <div>

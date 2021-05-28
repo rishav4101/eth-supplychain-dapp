@@ -96,7 +96,7 @@ export default function ShipManufacture(props) {
     <div className={classes.pageWrap}>
        <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} />
-        <h1 className={classes.pageHeading}>All Products To be Shipped</h1>
+        <h1 className={classes.pageHeading}>Products To be Shipped</h1>
         <h3 className={classes.tableCount}>Total : {allSoldProducts.length}</h3>
 
         <div>

@@ -111,7 +111,7 @@ export default function PersistentDrawerLeft({navItems,children}) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            SupplyChain-Dapp
           </Typography>
         </Toolbar>
       </AppBar>

@@ -95,7 +95,7 @@ export default function ReceiveCustomer(props){
         <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
-        <h1 className={classes.pageHeading}>All products to be Received.</h1>
+        <h1 className={classes.pageHeading}>Products to be Received</h1>
         <h3 className={classes.tableCount}>Total : {allReceiveProducts.length}</h3>
 
         <div>

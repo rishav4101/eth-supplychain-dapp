@@ -86,7 +86,7 @@ export default function AllManufacture(props) {
     <div classname={classes.pageWrap}>
       <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} />
-        <h1 className={classes.pageHeading}>All Manufactured Products</h1>
+        <h1 className={classes.pageHeading}>Manufactured Products</h1>
         <h3 className={classes.tableCount}>Total : {allManufacture.length}</h3>
         <>
           <div>
