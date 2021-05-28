@@ -51,25 +51,11 @@ export default function Manufacture(props){
 
     return (
         <>
-<<<<<<< HEAD
-        <Navbar navItems={navItem}>
-        <br/>
-
-        <h2>Manufacture Prod Form</h2>
-            <TextField
-            name="id"
-            variant="outlined"
-            value={manuForm.id}
-            onChange={handleChangeManufacturerForm}
-            label="id"
-            />
-=======
         <Navbar>
         <div className={classes.FormWrap}>
         <h1 className={classes.pageHeading}>Manufacture Product</h1>
         <Grid container spacing={3}>
         <Grid item xs={12}>
->>>>>>> fb2cf150eb149a3784fa6e06f3cf0b9c3b6df3b0
             <TextField
             name="manufacturerName"
             variant="outlined"
