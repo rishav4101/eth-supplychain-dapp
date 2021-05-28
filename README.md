@@ -51,6 +51,12 @@ blockchain to ensure a transparent and secure transfer of product from the manuf
     <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/sequencediagram.png?raw=true">
   </a>
 </p>
+<h3> Data Flow Diagram </h3>
+<p align="centre">
+  <a>
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/dataflow.png?raw=true">
+  </a>
+</p>
 
 ## How To Use
 

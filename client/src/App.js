@@ -64,42 +64,66 @@ class App extends Component {
         <RoleDataContextProvider mRole={this.state.mRole} tpRole={this.state.tpRole} dhRole={this.state.dhRole} cRole={this.state.cRole}>
         <Router history={createBrowserHistory()}>
           <Switch>
+
             <Route exact path="/roleAdmin">
               <RoleAdmin accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
 
+ 
             <Route exact path="/manufacturer/manufacture">
+              {this.state.mRole !== "" ? 
               <Manufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Manufacturer Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/manufacturer/allManufacture">
+            {this.state.mRole !== "" ? 
               <AllManufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Manufacturer Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/manufacturer/ship">
+            {this.state.mRole !== "" ? 
               <ShipManufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Manufacturer Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/ThirdParty/allProducts">
+            {this.state.tpRole !== "" ?
               <PurchaseThirdParty accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Third Party Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/ThirdParty/receive">
+            {this.state.tpRole !== "" ?
               <ReceiveThirdParty accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Third Party Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/Customer/buy">
+            {this.state.cRole !== "" ?
               <PurchaseCustomer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Customer Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/ThirdParty/ship">
+            {this.state.tpRole !== "" ?
               <ShipThirdParty accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Third Party Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/DeliveryHub/receive">
+            {this.state.dhRole !== "" ?
               <ReceiveDeliveryHub accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Delivery Hub Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/DeliveryHub/ship">
+            {this.state.dhRole !== "" ?
               <ShipDeliveryHub accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Delivery Hub Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/Customer/receive">
+            {this.state.cRole !== "" ?
               <ReceiveCustomer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Customer Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/Customer/allReceived">
+            {this.state.cRole !== "" ?
               <ReceivedByCustomer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              : <h1>Assign Customer Role at /RoleAdmin</h1> }
             </Route>
             <Route exact path="/">
               <Explorer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
