@@ -1,20 +1,22 @@
+import React from 'react';
 import { createContext, useState } from "react";
 
-const [roles, setRoles] = useState({
-    manufacturer : "",
-    thirdparty : "",
-    deliveryhub : "",
-    customer : "",
-});
+const RoleDataContext = createContext(null);
 
-RoleDataContext = createContext({ roles, setRoles });
+export const RoleDataContextProvider = ({ mRole, tpRole, dhRole, cRole, children }) => {
 
-const RoleDataContextProvider = ({ children }) => {
+    const [roles, setRoles] = useState({
+        manufacturer : mRole,
+        thirdparty : tpRole,
+        deliveryhub : dhRole,
+        customer : cRole
+    });
+
   return (
     <RoleDataContext.Provider value={{ roles, setRoles }}>
-      {...children}
+      {children}
     </RoleDataContext.Provider>
   );
 };
 
-export { RoleDataContext, RoleDataContextProvider };
+export const useRole = () => React.useContext(RoleDataContext);

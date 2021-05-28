@@ -1,11 +1,12 @@
 import React from "react";
 import Navbar from "../../components/Navbar"
 import Button from "@material-ui/core/Button";
+import { useRole } from "../../context/RoleDataContext";
 
 export default function ShipDeliveryHub(props){
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
-
+    const { roles } = useRole();
     const [count, setCount] = React.useState(0);
     const [allSoldProducts, setAllSoldProducts] = React.useState([]);
 
@@ -34,7 +35,7 @@ export default function ShipDeliveryHub(props){
     }, [count])
 
     const handleShipButton = async id => {
-        await supplyChainContract.methods.shipByDeliveryHub(id).send({ from: accounts[2], gas:1000000 }).then(console.log);
+        await supplyChainContract.methods.shipByDeliveryHub(id).send({ from: roles.deliveryhub, gas:1000000 }).then(console.log);
         setCount(0);
     }
 

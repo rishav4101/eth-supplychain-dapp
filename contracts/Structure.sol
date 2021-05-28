@@ -58,5 +58,6 @@ library Structure{
     bool Manufacturer;
     bool ThirdParty;
     bool DeliveryHub;
+    bool Customer;
   }
 }

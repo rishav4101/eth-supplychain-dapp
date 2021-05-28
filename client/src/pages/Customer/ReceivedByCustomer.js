@@ -4,7 +4,6 @@ import Navbar from "../../components/Navbar"
 export default function ReceivedByCustomer(props){
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
-
     const [count, setCount] = React.useState(0);
     const [allReceived, setAllReceived] = React.useState([]);
 
