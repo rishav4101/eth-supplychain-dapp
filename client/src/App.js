@@ -19,11 +19,7 @@ import ShipDeliveryHub from "./pages/DeliveryHub/ShipDeliveryHub";
 import ReceiveCustomer from "./pages/Customer/ReceiveCustomer";
 import ReceivedByCustomer from "./pages/Customer/ReceivedByCustomer";
 import PurchaseThirdParty from "./pages/ThirdParty/PurshaseThirdParty";
-<<<<<<< HEAD
-import Explorer from "./pages/Explorer";
-=======
 import RoleAdmin from "./pages/RoleAdmin";
->>>>>>> 78211015901729d55565056341eaf8fb8392c4e7
 
 class App extends Component {
   state = { web3: null, accounts: null, contract: null, mRole: null, tpRole: null, dhRole: null, cRole: null };
