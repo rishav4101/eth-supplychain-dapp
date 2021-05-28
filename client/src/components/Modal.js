@@ -62,6 +62,7 @@ export default function ProductModal({prod, open, handleClose, handleReceiveButt
 
                 <p>Manufactured date : {prod[1][0]}</p>
 
+{prod[1][5] == "2" || prod[1][5] == "5" ? <>
                 <TextField
         name="long"
         variant="outlined"
@@ -76,7 +77,7 @@ export default function ProductModal({prod, open, handleClose, handleReceiveButt
         onChange={handleChangeForm}
         label="lat"
         />
-
+</> : <> </> }
                 <Button
             type="submit"
             variant="contained"
