@@ -51,7 +51,7 @@ export default function Manufacture(props){
 
     return (
         <>
-        <Navbar>
+        <Navbar navItems={navItem}>
         <div className={classes.FormWrap}>
         <h1 className={classes.pageHeading}>Manufacture Product</h1>
         <Grid container spacing={3}>
