@@ -23,7 +23,11 @@ export default function ReceiveCustomer(props){
     const [modalData, setModalData] = useState([]);
     const [open, setOpen] = useState(false);
     const classes = useStyles();
-
+    const navItem = [
+      ["Purchase Product","/Customer/buy"],
+      ["Receive Product", "/Customer/receive"],
+      ["All Products","/Customer/allReceived"]
+    ];
     React.useEffect(() => {
         (async () => {
         const cnt = await supplyChainContract.methods.fetchProductCount().call();
@@ -88,7 +92,7 @@ export default function ReceiveCustomer(props){
 
     return(
         <div classname={classes.pageWrap}>
-        <Navbar>
+        <Navbar navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
         <h1 className={classes.pageHeading}>All products to be Received.</h1>
