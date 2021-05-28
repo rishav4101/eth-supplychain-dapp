@@ -283,7 +283,7 @@ contract SupplyChain {
     uint _uid,
     string memory deliveryHubLongitude,
     string memory deliveryHubLatitude
-  ) public shippedByDeliveryHub(_uid) {
+  ) public shippedByThirdParty(_uid) {
     require(hasDeliveryHubRole(msg.sender));
     products[_uid].owner = msg.sender;
     products[_uid].deliveryhub.deliveryHub = msg.sender;

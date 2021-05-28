@@ -14,6 +14,8 @@ import SoldManufacture from "./pages/Manufacturer/SoldManufacture";
 import "./App.css";
 import ReceiveThirdParty from "./pages/ThirdParty/ReceiveThirdParty";
 import PurchaseCustomer from "./pages/Customer/PurchaseCustomer";
+import ShipThirdParty from "./pages/ThirdParty/ShipThirdParty";
+import ReceiveDeliveryHub from "./pages/DeliveryHub/ReceiveDeliveryHub";
 
 class App extends Component {
   state = { web3: null, accounts: null, contract: null };
@@ -81,6 +83,12 @@ class App extends Component {
             </Route>
             <Route exact path="/Customer/buy">
               <PurchaseCustomer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/ThirdParty/ship">
+              <ShipThirdParty accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/DeliveryHub/receive">
+              <ReceiveDeliveryHub accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
           </Switch>
         </Router>

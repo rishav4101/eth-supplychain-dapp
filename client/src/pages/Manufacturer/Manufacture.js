@@ -48,6 +48,13 @@ export default function Manufacturer(props){
         setRoleInput("");
     }
 
+    const handleAddDeliveryHubRole = async () => {
+        await supplyChainContract.methods.addDeliveryHubRole(accounts[2]).send({ from: accounts[4], gas:100000 })
+        .then(console.log);
+      
+        setRoleInput("");
+    }
+
     const handleChangeManufacturerForm = async (e) => {
         setManuForm({
             ...manuForm,
@@ -71,14 +78,14 @@ export default function Manufacturer(props){
         <>
         <h1>Add role to manufac</h1>
         <input 
-        type="text" 
-        name="roleInput"
-        value={ roleInput }
-        onChange={ handleRoleFieldChange }
+            type="text" 
+            name="roleInput"
+            value={ roleInput }
+            onChange={ handleRoleFieldChange }
         />
         <button onClick={handleAddManufacturerRole}>ADD ROLE</button>
         <button onClick={handleAddThirdPartyRole}>ADD TP ROLE</button>
-
+        <button onClick={handleAddDeliveryHubRole}>ADD DH ROLE</button>
         <br/>
 
         <h2>Manufacture Prod Form</h2>

@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar";
 import Button from "@material-ui/core/Button";
 import ProductModal from "../../components/Modal";
 
-export default function ReceiveThirdParty(props){
+export default function ReceiveDeliveryHub(props){
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
 
@@ -24,7 +24,7 @@ export default function ReceiveThirdParty(props){
             for(var i = 1; i<count; i++){
                 var a = await supplyChainContract.methods.fetchProductPart1(i, 'product', 0).call();
                 var b = await supplyChainContract.methods.fetchProductPart2(i, 'product', 0).call();
-                if(b[5] == "2"){
+                if(b[5] == "5"){
                     const ar = [];
                     ar.push(a); ar.push(b);
                     arr.push(ar);
@@ -37,7 +37,7 @@ export default function ReceiveThirdParty(props){
     }, [count])
 
     const handleReceiveButton = async (id, long, lat) => {
-        await supplyChainContract.methods.receiveByThirdParty(parseInt(id), long, lat).send({ from: accounts[8], gas:1000000 }).then(console.log);
+        await supplyChainContract.methods.receiveByDeliveryHub(parseInt(id), long, lat).send({ from: accounts[2], gas:1000000 }).then(console.log);
         setCount(0);
         setOpen(false);
     }
@@ -55,7 +55,7 @@ export default function ReceiveThirdParty(props){
         <Navbar/>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
-        <h1>All Products To be Shipped</h1>
+        <h1>All Products To be Receive</h1>
         <h2>Total : {count}</h2>
           {allReceiveProducts.length !== 0 ? (allReceiveProducts.map((prod) => (
                 <>
