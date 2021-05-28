@@ -15,7 +15,7 @@ export default function Manufacture(props){
     console.log(roles);
     const navItem = [
         ["Add Product","/manufacturer/manufacture"],
-        ["Ship Product", "manufacturer/ship"],
+        ["Ship Product", "/manufacturer/ship"],
         ["All Products","/manufacturer/allManufacture"]
       ];
     const [manuForm, setManuForm] = React.useState({

@@ -130,7 +130,7 @@ class App extends Component {
               <ReceivedByCustomer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
               : <h1>Assign Customer Role at /RoleAdmin</h1> }
             </Route>
-            <Route exact path="/">
+            <Route exact path="/explorer">
               <Explorer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
           </Switch>
