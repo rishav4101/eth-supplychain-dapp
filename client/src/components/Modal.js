@@ -14,9 +14,10 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: '0px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    outline:"none"
   },
 }));
 
@@ -78,6 +79,7 @@ export default function ProductModal({prod, open, handleClose, handleReceiveButt
         label="lat"
         />
 </> : <> </> }
+{prod[1][5] === "2" || prod[1][5] === "5" || prod[1][5] === "7"? <>
                 <Button
             type="submit"
             variant="contained"
@@ -86,6 +88,7 @@ export default function ProductModal({prod, open, handleClose, handleReceiveButt
         >
             Recieve
         </Button>
+        </> : <> </> }
         </div>)}
           </div>
         </Fade>

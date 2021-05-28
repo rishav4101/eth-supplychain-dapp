@@ -21,6 +21,9 @@ import ReceivedByCustomer from "./pages/Customer/ReceivedByCustomer";
 import PurchaseThirdParty from "./pages/ThirdParty/PurshaseThirdParty";
 import RoleAdmin from "./pages/RoleAdmin";
 
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./components/Theme";
+
 class App extends Component {
   state = { web3: null, accounts: null, contract: null, mRole: null, tpRole: null, dhRole: null, cRole: null };
 
@@ -61,6 +64,7 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <ThemeProvider theme={theme}>
         <RoleDataContextProvider mRole={this.state.mRole} tpRole={this.state.tpRole} dhRole={this.state.dhRole} cRole={this.state.cRole}>
         <Router history={createBrowserHistory()}>
           <Switch>
@@ -128,6 +132,8 @@ class App extends Component {
           </Switch>
         </Router>
         </RoleDataContextProvider>
+        
+</ThemeProvider>
       </div>
     );
   }
