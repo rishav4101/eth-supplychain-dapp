@@ -98,7 +98,7 @@ export default function Explorer(props) {
                              <MapContainer/>
                         </Grid>
                     </Grid>
-                    <h2> Order History</h2>
+                    <h2> Product History</h2>
                     <Paper className={classes.root}>
                         <TableContainer >
                             <Table stickyHeader aria-label="sticky table">
