@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft({navItems,children}) {
+export default function PersistentDrawerLeft({ navItems, children }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
@@ -131,18 +131,30 @@ export default function PersistentDrawerLeft({navItems,children}) {
         </div>
         <Divider />
         <List>
-          {navItems.length !== 0 ?
-          navItems.map((item) => (
-            <Link to={item[1]} style={{textDecoration:"none"}}>
-            <ListItem button key={item[0]}>
-              <ListItemText primary={item[0]} />
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <ListItem>
+              <ListItemText>Home</ListItemText>
             </ListItem>
-            </Link>
-          ))
-          :
-          <> </>
-        }
-          
+          </Link>
+          <Link to="/explorer" style={{ textDecoration: "none" }}>
+            <ListItem>
+              <ListItemText>Explorer</ListItemText>
+            </ListItem>
+          </Link>
+        </List>
+        <Divider/>
+        <List>
+          {navItems.length !== 0 ?
+            navItems.map((item) => (
+              <Link to={item[1]} style={{ textDecoration: "none" }}>
+                <ListItem button key={item[0]}>
+                  <ListItemText primary={item[0]} />
+                </ListItem>
+              </Link>
+            ))
+            :
+            <> </>
+          }
         </List>
         <Divider />
       </Drawer>
@@ -152,9 +164,9 @@ export default function PersistentDrawerLeft({navItems,children}) {
         })}
       >
         <div className={classes.drawerHeader} />
-        <div style={{margin:"0 auto", maxWidth:1300}}>
-       {children}
-       </div>
+        <div style={{ margin: "0 auto", maxWidth: 1300 }}>
+          {children}
+        </div>
       </main>
     </div>
   );

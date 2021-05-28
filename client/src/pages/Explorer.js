@@ -37,6 +37,7 @@ export default function Explorer(props) {
     const [productData, setProductData] = React.useState([]);
     const [productHistory, setProductHistory] = React.useState([]);
     const [Text, setText] = React.useState(false);
+    const navItem = []
     const findProduct = async (search) => {
         var arr = [];
         var temp = [];
@@ -71,7 +72,7 @@ export default function Explorer(props) {
 
     return (
         <>
-            <Navbar />
+            <Navbar navItems={navItem}>
             <CustomizedInputBase findProduct={findProduct} />
             { productData.length != 0 ?
                 <>
@@ -139,6 +140,7 @@ export default function Explorer(props) {
                     {Text ? <p>Product Not Found</p> : <p>Search a Product</p>}
                 </>
             }
+            </Navbar>
         </>
     )
 }
