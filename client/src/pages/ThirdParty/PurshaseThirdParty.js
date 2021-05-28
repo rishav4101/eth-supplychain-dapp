@@ -2,12 +2,12 @@ import React from "react";
 import Navbar from "../../components/Navbar"
 import Button from "@material-ui/core/Button";
 
-export default function SoldManufacture(props){
+export default function PurchaseThirdParty(props){
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
 
     const [count, setCount] = React.useState(0);
-    const [allSoldProducts, setAllSoldProducts] = React.useState([]);
+    const [allProducts, setAllProducts] = React.useState([]);
 
     React.useEffect(() => {
         (async () => {
@@ -21,29 +21,29 @@ export default function SoldManufacture(props){
             for(var i = 1; i<count; i++){
                 var a = await supplyChainContract.methods.fetchProductPart1(i, 'product', 0).call();
                 var b = await supplyChainContract.methods.fetchProductPart2(i, 'product', 0).call();
-                if(b[5] == "1"){
+                if(b[5] == "0"){
                     const ar = [];
                     ar.push(a); ar.push(b);
                     arr.push(ar);
                 }
             }
-            await setAllSoldProducts(arr);
+            await setAllProducts(arr);
             
             }) ();
 
     }, [count])
 
-    const handleShipButton = async id => {
-        await supplyChainContract.methods.shipToThirdParty(id).send({ from: accounts[6], gas:1000000 }).then(console.log);
+    const handleBuyButton = async id => {
+        await supplyChainContract.methods.purchaseByThirdParty(id).send({ from: accounts[8], gas:1000000 }).then(console.log);
         setCount(0);
     }
 
     return(
         <>
         <Navbar/>
-        <h1>All Products To be Shipped</h1>
+        <h1>All Products</h1>
         <h2>Total : {count}</h2>
-          {allSoldProducts.length !== 0 ? (allSoldProducts.map((prod) => (
+          {allProducts.length !== 0 ? (allProducts.map((prod) => (
                 <>
                     <div>
                     <p>Universal ID : {prod[0][0]}</p>
@@ -60,9 +60,9 @@ export default function SoldManufacture(props){
                 type="submit"
                 variant="contained"
                 color="primary"
-                onClick={() => handleShipButton(prod[0][0])}
+                onClick={() => handleBuyButton(prod[0][0])}
             >
-                SHIP
+                BUY
             </Button>
                     </div>
                     

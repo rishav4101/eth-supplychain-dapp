@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-export default function Manufacturer(props){
+export default function Manufacture(props){
     // const web3 = props.web3;
     const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
@@ -89,7 +89,7 @@ export default function Manufacturer(props){
         <br/>
 
         <h2>Manufacture Prod Form</h2>
-        <TextField
+            <TextField
             name="id"
             variant="outlined"
             value={manuForm.id}

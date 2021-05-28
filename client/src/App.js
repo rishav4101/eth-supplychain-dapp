@@ -6,10 +6,9 @@ import { Router, Switch, Route } from "react-router-dom";
 import {createBrowserHistory} from 'history';
 import getWeb3 from "./getWeb3";
 
-import Manufacturer from "./pages/Manufacturer/Manufacture";
+import Manufacture from "./pages/Manufacturer/Manufacture";
 import AllManufacture from "./pages/Manufacturer/AllManufacture";
-import AllProductsTP from "./pages/ThirdParty/AllProductsTP";
-import SoldManufacture from "./pages/Manufacturer/SoldManufacture";
+import ShipManufacture from "./pages/Manufacturer/ShipManufacture";
 
 import "./App.css";
 import ReceiveThirdParty from "./pages/ThirdParty/ReceiveThirdParty";
@@ -19,6 +18,7 @@ import ReceiveDeliveryHub from "./pages/DeliveryHub/ReceiveDeliveryHub";
 import ShipDeliveryHub from "./pages/DeliveryHub/ShipDeliveryHub";
 import ReceiveCustomer from "./pages/Customer/ReceiveCustomer";
 import ReceivedByCustomer from "./pages/Customer/ReceivedByCustomer";
+import PurchaseThirdParty from "./pages/ThirdParty/PurshaseThirdParty";
 
 class App extends Component {
   state = { web3: null, accounts: null, contract: null };
@@ -69,17 +69,17 @@ class App extends Component {
       <div className="App">
         <Router history={createBrowserHistory()}>
           <Switch>
-            <Route exact path="/">
-              <Manufacturer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            <Route exact path="/manufacturer/manufacture">
+              <Manufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
-            <Route exact path="/allManufacture">
+            <Route exact path="/manufacturer/allManufacture">
               <AllManufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
-            <Route exact path="/manufacturer/sold">
-              <SoldManufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            <Route exact path="/manufacturer/ship">
+              <ShipManufacture accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
             <Route exact path="/ThirdParty/allProducts">
-              <AllProductsTP accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              <PurchaseThirdParty accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
             <Route exact path="/ThirdParty/receive">
               <ReceiveThirdParty accounts={this.state.accounts} supplyChainContract={this.state.contract} />
