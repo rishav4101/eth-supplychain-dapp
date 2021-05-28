@@ -165,7 +165,7 @@ function RoleAdmin(props) {
         <div style={{ marginLeft: "25%", marginTop: "40px" }}>
           <TextField
             id="customerRole"
-            label=" Enter Third Party Address"
+            label=" Enter Customer Address"
             variant="outlined"
             value={customerRole}
             onChange={(e) => setCustomerRole(e.target.value)}
