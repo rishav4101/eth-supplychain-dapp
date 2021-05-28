@@ -20,7 +20,7 @@ import ReceiveCustomer from "./pages/Customer/ReceiveCustomer";
 import ReceivedByCustomer from "./pages/Customer/ReceivedByCustomer";
 import PurchaseThirdParty from "./pages/ThirdParty/PurshaseThirdParty";
 import RoleAdmin from "./pages/RoleAdmin";
-
+import Explorer from './pages/Explorer';
 class App extends Component {
   state = { web3: null, accounts: null, contract: null, mRole: null, tpRole: null, dhRole: null, cRole: null };
 
