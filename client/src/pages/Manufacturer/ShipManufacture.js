@@ -196,7 +196,6 @@ export default function ShipManufacture(props) {
                              type="submit"
                              variant="contained"
                              color="primary"
-                             style={{zIndex:999}}
                              onClick={() => handleShipButton(prod[0][0])}
                            >
                              SHIP
