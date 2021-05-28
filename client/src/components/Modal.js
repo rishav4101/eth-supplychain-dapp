@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     outline: "none",
+    width:"min(90%, 800px)",
+    height: "80%",
+    border:"2px solid #1a237e",
+      borderRadius:10,
+      boxShadow:"2px 2px 10px #9fa8da",
+      overflow:"scroll"
   },
   dRow: {
     width: "100%",
@@ -26,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    maxWidth: "550px",
     margin: "0 auto",
   },
 
@@ -36,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     color: "#1a237e",
   },
+  pageHeading:{
+    textAlign:"center",
+    margin:"10px auto",
+    padding:0,
+    color:"#1a237e"
+},
 }));
 
 export default function ProductModal({
@@ -76,7 +87,9 @@ export default function ProductModal({
             {prod.length === 0 ? (
               <></>
             ) : (
-              <div style={{ maxHeight: "450px", overflow: "scroll" }}>
+              <>
+              <h1 className={classes.pageHeading}>Details</h1>
+              <div >
                 <div className={classes.dRow}>
                   <div className={classes.dCol}>Universal ID : </div>
                   <div className={classes.dCol}>{prod[0][0]}</div>
@@ -212,6 +225,7 @@ export default function ProductModal({
                   <> </>
                 )}
               </div>
+              </>
             )}
           </div>
         </Fade>
