@@ -19,6 +19,7 @@ import ShipDeliveryHub from "./pages/DeliveryHub/ShipDeliveryHub";
 import ReceiveCustomer from "./pages/Customer/ReceiveCustomer";
 import ReceivedByCustomer from "./pages/Customer/ReceivedByCustomer";
 import PurchaseThirdParty from "./pages/ThirdParty/PurshaseThirdParty";
+import Explorer from "./pages/Explorer";
 
 class App extends Component {
   state = { web3: null, accounts: null, contract: null };
@@ -101,6 +102,9 @@ class App extends Component {
             </Route>
             <Route exact path="/Customer/allReceived">
               <ReceivedByCustomer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/">
+              <Explorer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
           </Switch>
         </Router>
