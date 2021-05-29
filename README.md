@@ -1,6 +1,8 @@
 <h1 align="center">
   <br>
-  Eth-Supply-Chain
+  <a><img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/logo.png" width="200"></a>
+  <br>  
+  Supply-Chain-Dapp
   <br>
 </h1>
 
