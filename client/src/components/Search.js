@@ -49,7 +49,7 @@ export default function CustomizedInputBase(props) {
         placeholder="Enter Product Universal ID"
         inputProps={{ 'aria-label': 'Enter Product Universal ID' }}
         onChange = {onTextChage}
-        onKeyPress = {(e) => e.key == 'Enter'  ? props.findProduct(search): onTextChage}
+        onKeyPress = {(e) => e.key === 'Enter'  ? props.findProduct(search): onTextChage}
       />
       <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={() => props.findProduct(search)}>
         <SearchIcon />

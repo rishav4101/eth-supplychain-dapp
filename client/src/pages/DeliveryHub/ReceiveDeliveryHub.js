@@ -98,7 +98,7 @@ export default function ReceiveDeliveryHub(props){
 
     return(
         <div classname={classes.pageWrap}>
-        <Navbar navItems={navItem}>
+        <Navbar pageTitle={"Delivery Hub"} navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
         <h1 className={classes.pageHeading}>Products To be Received</h1>

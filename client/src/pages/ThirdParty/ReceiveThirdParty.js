@@ -98,7 +98,7 @@ export default function ReceiveThirdParty(props){
 
     return(
         <div classname={classes.pageWrap}>
-        <Navbar navItems={navItem}>
+        <Navbar pageTitle={"Third Party"} navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} handleReceiveButton={handleReceiveButton} />
 
         <h1 className={classes.pageHeading}>Products to be Received</h1>

@@ -99,7 +99,7 @@ export default function ShipThirdParty(props){
     return(
         <>
         <div classname={classes.pageWrap}>
-      <Navbar navItems={navItem}>
+      <Navbar pageTitle={"Third Party"} navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} />
         <h1 className={classes.pageHeading}>Products To be Shipped</h1>
         <h3 className={classes.tableCount}>Total : {allSoldProducts.length}</h3>

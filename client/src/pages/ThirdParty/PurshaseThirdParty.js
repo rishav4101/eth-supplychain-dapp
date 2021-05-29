@@ -97,7 +97,7 @@ export default function PurchaseThirdParty(props){
 
     return(
         <div classname={classes.pageWrap}>
-        <Navbar navItems={navItem}> 
+        <Navbar pageTitle={"Third Party"} navItems={navItem}> 
         <ProductModal prod={modalData} open={open} handleClose={handleClose} />
 
         <h1 className={classes.pageHeading}>All Products</h1>

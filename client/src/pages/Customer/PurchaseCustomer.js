@@ -99,7 +99,7 @@ export default function PurchaseCustomer(props){
     return(
         <>
          <div classname={classes.pageWrap}>
-        <Navbar navItems={navItem}>
+        <Navbar pageTitle={"Customer"} navItems={navItem}>
         <ProductModal prod={modalData} open={open} handleClose={handleClose} />
 
         <h1 className={classes.pageHeading}>All Products</h1>

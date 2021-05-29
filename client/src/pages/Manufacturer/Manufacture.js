@@ -10,7 +10,15 @@ export default function Manufacture(props){
     const supplyChainContract = props.supplyChainContract;
     const classes = useStyles();
     const { roles } = useRole();
-
+    // const [mname, setMname] = React.useState(false);
+    // const [mdetail, setMdetail] = React.useState(false);
+    // const [long, setlong] = React.useState(false);
+    // const [lat, setlat] = React.useState(false);
+    // const [pname, setpname] = React.useState(false);
+    // const [pcode, setpcode] = React.useState(false);
+    // const [pprice, setpprice] = React.useState(false);
+    // const [pcat, setpcat] = React.useState(false);
+    const [fvalid,setfvalid] = React.useState(false);
     console.log(roles);
     const navItem = [
         ["Add Product","/manufacturer/manufacture"],
@@ -37,12 +45,19 @@ export default function Manufacture(props){
     }
 
     const handleSubmitManufacturerForm = async () => {
+        
         console.log(parseInt(manuForm.id));
-        await supplyChainContract.methods.manufactureProduct( manuForm.manufacturerName, manuForm.manufacturerDetails, manuForm.manufacturerLongitude, manuForm.manufacturerLatitude, manuForm.productName, parseInt(manuForm.productCode), parseInt(manuForm.productPrice), manuForm.productCategory).send({ from: roles.manufacturer, gas:999999 })
-        // .then(console.log)
-        .on('transactionHash', function(hash){
+        if(manuForm.manufacturerName !== "" && manuForm.manufacturerDetails !== "" && manuForm.manufacturerLongitude !== "" && manuForm.manufacturerLatitude !== "" && manuForm.productName !== "" && manuForm.productCode !== 0 && manuForm.productPrice !== 0 && manuForm.productCategory !== "") {
+            setfvalid(false);
+            await supplyChainContract.methods.manufactureProduct( manuForm.manufacturerName, manuForm.manufacturerDetails, manuForm.manufacturerLongitude, manuForm.manufacturerLatitude, manuForm.productName, parseInt(manuForm.productCode), parseInt(manuForm.productPrice), manuForm.productCategory).send({ from: roles.manufacturer, gas:999999 })     
+            // .then(console.log)
+            .on('transactionHash', function(hash){
             handleSetTxhash(hash);
         });
+
+       }else{
+           setfvalid(true);
+       }
     }
 
     const handleSetTxhash =  async (hash) => { 
@@ -61,12 +76,13 @@ export default function Manufacture(props){
 
     return (
         <>
-        <Navbar navItems={navItem}>
+        <Navbar pageTitle={"Manufacturer"} navItems={navItem}>
         <div className={classes.FormWrap}>
         <h1 className={classes.pageHeading}>Add Product</h1>
         <Grid container spacing={3}>
         <Grid item xs={12}>
             <TextField
+            required
             name="manufacturerName"
             variant="outlined"
             value={manuForm.manufacturerName}
@@ -77,6 +93,7 @@ export default function Manufacture(props){
             </Grid>
             <Grid item xs={12}>
             <TextField
+            required
             name="manufacturerDetails"
             variant="outlined"
             value={manuForm.manufacturerDetails}
@@ -87,6 +104,7 @@ export default function Manufacture(props){
             </Grid>
             <Grid item xs={6}>
             <TextField
+            required
             name="manufacturerLongitude"
             variant="outlined"
             value={manuForm.manufacturerLongitude}
@@ -97,6 +115,7 @@ export default function Manufacture(props){
             </Grid>
             <Grid item xs={6}>
             <TextField
+            required
             name="manufacturerLatitude"
             variant="outlined"
             value={manuForm.manufacturerLatitude}
@@ -107,6 +126,7 @@ export default function Manufacture(props){
             </Grid>
             <Grid item xs={12}>
             <TextField
+            required
             name="productName"
             variant="outlined"
             value={manuForm.productName}
@@ -117,6 +137,7 @@ export default function Manufacture(props){
             </Grid>
             <Grid item xs={6}>
             <TextField
+            required
             name="productCode"
             variant="outlined"
             value={manuForm.productCode}
@@ -127,6 +148,7 @@ export default function Manufacture(props){
             </Grid>
             <Grid item xs={6}>
             <TextField
+            required
             name="productPrice"
             variant="outlined"
             value={manuForm.productPrice}
@@ -137,6 +159,7 @@ export default function Manufacture(props){
             </Grid>
             <Grid item xs={12}>
             <TextField
+            required
             name="productCategory"
             variant="outlined"
             value={manuForm.productCategory}
@@ -147,19 +170,20 @@ export default function Manufacture(props){
             </Grid>
             </Grid>
             <br/>
+             <p><b style={{color:"red"}}>{fvalid ? "Please enter correct data" : ""}</b></p>
              <Button
                 type="submit"
                 variant="contained"
                 color="primary"
                 onClick={handleSubmitManufacturerForm}
             >
-                MANUFACTURE
+                Submit
             </Button>
 
         <br/>
         <br/>
         
-        <Button type="submit" variant="contained" color="danger" onClick={createProduct}>Create 5 Test Products</Button>
+        {/* <Button type="submit" variant="contained" color="danger" onClick={createProduct}>Create 5 Test Products</Button> */}
         </div>
             </Navbar>
         </>

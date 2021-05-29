@@ -20,9 +20,9 @@ export class MapContainer extends Component {
 
     // });
     var points =[];
-    if(props.prodData[0][7].length != 0) { points.push({latitude: props.prodData[0][7], longitude: props.prodData[0][6]})};
-    if(props.prodData[2][0].length != 0) {points.push( {latitude: props.prodData[2][0], longitude: props.prodData[1][7]})};
-    if(props.prodData[2][3].length != 0) {points.push({latitude: props.prodData[2][3], longitude: props.prodData[2][2]})};
+    if(props.prodData[0][7].length !== 0) { points.push({latitude: props.prodData[0][7], longitude: props.prodData[0][6]})};
+    if(props.prodData[2][0].length !== 0) {points.push( {latitude: props.prodData[2][0], longitude: props.prodData[1][7]})};
+    if(props.prodData[2][3].length !== 0) {points.push({latitude: props.prodData[2][3], longitude: props.prodData[2][2]})};
 
     this.state = {
       stores: points

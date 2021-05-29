@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft({ navItems, children }) {
+export default function PersistentDrawerLeft({ pageTitle,navItems, children }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
@@ -124,6 +124,7 @@ export default function PersistentDrawerLeft({ navItems, children }) {
         }}
       >
         <div className={classes.drawerHeader}>
+        <ListItemText><b>{pageTitle}</b></ListItemText>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon style={{color:"#fff"}} /> : <ChevronRightIcon />}
           </IconButton>
