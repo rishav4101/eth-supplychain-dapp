@@ -87,7 +87,7 @@ export default function ReceivedByCustomer(props) {
   return (
     <>
       <div classname={classes.pageWrap}>
-        <Navbar navItems={navItem}>
+        <Navbar pageTitle={"Customer"} navItems={navItem}>
           {loading ? (
             <Loader />
           ) : (

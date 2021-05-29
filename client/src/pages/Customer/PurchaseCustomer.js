@@ -105,7 +105,7 @@ export default function PurchaseCustomer(props) {
   return (
     <>
       <div classname={classes.pageWrap}>
-        <Navbar navItems={navItem}>
+        <Navbar pageTitle={"Customer"} navItems={navItem}>
           {loading ? (
             <Loader />
           ) : (

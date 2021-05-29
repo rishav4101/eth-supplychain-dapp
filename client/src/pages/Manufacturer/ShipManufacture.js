@@ -105,7 +105,7 @@ export default function ShipManufacture(props) {
 
   return (
     <div className={classes.pageWrap}>
-      <Navbar navItems={navItem}>
+      <Navbar pageTitle={"Manufacturer"} navItems={navItem}>
         {loading ? (
           <Loader />
         ) : (

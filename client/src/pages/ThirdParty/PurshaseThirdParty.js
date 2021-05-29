@@ -76,15 +76,8 @@ export default function PurchaseThirdParty(props) {
     setPage(0);
   };
 
-<<<<<<< HEAD
-    return(
-        <div classname={classes.pageWrap}>
-        <Navbar pageTitle={"Third Party"} navItems={navItem}> 
-        <ProductModal prod={modalData} open={open} handleClose={handleClose} />
-=======
   const [open, setOpen] = React.useState(false);
   const [modalData, setModalData] = React.useState([]);
->>>>>>> 471c666881d1ad093fe56451b2c021896a7559f9
 
   const handleClose = () => setOpen(false);
 
@@ -112,7 +105,7 @@ export default function PurchaseThirdParty(props) {
 
   return (
     <div classname={classes.pageWrap}>
-      <Navbar navItems={navItem}>
+      <Navbar pageTitle={"Third Party"} navItems={navItem}>
         {loading ? (
           <Loader />
         ) : (
