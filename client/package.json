@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "clsx": "^1.1.1",
+    "express": "^4.17.1",
     "ganache-cli": "^6.12.2",
     "ganache-core": "^2.13.2",
     "google-maps-react": "^2.0.6",
