@@ -8,13 +8,12 @@
 
 <p align="center">
   <a >
-    <img src="https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg">
-       
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/Solidity.svg" width="50">       
   </a>
-  <a href="https://github.com/rishav4101/eth-supplychain-dapp/issues"><img src="https://img.shields.io/github/issues/rishav4101/eth-supplychain-dapp.svg"></a>
+  <a><img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/react.png" width="50"></a>
   
-  <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/license-MIT-green.svg">
+  <a>
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/truffle.png" width="50">
   </a>
 </p>
 
