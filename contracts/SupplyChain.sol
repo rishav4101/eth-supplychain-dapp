@@ -352,6 +352,7 @@ contract SupplyChain {
       string memory  
   )
   {  
+    require(products[_uid].uid != 0);
     Structure.Product storage product = products[_uid];
     if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
       product = products[_uid];
@@ -383,6 +384,7 @@ contract SupplyChain {
       address,
       string memory
   ){
+    require(products[_uid].uid != 0);
     Structure.Product storage product = products[_uid];
     if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
       product = products[_uid];
@@ -411,6 +413,7 @@ contract SupplyChain {
       address,
       string memory
   ){
+    require(products[_uid].uid != 0);
     Structure.Product storage product = products[_uid];
     if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
       product = products[_uid];
