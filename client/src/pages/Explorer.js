@@ -131,7 +131,7 @@ export default function Explorer(props) {
                             </Paper>
                         </Grid>
                         <Grid item xs={6} style={{position:"relative", }}>
-                             <MapContainer/>
+                             <MapContainer prodData={productData} />
                         </Grid>
                     </Grid>
                     <br/>
