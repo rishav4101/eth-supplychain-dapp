@@ -6,6 +6,18 @@
   <br>
 </h1>
 
+<p align="center">
+  <a >
+    <img src="https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg">
+       
+  </a>
+  <a href="https://github.com/rishav4101/eth-supplychain-dapp/issues"><img src="https://img.shields.io/github/issues/rishav4101/eth-supplychain-dapp.svg"></a>
+  
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/license-MIT-green.svg">
+  </a>
+</p>
+
 <h4 align="center">A simple Supply Chain setup with <a href="https://docs.soliditylang.org/en/v0.8.4/" target="_blank">Solidity</a>.</h4>
 
 <p align="center">
@@ -34,10 +46,8 @@ Also it leads to an increase in transparency and helps to build an efficient Roo
 blockchain to ensure a transparent and secure transfer of product from the manufacturer to the customer via the online e-commerce websites.
 
 ## Flow
-<p align="centre">
-  <a>
-    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/flow.png?raw=true">
-  </a>
+<p align="centre">  
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/flow.png" width="300">  
 </p>
 
 ## Contract Diagrams
