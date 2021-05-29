@@ -10,10 +10,14 @@ import DirectionsIcon from '@material-ui/icons/Directions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '2px 4px',
+    padding: '2px 10px',
     display: 'flex',
-    margin:'auto',
-    width: '50%',
+    margin:'20px auto',
+    width: '40%',
+    border:"2px solid #1a237e",
+    borderRadius:50,
+    boxShadow:"2px 2px 10px #9fa8da"
+
   },
   input: {
     justifyContent:'center',
@@ -39,8 +43,8 @@ export default function CustomizedInputBase(props) {
     <Paper  className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Search Product Info"
-        inputProps={{ 'aria-label': 'search product info' }}
+        placeholder="Enter Product Universal ID"
+        inputProps={{ 'aria-label': 'Enter Product Universal ID' }}
         onChange = {onTextChage}
       />
       <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={ () => props.findProduct(search)}>

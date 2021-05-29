@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-// import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 const mapStyles = {
-  width: '40%',
-  height: '50%'
+  // width: '40%',
+  // height: '50%',
+  padding: "15px",
+  borderRadius:"20px",
+  maxWidth:"900px",
+  height: "60vh",
+  zIndex: "1 !important",
+  border:"2px solid #32c8c6",
 };
 
 export class MapContainer extends Component {

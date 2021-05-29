@@ -52,5 +52,80 @@ export const useStyles = makeStyles({
 
     RoleForm:{
       display:"flex", alignItems:"center", margin:"20px auto"
-    }
+    },
+
+    //Explorer 
+    Explorerroot: {
+      padding: '2px 4px',
+      margin:"10px",
+      width: '100%',
+
+  },
+  ProductPaper : {
+      padding:10,
+    borderRadius:10,
+    boxShadow:"2px 2px 10px #9fa8da",
+    border:"2px solid #1a237e",
+  },
+  ExplorerdRow: {
+      width: "100%",
+      borderBottom: `0px solid #222`,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 5,
+      margin: "0 auto",
+      fontWeight: 600,
+      color: "#1a237e",
+    },
+    TableRoot2: {
+      width: '100%',
+      maxWidth: 1300,
+      margin:"5px auto",
+      border:"2px solid #1a237e",
+      borderRadius:10,
+      boxShadow:"2px 2px 10px #9fa8da"
+    },
+
+
+    //Modal
+    modal: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    paper: {
+      backgroundColor: "#fff",
+      border: "0px solid #000",
+      padding: 15,
+      outline: "none",
+      width:"min(90%, 650px)",
+      height: "80%",
+      border:"2px solid #1a237e",
+        borderRadius:10,
+        boxShadow:"2px 2px 10px #9fa8da",
+        overflow:"scroll"
+    },
+    dRow: {
+      width: "100%",
+      borderBottom: `1px solid #222`,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 10,
+      margin: "0 auto",
+    },
+  
+    dCol1: {
+      width: "30%",
+      textAlign: "left",
+      fontWeight: 600,
+      color: "#1a237e",
+    },
+    dCol2: {
+      width: "70%",
+      textAlign: "left",
+      fontWeight: 600,
+      color: "#1a237e",
+    },
   });

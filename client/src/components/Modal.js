@@ -5,49 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "0px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    outline: "none",
-    width:"min(90%, 800px)",
-    height: "80%",
-    border:"2px solid #1a237e",
-      borderRadius:10,
-      boxShadow:"2px 2px 10px #9fa8da",
-      overflow:"scroll"
-  },
-  dRow: {
-    width: "100%",
-    borderBottom: `1px solid #222`,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    margin: "0 auto",
-  },
-
-  dCol: {
-    width: "50%",
-    textAlign: "left",
-    fontWeight: 600,
-    color: "#1a237e",
-  },
-  pageHeading:{
-    textAlign:"center",
-    margin:"10px auto",
-    padding:0,
-    color:"#1a237e"
-},
-}));
+import { useStyles } from "./Styles";
 
 export default function ProductModal({
   prod,
@@ -91,99 +49,99 @@ export default function ProductModal({
               <h1 className={classes.pageHeading}>Details</h1>
               <div >
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Universal ID : </div>
-                  <div className={classes.dCol}>{prod[0][0]}</div>
+                  <div className={classes.dCol1}>Universal ID: </div>
+                  <div className={classes.dCol2}>{prod[0][0]}</div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>SKU :</div>{" "}
-                  <div className={classes.dCol}> {prod[0][1]}</div>
+                  <div className={classes.dCol1}>SKU:</div>{" "}
+                  <div className={classes.dCol2}> {prod[0][1]}</div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Owner : </div>{" "}
-                  <div className={classes.dCol}>{prod[0][2]}</div>
-                </div>
-
-                <div className={classes.dRow}>
-                  <div className={classes.dCol}>Manufacturer :</div>{" "}
-                  <div className={classes.dCol}>{prod[0][3]}</div>
+                  <div className={classes.dCol1}>Owner: </div>{" "}
+                  <div className={classes.dCol2}>{prod[0][2]}</div>
                 </div>
 
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Name of Manufacturer :</div>{" "}
-                  <div className={classes.dCol}> {prod[0][4]}</div>
+                  <div className={classes.dCol1}>Manufacturer:</div>{" "}
+                  <div className={classes.dCol2}>{prod[0][3]}</div>
                 </div>
 
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Manufactured date :</div>{" "}
-                  <div className={classes.dCol}> {prod[1][0]}</div>
+                  <div className={classes.dCol1}>Name of Manufacturer:</div>{" "}
+                  <div className={classes.dCol2}> {prod[0][4]}</div>
                 </div>
 
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Details of Manufacturer :</div>{" "}
-                  <div className={classes.dCol}> {prod[0][5]}</div>
+                  <div className={classes.dCol1}>Manufactured date:</div>{" "}
+                  <div className={classes.dCol2}> {prod[1][0]}</div>
                 </div>
 
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Longitude of Manufature : </div>{" "}
-                  <div className={classes.dCol}>{prod[0][6]}</div>
-                </div>
-                <div className={classes.dRow}>
-                  <div className={classes.dCol}>Latitude of Manufature :</div>{" "}
-                  <div className={classes.dCol}>{prod[0][7]}</div>
+                  <div className={classes.dCol1}>Details of Manufacturer:</div>{" "}
+                  <div className={classes.dCol2}> {prod[0][5]}</div>
                 </div>
 
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Product Name : </div>{" "}
-                  <div className={classes.dCol}>{prod[1][1]}</div>
+                  <div className={classes.dCol1}>Longitude of Manufature: </div>{" "}
+                  <div className={classes.dCol2}>{prod[0][6]}</div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Product Code:</div>{" "}
-                  <div className={classes.dCol}>{prod[1][2]}</div>
-                </div>
-
-                <div className={classes.dRow}>
-                  <div className={classes.dCol}>Product Price: </div>{" "}
-                  <div className={classes.dCol}>{prod[1][3]}</div>
+                  <div className={classes.dCol1}>Latitude of Manufature:</div>{" "}
+                  <div className={classes.dCol2}>{prod[0][7]}</div>
                 </div>
 
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}> Product Category: </div>
-                  <div className={classes.dCol}>{prod[1][4]}</div>
+                  <div className={classes.dCol1}>Product Name: </div>{" "}
+                  <div className={classes.dCol2}>{prod[1][1]}</div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Product State: </div>{" "}
-                  <div className={classes.dCol}>{prod[1][5]}</div>
+                  <div className={classes.dCol1}>Product Code:</div>{" "}
+                  <div className={classes.dCol2}>{prod[1][2]}</div>
+                </div>
+
+                <div className={classes.dRow}>
+                  <div className={classes.dCol1}>Product Price: </div>{" "}
+                  <div className={classes.dCol2}>{prod[1][3]}</div>
+                </div>
+
+                <div className={classes.dRow}>
+                  <div className={classes.dCol1}> Product Category: </div>
+                  <div className={classes.dCol2}>{prod[1][4]}</div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Third Party Address: </div>{" "}
-                  <div className={classes.dCol}>{prod[1][6]}</div>
+                  <div className={classes.dCol1}>Product State: </div>{" "}
+                  <div className={classes.dCol2}>{prod[1][5]}</div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>
-                    Third Party Longitude: </div> <div className={classes.dCol}>{prod[1][7]}
+                  <div className={classes.dCol1}>Third Party Address: </div>{" "}
+                  <div className={classes.dCol2}>{prod[1][6]}</div>
+                </div>
+                <div className={classes.dRow}>
+                  <div className={classes.dCol1}>
+                    Third Party Longitude: </div> <div className={classes.dCol2}>{prod[1][7]}
                   </div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>
-                    Third Party Latitude: </div> <div className={classes.dCol}>{prod[2][0]}
+                  <div className={classes.dCol1}>
+                    Third Party Latitude: </div> <div className={classes.dCol2}>{prod[2][0]}
                   </div>
                 </div>
 
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Delivery Hub Address:</div>{" "}
-                  <div className={classes.dCol}> {prod[2][1]}</div>
+                  <div className={classes.dCol1}>Delivery Hub Address:</div>{" "}
+                  <div className={classes.dCol2}> {prod[2][1]}</div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Delivery Hub Longitude: </div>{" "}
-                  <div className={classes.dCol}>{prod[2][2]}</div>
+                  <div className={classes.dCol1}>Delivery Hub Longitude: </div>{" "}
+                  <div className={classes.dCol2}>{prod[2][2]}</div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Delivery Hub Latitude:</div>{" "}
-                  <div className={classes.dCol}> {prod[2][3]}</div>
+                  <div className={classes.dCol1}>Delivery Hub Latitude:</div>{" "}
+                  <div className={classes.dCol2}> {prod[2][3]}</div>
                 </div>
                 <div className={classes.dRow}>
-                  <div className={classes.dCol}>Customer Address: </div>{" "}
-                  <div className={classes.dCol}>{prod[2][4]}</div>
+                  <div className={classes.dCol1}>Customer Address: </div>{" "}
+                  <div className={classes.dCol2}>{prod[2][4]}</div>
                 </div>
 
                 {prod[1][5] == "2" || prod[1][5] == "5" ? (
