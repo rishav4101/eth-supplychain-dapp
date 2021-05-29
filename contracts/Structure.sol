@@ -48,6 +48,7 @@ library Structure{
       ProductDetails productdet;
       DeliveryHubDetails deliveryhub;
       address customer;
+      string transaction;
   }
 
   struct ProductHistory{

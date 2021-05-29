@@ -65,10 +65,17 @@ export default function ReceiveThirdParty(props){
     }, [count])
 
     const handleReceiveButton = async (id, long, lat) => {
-        await supplyChainContract.methods.receiveByThirdParty(parseInt(id), long, lat).send({ from: roles.thirdparty, gas:1000000 }).then(console.log);
+        await supplyChainContract.methods.receiveByThirdParty(parseInt(id), long, lat).send({ from: roles.thirdparty, gas:1000000 })
+        .on('transactionHash', function(hash){
+          handleSetTxhash(id, hash);
+      });
         setCount(0);
         setOpen(false);
     }
+
+    const handleSetTxhash =  async (id, hash) => { 
+      await supplyChainContract.methods.setTransactionHash(id, hash).send({ from: roles.manufacturer, gas:900000 });
+  }
 
     const [page, setPage] = React.useState(0);
         const [rowsPerPage, setRowsPerPage] = React.useState(10);

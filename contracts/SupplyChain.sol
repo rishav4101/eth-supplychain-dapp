@@ -155,6 +155,7 @@ contract SupplyChain {
   }
   function manufactureEmptyInitialize(Structure.Product memory product) internal pure {
       address thirdParty;
+      string memory transaction;
       string memory thirdPartyLongitude;
       string memory thirdPartyLatitude;
 
@@ -172,6 +173,7 @@ contract SupplyChain {
       product.deliveryhub.deliveryHubLatitude = deliveryHubLatitude;
 
       product.customer = customer;
+      product.transaction = transaction;
   }
 
   function manufactureProductInitialize(
@@ -406,7 +408,8 @@ contract SupplyChain {
       address,
       string memory,
       string memory,
-      address
+      address,
+      string memory
   ){
     Structure.Product storage product = products[_uid];
     if(keccak256(bytes(_type)) == keccak256(bytes("product"))){
@@ -420,7 +423,8 @@ contract SupplyChain {
      product.deliveryhub.deliveryHub,
      product.deliveryhub.deliveryHubLongitude,
      product.deliveryhub.deliveryHubLatitude,
-     product.customer
+     product.customer,
+     product.transaction
     );
   }
 
@@ -438,4 +442,15 @@ contract SupplyChain {
   {
     return products[_uid].productState;
   }
+
+  function setTransactionHashOnManufacture(string memory tran) public {
+    productHistory[uid-1].history[productHistory[uid-1].history.length - 1].transaction = tran;
+  }
+
+  function setTransactionHash(uint _uid, string memory tran) public {
+    Structure.Product storage p = productHistory[_uid].history[productHistory[_uid].history.length - 1];
+    p.transaction = tran;
+    // productHistory[_uid].history[productHistory[_uid].history.length - 1].transaction = tran;
+  }
+
 }

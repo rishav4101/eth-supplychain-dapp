@@ -84,11 +84,17 @@ export default function ShipManufacture(props) {
     setOpen(true);
   };
 
+  const handleSetTxhash =  async (id, hash) => { 
+    await supplyChainContract.methods.setTransactionHash(id, hash).send({ from: roles.manufacturer, gas:900000 });
+}
+
   const handleShipButton = async (id) => {
     await supplyChainContract.methods
       .shipToThirdParty(id)
       .send({ from: roles.manufacturer, gas: 1000000 })
-      .then(console.log);
+      .on('transactionHash', function(hash){
+        handleSetTxhash(id, hash);
+    });
     setCount(0);
   };
 

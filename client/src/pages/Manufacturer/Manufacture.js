@@ -39,12 +39,23 @@ export default function Manufacture(props){
 
     const handleSubmitManufacturerForm = async () => {
         console.log(parseInt(manuForm.id));
-        await supplyChainContract.methods.manufactureProduct( manuForm.manufacturerName, manuForm.manufacturerDetails, manuForm.manufacturerLongitude, manuForm.manufacturerLatitude, manuForm.productName, parseInt(manuForm.productCode), parseInt(manuForm.productPrice), manuForm.productCategory).send({ from: roles.manufacturer, gas:999999 }).then(console.log);
+        await supplyChainContract.methods.manufactureProduct( manuForm.manufacturerName, manuForm.manufacturerDetails, manuForm.manufacturerLongitude, manuForm.manufacturerLatitude, manuForm.productName, parseInt(manuForm.productCode), parseInt(manuForm.productPrice), manuForm.productCategory).send({ from: roles.manufacturer, gas:999999 })
+        // .then(console.log)
+        .on('transactionHash', function(hash){
+            handleSetTxhash(hash);
+        });
+    }
+
+    const handleSetTxhash =  async (hash) => { 
+        await supplyChainContract.methods.setTransactionHashOnManufacture(hash).send({ from: roles.manufacturer, gas:900000 });
     }
 
     const createProduct = async () => {
         for(var i = 0 ;i < 20 ;i++){
-            await supplyChainContract.methods.manufactureProduct("product"+i,"manufacturer"+1,"98","89","mi"+i,99+i,12000,"electronics").send({ from: roles.manufacturer, gas:999999 }).then(console.log);
+            await supplyChainContract.methods.manufactureProduct("product"+i,"manufacturer"+1,"98","89","mi"+i,99+i,12000,"electronics").send({ from: roles.manufacturer, gas:999999 })
+            .on('transactionHash', function(hash){
+                handleSetTxhash(hash);
+            });
         }
         
     }

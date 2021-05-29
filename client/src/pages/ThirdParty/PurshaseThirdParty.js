@@ -84,10 +84,17 @@ export default function PurchaseThirdParty(props){
           setOpen(true);
         };
 
-    const handleBuyButton = async id => {
-        await supplyChainContract.methods.purchaseByThirdParty(id).send({ from: roles.thirdparty, gas:1000000 }).then(console.log);
-        setCount(0);
-    }
+        const handleSetTxhash =  async (id, hash) => { 
+          await supplyChainContract.methods.setTransactionHash(id, hash).send({ from: roles.manufacturer, gas:900000 });
+      }
+
+      const handleBuyButton = async id => {
+          await supplyChainContract.methods.purchaseByThirdParty(id).send({ from: roles.thirdparty, gas:1000000 })
+          .on('transactionHash', function(hash){
+            handleSetTxhash(id, hash);
+        });
+          setCount(0);
+      }
 
     return(
         <div classname={classes.pageWrap}>

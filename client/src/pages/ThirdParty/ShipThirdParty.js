@@ -63,8 +63,15 @@ export default function ShipThirdParty(props){
 
     }, [count])
 
+    const handleSetTxhash =  async (id, hash) => { 
+      await supplyChainContract.methods.setTransactionHash(id, hash).send({ from: roles.manufacturer, gas:900000 });
+  }
+
     const handleShipButton = async id => {
-        await supplyChainContract.methods.shipByThirdParty(id).send({ from: roles.thirdparty, gas:1000000 }).then(console.log);
+        await supplyChainContract.methods.shipByThirdParty(id).send({ from: roles.thirdparty, gas:1000000 })
+        .on('transactionHash', function(hash){
+          handleSetTxhash(id, hash);
+      });
         setCount(0);
     }
     const [page, setPage] = React.useState(0);

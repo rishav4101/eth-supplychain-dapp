@@ -86,9 +86,16 @@ export default function PurchaseCustomer(props){
     };
 
     const handleBuyButton = async id => {
-        await supplyChainContract.methods.purchaseByCustomer(id).send({ from: roles.customer, gas:1000000 }).then(console.log);
+        await supplyChainContract.methods.purchaseByCustomer(id).send({ from: roles.customer, gas:1000000 })
+        .on('transactionHash', function(hash){
+          handleSetTxhash(id, hash);
+      });
         setCount(0);
     }
+
+    const handleSetTxhash =  async (id, hash) => { 
+      await supplyChainContract.methods.setTransactionHash(id, hash).send({ from: roles.manufacturer, gas:900000 });
+  }
 
     return(
         <>

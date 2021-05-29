@@ -76,7 +76,7 @@ class App extends Component {
               <RoleAdmin accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
             <Route exact path="/explorer">
-              <Explorer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+              <Explorer accounts={this.state.accounts} supplyChainContract={this.state.contract} web3={this.state.web3} />
             </Route>
             <Route exact path="/">
               <Home accounts={this.state.accounts} supplyChainContract={this.state.contract} />

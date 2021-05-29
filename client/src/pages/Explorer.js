@@ -8,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import ProductModal from "../components/Modal";
+import ReciptModal from "../components/ReciptModal";
 import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from "@material-ui/core";
@@ -30,6 +31,7 @@ const map = ["Manufactured", "Bought By Third Party", "Shipped From Manufacturer
 export default function Explorer(props) {
     const classes = useStyles();
     const accounts = props.accounts;
+    const web3 = props.web3;
     const supplyChainContract = props.supplyChainContract;
     const [search, setSearch] = React.useState("");
     const [productData, setProductData] = React.useState([]);
@@ -37,7 +39,9 @@ export default function Explorer(props) {
     const [Text, setText] = React.useState(false);
     const navItem = []
     const [modalData, setModalData] = React.useState([]);
+    const [modalReciptData, setModalReciptData] = React.useState([]);
     const [open, setOpen] = React.useState(false);
+    const [openRecipt, setOpenRecipt] = React.useState(false);
 
     const findProduct = async (search) => {
         var arr = [];
@@ -75,6 +79,7 @@ export default function Explorer(props) {
     }
 
     const handleClose = () => setOpen(false);
+    const handleCloseRecipt = () => setOpenRecipt(false);
 
     const handleClick = async (prod) => {
       await setModalData(prod);
@@ -82,15 +87,24 @@ export default function Explorer(props) {
       setOpen(true);
     };
 
+    const fetchTxRecipt = async (hash) => {
+        web3.eth.getTransaction(hash).then((recipt) => {
+            console.log(recipt);
+            setModalReciptData(recipt);
+            setOpenRecipt(true);
+        });
+    }
+
     return (
         <>
             <Navbar navItems={navItem}>
             <ProductModal prod={modalData} open={open} handleClose={handleClose}/>
+            <ReciptModal recipt={modalReciptData} openRecipt={openRecipt} handleCloseRecipt={handleCloseRecipt}/>
             <h1 className={classes.pageHeading}>Search a product</h1>
             <CustomizedInputBase findProduct={findProduct} />
             { productData.length != 0 ?
                 <>
-                    <Grid container className={classes.Explorerroot}>
+                    <Grid container className={classes.Explorerroot} spacing={3}>
                         <Grid item xs={6} >
                             <Paper className={classes.ProductPaper}>
                                 <div>
@@ -116,8 +130,8 @@ export default function Explorer(props) {
                                 </div>
                             </Paper>
                         </Grid>
-                        <Grid item xs={6} >
-                             {/* <MapContainer/> */}
+                        <Grid item xs={6} style={{position:"relative", }}>
+                             <MapContainer/>
                         </Grid>
                     </Grid>
                     <br/>
@@ -137,6 +151,20 @@ export default function Explorer(props) {
                                                 {column.label}
                                             </TableCell>
                                         ))}
+                                        <TableCell
+                                               
+                                               align="center"
+                                               className={classes.TableHead}
+                                           >
+                                              Details
+                                           </TableCell>
+                                            <TableCell
+                                               
+                                                align="center"
+                                                className={classes.TableHead}
+                                            >
+                                                Recipt
+                                            </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -163,8 +191,31 @@ export default function Explorer(props) {
                                                             {row[1][4]}
                                                         </TableCell>
                                                         
-                                                        <TableCell style={{color:"#f00 !important"}} className={classes.TableCell} align="center" onClick={() => handleClick(row)} >
+                                                        <TableCell style={{color:"#f00 !important"}} className={classes.TableCell} align="center" >
                                                             {map[row[1][5]]}
+                                                        </TableCell>
+
+
+                                                        <TableCell className={classes.TableCell} align="center" >
+                                                        <Button
+                             type="submit"
+                             variant="contained"
+                             color="primary"
+                             onClick={() => handleClick(row)}
+                           >
+                             DETAILS
+                           </Button>
+                                                        </TableCell>
+
+                                                        <TableCell className={classes.TableCell} align="center" >
+                                                        <Button
+                             type="submit"
+                             variant="contained"
+                             color="primary"
+                             onClick={() => fetchTxRecipt(row[2][5])}
+                           >
+                             RECIPT
+                           </Button>
                                                         </TableCell>
                                                 
                                             </TableRow>

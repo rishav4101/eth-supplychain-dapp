@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 const mapStyles = {
-  // width: '40%',
+  width: '100%',
   // height: '50%',
-  padding: "15px",
-  borderRadius:"20px",
-  maxWidth:"900px",
-  height: "60vh",
-  zIndex: "1 !important",
-  border:"2px solid #32c8c6",
+  
+  borderRadius:"10px",
+  // maxWidth:"400px",
+  height: "350px",
+  zIndex: "10 !important",
+  border:"2px solid #1a237e",
 };
 
 export class MapContainer extends Component {
@@ -49,6 +49,6 @@ export class MapContainer extends Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBq4B79ojoauTrFKxWIH9vqYbdshJGB13I'
+MapContainer = GoogleApiWrapper({
+  apiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY
 })(MapContainer);

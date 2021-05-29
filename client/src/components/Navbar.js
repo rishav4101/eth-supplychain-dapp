@@ -112,8 +112,8 @@ export default function PersistentDrawerLeft({ navItems, children }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            SupplyChain-Dapp
+          <Typography variant="h6" noWrap style={{display:"flex", alignItems:"center"}}>
+            <img alt="." src="/logo.png" style={{height:"45px", width:"auto"}}/>&nbsp;SupplyChain-Dapp
           </Typography>
         </Toolbar>
       </AppBar>

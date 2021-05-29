@@ -143,6 +143,10 @@ export default function ProductModal({
                   <div className={classes.dCol1}>Customer Address: </div>{" "}
                   <div className={classes.dCol2}>{prod[2][4]}</div>
                 </div>
+                <div className={classes.dRow}>
+                  <div className={classes.dCol1}>Tx Hash: </div>{" "}
+                  <div className={classes.dCol2}>{prod[2][5]}</div>
+                </div>
 {console.log(handleReceiveButton)}
                 {handleReceiveButton ?  
                 

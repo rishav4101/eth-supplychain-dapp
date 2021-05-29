@@ -106,6 +106,18 @@ export const useStyles = makeStyles({
         boxShadow:"2px 2px 10px #9fa8da",
         overflow:"scroll"
     },
+    Reciptpaper: {
+      backgroundColor: "#fff",
+      border: "0px solid #000",
+      padding: 15,
+      outline: "none",
+      width:"min(95%, 950px)",
+      height: "500px",
+      border:"2px solid #1a237e",
+        borderRadius:10,
+        boxShadow:"2px 2px 10px #9fa8da",
+        overflow:"scroll"
+    },
     dRow: {
       width: "100%",
       borderBottom: `1px solid #222`,
