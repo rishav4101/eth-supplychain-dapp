@@ -7,7 +7,6 @@ import { useStyles } from "../../components/Styles";
 import Grid from '@material-ui/core/Grid';
 
 export default function Manufacture(props){
-    const accounts = props.accounts;
     const supplyChainContract = props.supplyChainContract;
     const classes = useStyles();
     const { roles } = useRole();
@@ -51,7 +50,7 @@ export default function Manufacture(props){
     }
 
     const createProduct = async () => {
-        for(var i = 0 ;i < 20 ;i++){
+        for(var i = 0 ;i < 5 ;i++){
             await supplyChainContract.methods.manufactureProduct("product"+i,"manufacturer"+1,"98","89","mi"+i,99+i,12000,"electronics").send({ from: roles.manufacturer, gas:999999 })
             .on('transactionHash', function(hash){
                 handleSetTxhash(hash);
@@ -160,7 +159,7 @@ export default function Manufacture(props){
         <br/>
         <br/>
         
-        <Button type="submit" variant="contained" color="danger" onClick={createProduct}>Create 20 Test Products</Button>
+        <Button type="submit" variant="contained" color="danger" onClick={createProduct}>Create 5 Test Products</Button>
         </div>
             </Navbar>
         </>

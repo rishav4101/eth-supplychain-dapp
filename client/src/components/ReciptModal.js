@@ -1,10 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import { useStyles } from "./Styles";
 
 export default function ReciptModal({
@@ -33,6 +30,8 @@ export default function ReciptModal({
               
               <h1 className={classes.pageHeading}>Recipt</h1>
               <div >
+                {recipt !== null ?
+                (<>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Tx hash: </div>
                   <div className={classes.dCol2}>{recipt.hash}</div>
@@ -69,6 +68,8 @@ export default function ReciptModal({
                   <div className={classes.dCol1}>Value: </div>
                   <div className={classes.dCol2}>{recipt.value}</div>
                 </div>
+                </>)
+                : <> </>}
                 
             </div>
           </div>

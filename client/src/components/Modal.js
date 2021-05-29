@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -45,6 +44,7 @@ export default function ProductModal({
             {prod.length === 0 ? (
               <></>
             ) : (
+              
               <>
               <h1 className={classes.pageHeading}>Details</h1>
               <div >
@@ -73,7 +73,7 @@ export default function ProductModal({
 
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Manufactured date:</div>{" "}
-                  <div className={classes.dCol2}> {prod[1][0]}</div>
+                  <div className={classes.dCol2}>{new Date(parseInt(prod[1][0]*1000)).toDateString() + " " + new Date(parseInt(prod[1][0]*1000)).toTimeString()}</div>
                 </div>
 
                 <div className={classes.dRow}>
@@ -157,7 +157,7 @@ export default function ProductModal({
                 {handleReceiveButton ?  
                 
                 (
-                  prod[1][5] == "2" || prod[1][5] == "5" ? (
+                  prod[1][5] === "2" || prod[1][5] === "5" ? (
                   <>
                     <TextField
                       name="long"

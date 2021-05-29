@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -14,7 +13,6 @@ import ProductModal from "../../components/Modal";
 import clsx from "clsx";
 
 export default function AllManufacture(props) {
-  const accounts = props.accounts;
   const supplyChainContract = props.supplyChainContract;
   const classes = useStyles();
   const [count, setCount] = React.useState(0);
@@ -126,6 +124,7 @@ export default function AllManufacture(props) {
                           page * rowsPerPage + rowsPerPage
                         )
                         .map((prod) => {
+                          const d = new Date(parseInt(prod[1][0]*1000));
                           return (
                             <TableRow
                               hover
@@ -154,7 +153,7 @@ export default function AllManufacture(props) {
                               >
                                 {prod[0][4]}
                               </TableCell>
-                              <TableCell align="center">{prod[1][0]}</TableCell>
+                              <TableCell align="center">{d.toDateString() + " " + d.toTimeString()}</TableCell>
                               <TableCell
                                 className={classes.TableCell}
                                 align="center"
