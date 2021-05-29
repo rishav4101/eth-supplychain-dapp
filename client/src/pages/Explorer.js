@@ -10,7 +10,6 @@ import TableHead from '@material-ui/core/TableHead';
 import ProductModal from "../components/Modal";
 import ReciptModal from "../components/ReciptModal";
 import TableRow from '@material-ui/core/TableRow';
-import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from "@material-ui/core";
 import { MapContainer } from "../components/map";
 import Button from "@material-ui/core/Button";
@@ -30,10 +29,8 @@ const map = ["Manufactured", "Bought By Third Party", "Shipped From Manufacturer
 
 export default function Explorer(props) {
     const classes = useStyles();
-    const accounts = props.accounts;
     const web3 = props.web3;
     const supplyChainContract = props.supplyChainContract;
-    const [search, setSearch] = React.useState("");
     const [productData, setProductData] = React.useState([]);
     const [productHistory, setProductHistory] = React.useState([]);
     const [Text, setText] = React.useState(false);
@@ -47,6 +44,7 @@ export default function Explorer(props) {
         var arr = [];
         var temp = [];
     
+        try{
             var a = await supplyChainContract.methods.fetchProductPart1(parseInt(search), 'product', 0).call();
             var b = await supplyChainContract.methods.fetchProductPart2(parseInt(search), 'product', 0).call();
             var c = await supplyChainContract.methods.fetchProductPart3(parseInt(search), 'product', 0).call();
@@ -68,15 +66,13 @@ export default function Explorer(props) {
                 console.log(arr);
             }
             setProductHistory(arr);
-
+        } catch(e) {
+            setText(true);
+            console.log(e);
+        }
    
 
     };
-    const createData = (id, mname, date, lc) => {
-        var lastAction = map[lc];
-        var mdate =date;
-        return { id, mname, mdate, lastAction }
-    }
 
     const handleClose = () => setOpen(false);
     const handleCloseRecipt = () => setOpenRecipt(false);
@@ -102,7 +98,7 @@ export default function Explorer(props) {
             <ReciptModal recipt={modalReciptData} openRecipt={openRecipt} handleCloseRecipt={handleCloseRecipt}/>
             <h1 className={classes.pageHeading}>Search a product</h1>
             <CustomizedInputBase findProduct={findProduct} />
-            { productData.length != 0 ?
+            { productData.length !== 0 ?
                 <>
                     <Grid container className={classes.Explorerroot} spacing={3}>
                         <Grid item xs={6} >
@@ -170,7 +166,7 @@ export default function Explorer(props) {
                                 <TableBody>
                                     {productHistory.length !== 0 ?  (productHistory.map((row) => {
                                         console.log(row[1][0]);
-                                        const d = new Date(Number(row[1][0]));
+                                        const d = new Date(parseInt(row[1][0]*1000));
                                         console.log(JSON.stringify(d))
                                         return (
                                             <TableRow hover role="checkbox" tabIndex={-1} key={row[0][0]}>
@@ -181,7 +177,7 @@ export default function Explorer(props) {
                                                             {row[0][4]}
                                                         </TableCell>
                                                         <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(row)}>
-                                                        {d.toDateString() + " " + d.toLocaleTimeString()}
+                                                        {d.toDateString() + " " + d.toTimeString()}
                                                         </TableCell>
                                                         <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(row)}>
                                                             {row[1][1]}

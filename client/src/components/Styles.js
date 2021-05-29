@@ -96,7 +96,6 @@ export const useStyles = makeStyles({
     },
     paper: {
       backgroundColor: "#fff",
-      border: "0px solid #000",
       padding: 15,
       outline: "none",
       width:"min(90%, 650px)",
@@ -126,6 +125,7 @@ export const useStyles = makeStyles({
       alignItems: "center",
       padding: 10,
       margin: "0 auto",
+      
     },
   
     dCol1: {
@@ -139,6 +139,8 @@ export const useStyles = makeStyles({
       textAlign: "left",
       fontWeight: 600,
       color: "#1a237e",
+      overflow:"hidden",
+      textOverflow: "ellipsis"
     },
 
     //Home

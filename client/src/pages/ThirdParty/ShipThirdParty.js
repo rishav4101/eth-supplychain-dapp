@@ -15,14 +15,13 @@ import ProductModal from "../../components/Modal";
 import clsx from "clsx";
 
 export default function ShipThirdParty(props){
-    const accounts = props.accounts;
     const classes = useStyles();
     const supplyChainContract = props.supplyChainContract;
     const { roles } = useRole();
     const [count, setCount] = React.useState(0);
     const [allSoldProducts, setAllSoldProducts] = React.useState([]);
     const navItem = [
-      ["Add Product","/ThirdParty/allProducts"],
+      ["Buy Product","/ThirdParty/allProducts"],
       ["Receive Product", "/ThirdParty/receive"],
       ["Ship Products","/ThirdParty/ship"]
     ];
@@ -148,6 +147,7 @@ export default function ShipThirdParty(props){
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((prod) => {
+                        const d = new Date(parseInt(prod[1][0]*1000));
                         return (
                             <>
                           <TableRow
@@ -180,7 +180,7 @@ export default function ShipThirdParty(props){
                             >
                               {prod[0][4]}
                             </TableCell>
-                            <TableCell align="center" onClick={() => handleClick(prod)}>{prod[1][0]}</TableCell>
+                            <TableCell align="center" onClick={() => handleClick(prod)}>{d.toDateString() + " " + d.toTimeString()}</TableCell>
                             <TableCell
                               className={classes.TableCell}
                               align="center"

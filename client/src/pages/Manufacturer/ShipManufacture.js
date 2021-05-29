@@ -15,7 +15,6 @@ import ProductModal from "../../components/Modal";
 import clsx from "clsx";
 
 export default function ShipManufacture(props) {
-  const accounts = props.accounts;
   const supplyChainContract = props.supplyChainContract;
   const { roles } = useRole();
   const classes = useStyles();
@@ -148,6 +147,7 @@ export default function ShipManufacture(props) {
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((prod) => {
+                        const d = new Date(parseInt(prod[1][0]*1000));
                         return (
                             <>
                           <TableRow
@@ -180,7 +180,7 @@ export default function ShipManufacture(props) {
                             >
                               {prod[0][4]}
                             </TableCell>
-                            <TableCell align="center" onClick={() => handleClick(prod)}>{prod[1][0]}</TableCell>
+                            <TableCell align="center" onClick={() => handleClick(prod)}>{d.toDateString() + " " + d.toTimeString()}</TableCell>
                             <TableCell
                               className={classes.TableCell}
                               align="center"

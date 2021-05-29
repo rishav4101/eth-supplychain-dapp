@@ -15,7 +15,6 @@ import ProductModal from "../../components/Modal";
 import clsx from "clsx";
 
 export default function PurchaseCustomer(props){
-    const accounts = props.accounts;
     const classes = useStyles();
     const supplyChainContract = props.supplyChainContract;
     const { roles } = useRole();
@@ -24,7 +23,7 @@ export default function PurchaseCustomer(props){
     const navItem = [
         ["Purchase Product","/Customer/buy"],
         ["Receive Product", "/Customer/receive"],
-        ["All Products","/Customer/allReceived"]
+        ["Your Products","/Customer/allReceived"]
       ];
     React.useEffect(() => {
         (async () => {
@@ -150,6 +149,7 @@ export default function PurchaseCustomer(props){
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((prod) => {
+                        const d = new Date(parseInt(prod[1][0]*1000));
                         return (
                             <>
                           <TableRow
@@ -182,7 +182,7 @@ export default function PurchaseCustomer(props){
                             >
                               {prod[0][4]}
                             </TableCell>
-                            <TableCell align="center" onClick={() => handleClick(prod)}>{prod[1][0]}</TableCell>
+                            <TableCell align="center" onClick={() => handleClick(prod)}>{d.toDateString() + " " + d.toTimeString()}</TableCell>
                             <TableCell
                               className={classes.TableCell}
                               align="center"

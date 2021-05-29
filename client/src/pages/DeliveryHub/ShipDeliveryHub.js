@@ -16,7 +16,6 @@ import clsx from "clsx";
 
 
 export default function ShipDeliveryHub(props){
-    const accounts = props.accounts;
     const classes = useStyles();
     const supplyChainContract = props.supplyChainContract;
     const { roles } = useRole();
@@ -148,6 +147,7 @@ export default function ShipDeliveryHub(props){
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((prod) => {
+                        const d = new Date(parseInt(prod[1][0]*1000));
                         return (
                             <>
                           <TableRow
@@ -180,7 +180,7 @@ export default function ShipDeliveryHub(props){
                             >
                               {prod[0][4]}
                             </TableCell>
-                            <TableCell align="center" onClick={() => handleClick(prod)}>{prod[1][0]}</TableCell>
+                            <TableCell align="center" onClick={() => handleClick(prod)}>{d.toDateString() + " " + d.toTimeString()}</TableCell>
                             <TableCell
                               className={classes.TableCell}
                               align="center"
