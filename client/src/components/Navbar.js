@@ -1,29 +1,29 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { Link } from 'react-router-dom';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import React from "react";
+import clsx from "clsx";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import { Link } from "react-router-dom";
+import GitHubIcon from "@material-ui/icons/GitHub";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   hide: {
-    display: 'none',
+    display: "none",
   },
   drawer: {
     width: drawerWidth,
@@ -48,28 +48,28 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor:"#09126d",
-    color:"#fff"
+    backgroundColor: "#09126d",
+    color: "#fff",
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -109,8 +109,17 @@ export default function PersistentDrawerLeft({ pageTitle,navItems, children }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap style={{display:"flex", alignItems:"center"}}>
-            <img alt="." src="/logo.png" style={{height:"45px", width:"auto"}}/>&nbsp;SupplyChain-Dapp
+          <Typography
+            variant="h6"
+            noWrap
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <img
+              alt="."
+              src="/logo.png"
+              style={{ height: "45px", width: "auto" }}
+            />
+            &nbsp;SupplyChain-Dapp
           </Typography>
         </Toolbar>
       </AppBar>
@@ -126,41 +135,67 @@ export default function PersistentDrawerLeft({ pageTitle,navItems, children }) {
         <div className={classes.drawerHeader}>
         <ListItemText><b>{pageTitle}</b></ListItemText>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon style={{color:"#fff"}} /> : <ChevronRightIcon />}
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon style={{ color: "#fff" }} />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </div>
         <List>
-          <Link to="/" style={{ textDecoration: "none", color:"#fff" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
             <ListItem>
               <ListItemText>Home</ListItemText>
             </ListItem>
           </Link>
-          <Link to="/explorer" style={{ textDecoration: "none", color:"#fff" }}>
+          <Link
+            to="/explorer"
+            style={{ textDecoration: "none", color: "#fff" }}
+          >
             <ListItem>
               <ListItemText>Explorer</ListItemText>
             </ListItem>
           </Link>
         </List>
         <List>
-          {navItems.length !== 0 ?
+          {navItems.length !== 0 ? (
             navItems.map((item) => (
-              <Link to={item[1]} style={{ textDecoration: "none", color:"#fff" }}>
+              <Link
+                to={item[1]}
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
                 <ListItem button key={item[0]}>
                   <ListItemText primary={item[0]} />
                 </ListItem>
               </Link>
             ))
-            :
+          ) : (
             <> </>
-          }
+          )}
         </List>
-        <div style={{height:"100%", display:"flex", alignItems:"flex-end"}}>
-          <div style={{width:"100%", height:"70px", display:"flex", justifyContent:"center", alignItems:"center", fontWeight:500, fontSize:17, borderTop:"1px solid #44a"}}>
+        <div
+          style={{ height: "100%", display: "flex", alignItems: "flex-end" }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "70px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: 500,
+              fontSize: 17,
+              borderTop: "1px solid #44a",
+            }}
+          >
             By Team Akatsuki &nbsp;&nbsp;
-            <a style={{textDecoration:"none"}} href="https://github.com/rishav4101/eth-supplychain-dapp">
-            <GitHubIcon style={{color:"#fff"}}/>
+            <a
+              style={{ textDecoration: "none" }}
+              href="https://github.com/rishav4101/eth-supplychain-dapp"
+            >
+              <GitHubIcon style={{ color: "#fff" }} />
             </a>
-            </div>
+          </div>
         </div>
       </Drawer>
       <main
@@ -169,9 +204,7 @@ export default function PersistentDrawerLeft({ pageTitle,navItems, children }) {
         })}
       >
         <div className={classes.drawerHeader} />
-        <div style={{ margin: "0 auto", maxWidth: 1300 }}>
-          {children}
-        </div>
+        <div style={{ margin: "0 auto", maxWidth: 1300 }}>{children}</div>
       </main>
     </div>
   );

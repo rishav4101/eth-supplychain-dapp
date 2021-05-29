@@ -13,6 +13,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import { useStyles } from "../../components/Styles";
 import ProductModal from "../../components/Modal";
 import clsx from "clsx";
+import Loader from "../../components/Loader";
 
 export default function ShipManufacture(props) {
   const supplyChainContract = props.supplyChainContract;
@@ -20,13 +21,15 @@ export default function ShipManufacture(props) {
   const classes = useStyles();
   const [count, setCount] = React.useState(0);
   const [allSoldProducts, setAllSoldProducts] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
   const navItem = [
-    ["Add Product","/manufacturer/manufacture"],
+    ["Add Product", "/manufacturer/manufacture"],
     ["Ship Product", "/manufacturer/ship"],
-    ["All Products","/manufacturer/allManufacture"]
+    ["All Products", "/manufacturer/allManufacture"],
   ];
   React.useEffect(() => {
     (async () => {
+      setLoading(true);
       const cnt = await supplyChainContract.methods.fetchProductCount().call();
       setCount(cnt);
       console.log(count);
@@ -57,6 +60,7 @@ export default function ShipManufacture(props) {
         }
       }
       setAllSoldProducts(arr);
+      setLoading(false);
     })();
   }, [count]);
 
@@ -83,158 +87,178 @@ export default function ShipManufacture(props) {
     setOpen(true);
   };
 
-  const handleSetTxhash =  async (id, hash) => { 
-    await supplyChainContract.methods.setTransactionHash(id, hash).send({ from: roles.manufacturer, gas:900000 });
-}
+  const handleSetTxhash = async (id, hash) => {
+    await supplyChainContract.methods
+      .setTransactionHash(id, hash)
+      .send({ from: roles.manufacturer, gas: 900000 });
+  };
 
   const handleShipButton = async (id) => {
     await supplyChainContract.methods
       .shipToThirdParty(id)
       .send({ from: roles.manufacturer, gas: 1000000 })
-      .on('transactionHash', function(hash){
+      .on("transactionHash", function (hash) {
         handleSetTxhash(id, hash);
-    });
+      });
     setCount(0);
   };
 
   return (
     <div className={classes.pageWrap}>
-       <Navbar pageTitle={"Manufacturer"} navItems={navItem}>
-        <ProductModal prod={modalData} open={open} handleClose={handleClose} />
-        <h1 className={classes.pageHeading}>Products To be Shipped</h1>
-        <h3 className={classes.tableCount}>Total : {allSoldProducts.length}</h3>
-
-        <div>
-          <Paper className={classes.TableRoot}>
-            <TableContainer className={classes.TableContainer}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className={classes.TableHead} align="left">
-                      Universal ID
-                    </TableCell>
-                    <TableCell className={classes.TableHead} align="center">
-                      Product Code
-                    </TableCell>
-                    <TableCell className={classes.TableHead} align="center">
-                      Manufacturer
-                    </TableCell>
-                    <TableCell className={classes.TableHead} align="center">
-                      Manufacture Date
-                    </TableCell>
-                    <TableCell className={classes.TableHead} align="center">
-                      Product Name
-                    </TableCell>
-                    <TableCell
-                      className={clsx(classes.TableHead, classes.AddressCell)}
-                      align="center"
-                    >
-                      Owner
-                    </TableCell>
-                    <TableCell
-                      className={clsx(classes.TableHead)}
-                      align="center"
-                    >
-                      Ship
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {allSoldProducts.length !== 0 ? (
-                    allSoldProducts
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((prod) => {
-                        const d = new Date(parseInt(prod[1][0]*1000));
-                        return (
-                            <>
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={prod[0][0]}
-                            
-                          >
-                            <TableCell
-                              className={classes.TableCell}
-                              component="th"
-                              align="left"
-                              scope="row"
-                              onClick={() => handleClick(prod)}
-                            >
-                              {prod[0][0]}
-                            </TableCell>
-                            <TableCell
-                              className={classes.TableCell}
-                              align="center"
-                              onClick={() => handleClick(prod)}
-                            >
-                              {prod[1][2]}
-                            </TableCell>
-                            <TableCell
-                              className={classes.TableCell}
-                              align="center"
-                              onClick={() => handleClick(prod)}
-                            >
-                              {prod[0][4]}
-                            </TableCell>
-                            <TableCell align="center" onClick={() => handleClick(prod)}>{d.toDateString() + " " + d.toTimeString()}</TableCell>
-                            <TableCell
-                              className={classes.TableCell}
-                              align="center"
-                              onClick={() => handleClick(prod)}
-                            >
-                              {prod[1][1]}
-                            </TableCell>
-                            <TableCell
-                              className={clsx(
-                                classes.TableCell,
-                                classes.AddressCell
-                              )}
-                              align="center"
-                              onClick={() => handleClick(prod)}
-                            >
-                              {prod[0][2]}
-                            </TableCell>
-                            <TableCell
-                           className={clsx(classes.TableCell)}
-                           align="center"
-                         >
-                           <Button
-                             type="submit"
-                             variant="contained"
-                             color="primary"
-                             onClick={() => handleShipButton(prod[0][0])}
-                           >
-                             SHIP
-                           </Button>
-                         </TableCell>
-                          </TableRow>
-                           
-                         </>
-                        );
-                      })
-                  ) : (
-                    <> </>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={allSoldProducts.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
+      <Navbar navItems={navItem}>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <ProductModal
+              prod={modalData}
+              open={open}
+              handleClose={handleClose}
             />
-          </Paper>
-        </div>
+            <h1 className={classes.pageHeading}>Products To be Shipped</h1>
+            <h3 className={classes.tableCount}>
+              Total : {allSoldProducts.length}
+            </h3>
 
-        {/* {allSoldProducts.length !== 0 ? (
+            <div>
+              <Paper className={classes.TableRoot}>
+                <TableContainer className={classes.TableContainer}>
+                  <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell className={classes.TableHead} align="left">
+                          Universal ID
+                        </TableCell>
+                        <TableCell className={classes.TableHead} align="center">
+                          Product Code
+                        </TableCell>
+                        <TableCell className={classes.TableHead} align="center">
+                          Manufacturer
+                        </TableCell>
+                        <TableCell className={classes.TableHead} align="center">
+                          Manufacture Date
+                        </TableCell>
+                        <TableCell className={classes.TableHead} align="center">
+                          Product Name
+                        </TableCell>
+                        <TableCell
+                          className={clsx(
+                            classes.TableHead,
+                            classes.AddressCell
+                          )}
+                          align="center"
+                        >
+                          Owner
+                        </TableCell>
+                        <TableCell
+                          className={clsx(classes.TableHead)}
+                          align="center"
+                        >
+                          Ship
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {allSoldProducts.length !== 0 ? (
+                        allSoldProducts
+                          .slice(
+                            page * rowsPerPage,
+                            page * rowsPerPage + rowsPerPage
+                          )
+                          .map((prod) => {
+                            const d = new Date(parseInt(prod[1][0] * 1000));
+                            return (
+                              <>
+                                <TableRow
+                                  hover
+                                  role="checkbox"
+                                  tabIndex={-1}
+                                  key={prod[0][0]}
+                                >
+                                  <TableCell
+                                    className={classes.TableCell}
+                                    component="th"
+                                    align="left"
+                                    scope="row"
+                                    onClick={() => handleClick(prod)}
+                                  >
+                                    {prod[0][0]}
+                                  </TableCell>
+                                  <TableCell
+                                    className={classes.TableCell}
+                                    align="center"
+                                    onClick={() => handleClick(prod)}
+                                  >
+                                    {prod[1][2]}
+                                  </TableCell>
+                                  <TableCell
+                                    className={classes.TableCell}
+                                    align="center"
+                                    onClick={() => handleClick(prod)}
+                                  >
+                                    {prod[0][4]}
+                                  </TableCell>
+                                  <TableCell
+                                    align="center"
+                                    onClick={() => handleClick(prod)}
+                                  >
+                                    {d.toDateString() + " " + d.toTimeString()}
+                                  </TableCell>
+                                  <TableCell
+                                    className={classes.TableCell}
+                                    align="center"
+                                    onClick={() => handleClick(prod)}
+                                  >
+                                    {prod[1][1]}
+                                  </TableCell>
+                                  <TableCell
+                                    className={clsx(
+                                      classes.TableCell,
+                                      classes.AddressCell
+                                    )}
+                                    align="center"
+                                    onClick={() => handleClick(prod)}
+                                  >
+                                    {prod[0][2]}
+                                  </TableCell>
+                                  <TableCell
+                                    className={clsx(classes.TableCell)}
+                                    align="center"
+                                  >
+                                    <Button
+                                      type="submit"
+                                      variant="contained"
+                                      color="primary"
+                                      onClick={() =>
+                                        handleShipButton(prod[0][0])
+                                      }
+                                    >
+                                      SHIP
+                                    </Button>
+                                  </TableCell>
+                                </TableRow>
+                              </>
+                            );
+                          })
+                      ) : (
+                        <> </>
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <TablePagination
+                  rowsPerPageOptions={[10, 25, 100]}
+                  component="div"
+                  count={allSoldProducts.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onChangePage={handleChangePage}
+                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
+              </Paper>
+            </div>
+
+            {/* {allSoldProducts.length !== 0 ? (
           allSoldProducts.map((prod) => (
             <>
               <div>
@@ -262,6 +286,8 @@ export default function ShipManufacture(props) {
         ) : (
           <> </>
         )} */}
+          </>
+        )}
       </Navbar>
     </div>
   );
