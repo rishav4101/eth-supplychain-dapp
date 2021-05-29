@@ -15,14 +15,14 @@ export const useStyles = makeStyles({
 
     TableRoot: {
       width: '100%',
-      maxWidth: 900,
+      maxWidth: 1200,
       margin:"5px auto",
       border:"2px solid #1a237e",
       borderRadius:10,
       boxShadow:"2px 2px 10px #9fa8da"
     },
     TableContainer: {
-      maxHeight: 500,
+      maxHeight: 600,
       borderRadius:7
     },
     AddressCell :{
