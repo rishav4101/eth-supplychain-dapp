@@ -19,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
   input: {
     justifyContent:'center',
     flex: 1,
+    outline:"none",
+    border:"none",
+    padding:0,
+    borderRadius:40,
+    fontSize: 17
   },
   iconButton: {
     padding: 10,
@@ -38,13 +43,14 @@ export default function CustomizedInputBase(props) {
   return (
     <>
     <Paper  className={classes.root}>
-      <InputBase
+      <input
         className={classes.input}
         placeholder="Enter Product Universal ID"
         inputProps={{ 'aria-label': 'Enter Product Universal ID' }}
         onChange = {onTextChage}
+        onKeyPress = {() => props.findProduct(search)}
       />
-      <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={ () => props.findProduct(search)}>
+      <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={() => props.findProduct(search)}>
         <SearchIcon />
       </IconButton>
     </Paper>
