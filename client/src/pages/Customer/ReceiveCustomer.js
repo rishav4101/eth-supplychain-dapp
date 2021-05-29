@@ -25,7 +25,7 @@ export default function ReceiveCustomer(props){
     const navItem = [
       ["Purchase Product","/Customer/buy"],
       ["Receive Product", "/Customer/receive"],
-      ["All Products","/Customer/allReceived"]
+      ["Your Products","/Customer/allReceived"]
     ];
     React.useEffect(() => {
         (async () => {

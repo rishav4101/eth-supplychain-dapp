@@ -21,7 +21,7 @@ export default function ShipThirdParty(props){
     const [count, setCount] = React.useState(0);
     const [allSoldProducts, setAllSoldProducts] = React.useState([]);
     const navItem = [
-      ["Add Product","/ThirdParty/allProducts"],
+      ["Buy Product","/ThirdParty/allProducts"],
       ["Receive Product", "/ThirdParty/receive"],
       ["Ship Products","/ThirdParty/ship"]
     ];

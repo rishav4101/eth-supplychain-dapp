@@ -1,3 +1,7 @@
+html, body {
+  font-family: 'Poppins', sans-serif;
+}
+
 .App {
   text-align: center;
 }

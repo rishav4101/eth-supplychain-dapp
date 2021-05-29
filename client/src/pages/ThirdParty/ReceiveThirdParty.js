@@ -23,7 +23,7 @@ export default function ReceiveThirdParty(props){
     const [open, setOpen] = useState(false);
     const classes = useStyles();
     const navItem = [
-      ["Add Product","/ThirdParty/allProducts"],
+      ["Buy Product","/ThirdParty/allProducts"],
       ["Receive Product", "/ThirdParty/receive"],
       ["Ship Products","/ThirdParty/ship"]
     ];

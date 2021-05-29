@@ -97,7 +97,7 @@ export default function Manufacture(props){
             </Grid>
             <Grid item xs={6}>
             <TextField
-            name="Latitude"
+            name="manufacturerLatitude"
             variant="outlined"
             value={manuForm.manufacturerLatitude}
             onChange={handleChangeManufacturerForm}

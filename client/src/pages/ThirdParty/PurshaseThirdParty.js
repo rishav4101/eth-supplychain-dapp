@@ -21,7 +21,7 @@ export default function PurchaseThirdParty(props){
     const [count, setCount] = React.useState(0);
     const [allProducts, setAllProducts] = React.useState([]);
     const navItem = [
-      ["Add Product","/ThirdParty/allProducts"],
+      ["Buy Product","/ThirdParty/allProducts"],
       ["Receive Product", "/ThirdParty/receive"],
       ["Ship Products","/ThirdParty/ship"]
     ];
