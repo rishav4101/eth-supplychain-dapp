@@ -1,8 +1,24 @@
 <h1 align="center">
   <br>
-  Eth-Supply-Chain
+  <a><img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/logo.png" width="200"></a>
+  <br>  
+  Supply-Chain-Dapp
   <br>
 </h1>
+
+<p align="center">
+  <a href="https://www.trufflesuite.com/ganache">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/ganachetrans.png" width="80">
+  </a>
+  <a href="https://soliditylang.org/">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/Solidity.svg" width="80">       
+  </a>
+  <a href="https://reactjs.org/"><img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/react.png" width="80"></a>
+  
+  <a href="https://www.trufflesuite.com/">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/trufflenew.png" width="50">
+  </a>
+</p>
 
 <h4 align="center">A simple Supply Chain setup with <a href="https://docs.soliditylang.org/en/v0.8.4/" target="_blank">Solidity</a>.</h4>
 
@@ -32,23 +48,21 @@ Also it leads to an increase in transparency and helps to build an efficient Roo
 blockchain to ensure a transparent and secure transfer of product from the manufacturer to the customer via the online e-commerce websites.
 
 ## Flow
-<p align="centre">
-  <a>
-    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/flow.jpeg?raw=true">
-  </a>
+<p align="centre">  
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/flow.png" width="300">  
 </p>
 
 ## Contract Diagrams
 ### Activity Diagram
 <p align="centre">
   <a>
-    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/activitydiagram.png?raw=true">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/activitydiagram.png?raw=true" >
   </a>
 </p>
 <h3> Sequence Diagram</h3>
 <p align="centre">
   <a>
-    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/sequencediagram.png?raw=true">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/sequencediagram.png?raw=true" width="1000">
   </a>
 </p>
 <h3> Data Flow Diagram </h3>
@@ -62,3 +76,11 @@ blockchain to ensure a transparent and secure transfer of product from the manuf
 
 ## License
 This project uses an [MIT](https://opensource.org/licenses/MIT) license.
+## Documentation to help with Solidity
+https://docs.soliditylang.org/en/v0.8.4/
+## Documentation to help with React
+https://reactjs.org/docs/getting-started.html
+## Documentation to help with Truffle
+https://www.trufflesuite.com/docs/truffle/reference/configuration
+## Documentation to help with Ganache-cli
+https://www.trufflesuite.com/docs/ganache/overview
