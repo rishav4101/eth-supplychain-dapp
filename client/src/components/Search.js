@@ -40,6 +40,7 @@ export default function CustomizedInputBase(props) {
   const onTextChage = async (e) =>{
     setSearch(e.target.value);
   }
+  
   return (
     <>
     <Paper  className={classes.root}>
@@ -48,7 +49,7 @@ export default function CustomizedInputBase(props) {
         placeholder="Enter Product Universal ID"
         inputProps={{ 'aria-label': 'Enter Product Universal ID' }}
         onChange = {onTextChage}
-        onKeyPress = {() => props.findProduct(search)}
+        onKeyPress = {(e) => e.key == 'Enter'  ? props.findProduct(search): onTextChage}
       />
       <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={() => props.findProduct(search)}>
         <SearchIcon />

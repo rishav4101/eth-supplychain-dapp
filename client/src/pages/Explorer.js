@@ -45,6 +45,7 @@ export default function Explorer(props) {
         var temp = [];
     
         try{
+            setText(false);
             setProductData([]);
             setProductHistory([]);
             var a = await supplyChainContract.methods.fetchProductPart1(parseInt(search), 'product', 0).call();
