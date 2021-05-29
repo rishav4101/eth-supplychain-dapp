@@ -11,19 +11,23 @@ import TablePagination from "@material-ui/core/TablePagination";
 import { useStyles } from "../../components/Styles";
 import ProductModal from "../../components/Modal";
 import clsx from "clsx";
+import Loader from "../../components/Loader";
 
 export default function AllManufacture(props) {
   const supplyChainContract = props.supplyChainContract;
   const classes = useStyles();
   const [count, setCount] = React.useState(0);
   const [allManufacture, setAllManufacture] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
   const navItem = [
-    ["Add Product","/manufacturer/manufacture"],
+    ["Add Product", "/manufacturer/manufacture"],
     ["Ship Product", "/manufacturer/ship"],
-    ["All Products","/manufacturer/allManufacture"]
+    ["All Products", "/manufacturer/allManufacture"],
   ];
   React.useEffect(() => {
+    setLoading(true);
     (async () => {
+      setLoading(true);
       const cnt = await supplyChainContract.methods.fetchProductCount().call();
       setCount(cnt);
       console.log(count);
@@ -54,6 +58,7 @@ export default function AllManufacture(props) {
         }
       }
       setAllManufacture(arr);
+      setLoading(false);
     })();
   }, [count]);
 
@@ -79,117 +84,146 @@ export default function AllManufacture(props) {
     console.log(modalData);
     setOpen(true);
   };
- 
+
   return (
     <div classname={classes.pageWrap}>
       <Navbar navItems={navItem}>
-        <ProductModal prod={modalData} open={open} handleClose={handleClose} />
-        <h1 className={classes.pageHeading}>Manufactured Products</h1>
-        <h3 className={classes.tableCount}>Total : {allManufacture.length}</h3>
-        <>
+        {loading ? (
+          <Loader />
+        ) : (
           <div>
-            <Paper className={classes.TableRoot}>
-              <TableContainer className={classes.TableContainer}>
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell className={classes.TableHead} align="left">
-                        Universal ID
-                      </TableCell>
-                      <TableCell className={classes.TableHead} align="center">
-                        Product Code
-                      </TableCell>
-                      <TableCell className={classes.TableHead} align="center">
-                        Manufacturer
-                      </TableCell>
-                      <TableCell className={classes.TableHead} align="center">
-                        Manufacture Date
-                      </TableCell>
-                      <TableCell className={classes.TableHead} align="center">
-                        Product Name
-                      </TableCell>
-                      <TableCell
-                        className={clsx(classes.TableHead, classes.AddressCell)}
-                        align="center"
-                      >
-                        Owner
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {allManufacture.length !== 0 ? (
-                      allManufacture
-                        .slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                        .map((prod) => {
-                          const d = new Date(parseInt(prod[1][0]*1000));
-                          return (
-                            <TableRow
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
-                              key={prod[0][0]}
-                              onClick={() => handleClick(prod)}
-                            >
-                              <TableCell
-                                className={classes.TableCell}
-                                component="th"
-                                align="left"
-                                scope="row"
-                              >
-                                {prod[0][0]}
-                              </TableCell>
-                              <TableCell
-                                className={classes.TableCell}
-                                align="center"
-                              >
-                                {prod[1][2]}
-                              </TableCell>
-                              <TableCell
-                                className={classes.TableCell}
-                                align="center"
-                              >
-                                {prod[0][4]}
-                              </TableCell>
-                              <TableCell align="center">{d.toDateString() + " " + d.toTimeString()}</TableCell>
-                              <TableCell
-                                className={classes.TableCell}
-                                align="center"
-                              >
-                                {prod[1][1]}
-                              </TableCell>
-                              <TableCell
-                                className={clsx(
-                                  classes.TableCell,
-                                  classes.AddressCell
-                                )}
-                                align="left"
-                              >
-                                {prod[0][2]}
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })
-                    ) : (
-                      <> </>
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={allManufacture.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-              />
-            </Paper>
+            <ProductModal
+              prod={modalData}
+              open={open}
+              handleClose={handleClose}
+            />
+            <h1 className={classes.pageHeading}>Manufactured Products</h1>
+            <h3 className={classes.tableCount}>
+              Total : {allManufacture.length}
+            </h3>
+            <>
+              <div>
+                <Paper className={classes.TableRoot}>
+                  <TableContainer className={classes.TableContainer}>
+                    <Table stickyHeader aria-label="sticky table">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell className={classes.TableHead} align="left">
+                            Universal ID
+                          </TableCell>
+                          <TableCell
+                            className={classes.TableHead}
+                            align="center"
+                          >
+                            Product Code
+                          </TableCell>
+                          <TableCell
+                            className={classes.TableHead}
+                            align="center"
+                          >
+                            Manufacturer
+                          </TableCell>
+                          <TableCell
+                            className={classes.TableHead}
+                            align="center"
+                          >
+                            Manufacture Date
+                          </TableCell>
+                          <TableCell
+                            className={classes.TableHead}
+                            align="center"
+                          >
+                            Product Name
+                          </TableCell>
+                          <TableCell
+                            className={clsx(
+                              classes.TableHead,
+                              classes.AddressCell
+                            )}
+                            align="center"
+                          >
+                            Owner
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {allManufacture.length !== 0 ? (
+                          allManufacture
+                            .slice(
+                              page * rowsPerPage,
+                              page * rowsPerPage + rowsPerPage
+                            )
+                            .map((prod) => {
+                              const d = new Date(parseInt(prod[1][0] * 1000));
+                              return (
+                                <TableRow
+                                  hover
+                                  role="checkbox"
+                                  tabIndex={-1}
+                                  key={prod[0][0]}
+                                  onClick={() => handleClick(prod)}
+                                >
+                                  <TableCell
+                                    className={classes.TableCell}
+                                    component="th"
+                                    align="left"
+                                    scope="row"
+                                  >
+                                    {prod[0][0]}
+                                  </TableCell>
+                                  <TableCell
+                                    className={classes.TableCell}
+                                    align="center"
+                                  >
+                                    {prod[1][2]}
+                                  </TableCell>
+                                  <TableCell
+                                    className={classes.TableCell}
+                                    align="center"
+                                  >
+                                    {prod[0][4]}
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    {d.toDateString() + " " + d.toTimeString()}
+                                  </TableCell>
+                                  <TableCell
+                                    className={classes.TableCell}
+                                    align="center"
+                                  >
+                                    {prod[1][1]}
+                                  </TableCell>
+                                  <TableCell
+                                    className={clsx(
+                                      classes.TableCell,
+                                      classes.AddressCell
+                                    )}
+                                    align="left"
+                                  >
+                                    {prod[0][2]}
+                                  </TableCell>
+                                </TableRow>
+                              );
+                            })
+                        ) : (
+                          <> </>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                  <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={allManufacture.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                  />
+                </Paper>
+              </div>
+            </>
           </div>
-        </>
+        )}
       </Navbar>
     </div>
   );

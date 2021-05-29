@@ -4,34 +4,27 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { useStyles } from "./Styles";
 
-export default function ReciptModal({
-    recipt,
-    openRecipt,
-    handleCloseRecipt
-  }) {
-    const classes = useStyles();
-      return(
- 
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={openRecipt}
-        onClose={handleCloseRecipt}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={openRecipt}>
-          <div className={classes.Reciptpaper}>
-            
-              
-              <h1 className={classes.pageHeading}>Recipt</h1>
-              <div >
-                {recipt !== null ?
-                (<>
+export default function ReciptModal({ recipt, openRecipt, handleCloseRecipt }) {
+  const classes = useStyles();
+  return (
+    <Modal
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
+      className={classes.modal}
+      open={openRecipt}
+      onClose={handleCloseRecipt}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
+    >
+      <Fade in={openRecipt}>
+        <div className={classes.Reciptpaper}>
+          <h1 className={classes.pageHeading}>Recipt</h1>
+          <div>
+            {recipt !== null ? (
+              <>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Tx hash: </div>
                   <div className={classes.dCol2}>{recipt.hash}</div>
@@ -68,13 +61,13 @@ export default function ReciptModal({
                   <div className={classes.dCol1}>Value: </div>
                   <div className={classes.dCol2}>{recipt.value}</div>
                 </div>
-                </>)
-                : <> </>}
-                
-            </div>
+              </>
+            ) : (
+              <> </>
+            )}
           </div>
-        </Fade>
-      </Modal>
-  
-      )
-  }
+        </div>
+      </Fade>
+    </Modal>
+  );
+}
