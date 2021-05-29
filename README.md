@@ -7,6 +7,9 @@
 </h1>
 
 <p align="center">
+  <a href="https://www.trufflesuite.com/ganache">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/ganachetrans.png" width="80">
+  </a>
   <a href="https://soliditylang.org/">
     <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/Solidity.svg" width="80">       
   </a>
@@ -79,3 +82,5 @@ https://docs.soliditylang.org/en/v0.8.4/
 https://reactjs.org/docs/getting-started.html
 ## Documentation to help with Truffle
 https://www.trufflesuite.com/docs/truffle/reference/configuration
+## Documentation to help with Ganache-cli
+https://www.trufflesuite.com/docs/ganache/overview
