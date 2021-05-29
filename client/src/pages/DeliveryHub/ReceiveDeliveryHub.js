@@ -24,8 +24,8 @@ export default function ReceiveDeliveryHub(props){
     const [open, setOpen] = useState(false);
     const classes = useStyles();
     const navItem = [
-      ["Receive Product","/DeliveryHub/ship"],
-      ["Ship Product", "/DeliveryHub/receive"],
+      ["Receive Product","/DeliveryHub/receive"],
+      ["Ship Product", "/DeliveryHub/ship"],
     ];
     React.useEffect(() => {
         (async () => {
@@ -50,7 +50,7 @@ export default function ReceiveDeliveryHub(props){
                   .fetchProductPart2(i, "product", 0)
                   .call();
                 const c = await supplyChainContract.methods
-                  .fetchProductPart2(i, "product", 0)
+                  .fetchProductPart3(i, "product", 0)
                   .call();
                 prodData.push(a);
                 prodData.push(b);

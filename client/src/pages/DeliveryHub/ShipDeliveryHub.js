@@ -23,9 +23,9 @@ export default function ShipDeliveryHub(props){
     const [count, setCount] = React.useState(0);
     const [allSoldProducts, setAllSoldProducts] = React.useState([]);
     const navItem = [
-        ["Receive Product","/DeliveryHub/ship"],
-        ["Ship Product", "/DeliveryHub/receive"],
-      ];
+      ["Receive Product","/DeliveryHub/receive"],
+      ["Ship Product", "/DeliveryHub/ship"],
+    ];
     React.useEffect(() => {
         (async () => {
         const cnt = await supplyChainContract.methods.fetchProductCount().call();
@@ -49,7 +49,7 @@ export default function ShipDeliveryHub(props){
                   .fetchProductPart2(i, "product", 0)
                   .call();
                 const c = await supplyChainContract.methods
-                  .fetchProductPart2(i, "product", 0)
+                  .fetchProductPart3(i, "product", 0)
                   .call();
                 prodData.push(a);
                 prodData.push(b);

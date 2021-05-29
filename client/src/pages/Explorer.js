@@ -22,7 +22,7 @@ const columns = [
     { id: 'mdate', label: 'Date', minWidth: 170 },
     { id: 'pname', label: 'Product Name', minWidth: 170 },
     { id: 'price', label: 'Price', minWidth: 170 },
-    { id: 'category', label: 'Category', minWidth: 170 },
+    { id: 'owner', label: 'Owner', minWidth: 170 },
     { id: 'lastAction', label: 'Last Action', minWidth: 170 }
 ];
 
@@ -169,7 +169,9 @@ export default function Explorer(props) {
                                 </TableHead>
                                 <TableBody>
                                     {productHistory.length !== 0 ?  (productHistory.map((row) => {
-                                        console.log(row)
+                                        console.log(row[1][0]);
+                                        const d = new Date(Number(row[1][0]));
+                                        console.log(JSON.stringify(d))
                                         return (
                                             <TableRow hover role="checkbox" tabIndex={-1} key={row[0][0]}>
                                                         <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(row)}>
@@ -179,7 +181,7 @@ export default function Explorer(props) {
                                                             {row[0][4]}
                                                         </TableCell>
                                                         <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(row)}>
-                                                            {row[0][5]}
+                                                        {d.toDateString() + " " + d.toLocaleTimeString()}
                                                         </TableCell>
                                                         <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(row)}>
                                                             {row[1][1]}
@@ -188,7 +190,10 @@ export default function Explorer(props) {
                                                             {row[1][3]}
                                                         </TableCell>
                                                         <TableCell className={classes.TableCell} align="center" onClick={() => handleClick(row)}>
-                                                            {row[1][4]}
+                                                            {/* {row[0][2]} */}
+                                                            {row[0][2].length > 15
+                        ? row[0][2].substring(0, 15) + "..."
+                        : row[0][2]}
                                                         </TableCell>
                                                         
                                                         <TableCell style={{color:"#f00 !important"}} className={classes.TableCell} align="center" >
