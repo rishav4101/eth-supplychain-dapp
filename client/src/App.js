@@ -25,6 +25,8 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./components/Theme";
 
 import Explorer from './pages/Explorer';
+import Home from "./pages/Home";
+
 class App extends Component {
   state = { web3: null, accounts: null, contract: null, mRole: null, tpRole: null, dhRole: null, cRole: null };
 
@@ -72,6 +74,12 @@ class App extends Component {
 
             <Route exact path="/roleAdmin">
               <RoleAdmin accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/explorer">
+              <Explorer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
+            </Route>
+            <Route exact path="/">
+              <Home accounts={this.state.accounts} supplyChainContract={this.state.contract} />
             </Route>
 
  
@@ -130,9 +138,7 @@ class App extends Component {
               <ReceivedByCustomer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
               : <h1>Assign Customer Role at /RoleAdmin</h1> }
             </Route>
-            <Route exact path="/explorer">
-              <Explorer accounts={this.state.accounts} supplyChainContract={this.state.contract} />
-            </Route>
+            
           </Switch>
         </Router>
         </RoleDataContextProvider>

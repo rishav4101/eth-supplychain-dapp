@@ -143,8 +143,11 @@ export default function ProductModal({
                   <div className={classes.dCol1}>Customer Address: </div>{" "}
                   <div className={classes.dCol2}>{prod[2][4]}</div>
                 </div>
-
-                {prod[1][5] == "2" || prod[1][5] == "5" ? (
+{console.log(handleReceiveButton)}
+                {handleReceiveButton ?  
+                
+                (
+                  prod[1][5] == "2" || prod[1][5] == "5" ? (
                   <>
                     <TextField
                       name="long"
@@ -163,8 +166,9 @@ export default function ProductModal({
                   </>
                 ) : (
                   <> </>
-                )}
-                {prod[1][5] === "2" ||
+                )) : <> </>}
+                {handleReceiveButton  ?  
+                (prod[1][5] === "2" ||
                 prod[1][5] === "5" ||
                 prod[1][5] === "7" ? (
                   <>
@@ -181,7 +185,7 @@ export default function ProductModal({
                   </>
                 ) : (
                   <> </>
-                )}
+                )) : <></>}
               </div>
               </>
             )}

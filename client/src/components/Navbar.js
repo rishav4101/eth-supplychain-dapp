@@ -51,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor:"#09126d",
+    color:"#fff"
   },
   drawerHeader: {
     display: 'flex',
@@ -126,27 +128,25 @@ export default function PersistentDrawerLeft({ navItems, children }) {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? <ChevronLeftIcon style={{color:"#fff"}} /> : <ChevronRightIcon />}
           </IconButton>
         </div>
-        <Divider />
         <List>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/" style={{ textDecoration: "none", color:"#fff" }}>
             <ListItem>
               <ListItemText>Home</ListItemText>
             </ListItem>
           </Link>
-          <Link to="/explorer" style={{ textDecoration: "none" }}>
+          <Link to="/explorer" style={{ textDecoration: "none", color:"#fff" }}>
             <ListItem>
               <ListItemText>Explorer</ListItemText>
             </ListItem>
           </Link>
         </List>
-        <Divider/>
         <List>
           {navItems.length !== 0 ?
             navItems.map((item) => (
-              <Link to={item[1]} style={{ textDecoration: "none" }}>
+              <Link to={item[1]} style={{ textDecoration: "none", color:"#fff" }}>
                 <ListItem button key={item[0]}>
                   <ListItemText primary={item[0]} />
                 </ListItem>
@@ -156,7 +156,9 @@ export default function PersistentDrawerLeft({ navItems, children }) {
             <> </>
           }
         </List>
-        <Divider />
+        <div style={{height:"100%", display:"flex", alignItems:"flex-end"}}>
+          <div style={{width:"100%", height:"70px", display:"flex", justifyContent:"center", alignItems:"center", fontWeight:500, fontSize:17, borderTop:"1px solid #44a"}}>Team Akatsuki</div>
+        </div>
       </Drawer>
       <main
         className={clsx(classes.content, {
