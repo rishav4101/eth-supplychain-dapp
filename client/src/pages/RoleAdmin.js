@@ -165,6 +165,14 @@ function RoleAdmin(props) {
         </div>
       </form>
       </div>
+      <div className={classes.FormWrap}>
+        <h1 className={classes.pageHeading}>Local Accounts</h1>
+        {accounts.slice(1).map((acc) => (
+          <h3 className={classes.tableCount}>{acc}</h3>
+        ))}
+        
+      </div>
+
       </ResponsiveDrawer>
     </div>
   );

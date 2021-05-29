@@ -450,7 +450,6 @@ contract SupplyChain {
   function setTransactionHash(uint _uid, string memory tran) public {
     Structure.Product storage p = productHistory[_uid].history[productHistory[_uid].history.length - 1];
     p.transaction = tran;
-    // productHistory[_uid].history[productHistory[_uid].history.length - 1].transaction = tran;
   }
 
 }

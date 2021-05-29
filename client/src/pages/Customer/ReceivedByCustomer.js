@@ -46,7 +46,7 @@ export default function ReceivedByCustomer(props) {
                         .fetchProductPart2(i, "product", 0)
                         .call();
                     const c = await supplyChainContract.methods
-                        .fetchProductPart2(i, "product", 0)
+                        .fetchProductPart3(i, "product", 0)
                         .call();
                     prodData.push(a);
                     prodData.push(b);

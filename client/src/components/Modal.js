@@ -145,8 +145,14 @@ export default function ProductModal({
                 </div>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Tx Hash: </div>{" "}
-                  <div className={classes.dCol2}>{prod[2][5]}</div>
+                  <div className={classes.dCol2}>
+                    {/* {prod[2][5]} */}
+                    {prod[2][5].length > 40
+                        ? prod[2][5].substring(0, 40) + "..."
+                        : prod[2][5]}
+                        </div>
                 </div>
+                <br/>
 {console.log(handleReceiveButton)}
                 {handleReceiveButton ?  
                 
@@ -158,14 +164,15 @@ export default function ProductModal({
                       variant="outlined"
                       value={rdata.long}
                       onChange={handleChangeForm}
-                      label="long"
+                      label="Longitude"
                     />
+                    &nbsp;
                     <TextField
                       name="lat"
                       variant="outlined"
                       value={rdata.lat}
                       onChange={handleChangeForm}
-                      label="lat"
+                      label="Latitude"
                     />
                   </>
                 ) : (
@@ -180,6 +187,7 @@ export default function ProductModal({
                       type="submit"
                       variant="contained"
                       color="primary"
+                      style={{margin:10}}
                       onClick={() =>
                         handleReceiveButton(prod[0][0], rdata.long, rdata.lat)
                       }

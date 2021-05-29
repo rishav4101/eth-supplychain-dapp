@@ -43,7 +43,7 @@ export const useStyles = makeStyles({
     },
 
     FormWrap:{
-    maxWidth: 700,
+    maxWidth: 900,
       margin:"30px auto",
       padding:20,
       borderRadius:10,
