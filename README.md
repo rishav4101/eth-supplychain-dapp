@@ -34,7 +34,7 @@ blockchain to ensure a transparent and secure transfer of product from the manuf
 ## Flow
 <p align="centre">
   <a>
-    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/flow.jpeg?raw=true">
+    <img src="https://github.com/rishav4101/eth-supplychain-dapp/blob/main/images/flow.png?raw=true">
   </a>
 </p>
 
