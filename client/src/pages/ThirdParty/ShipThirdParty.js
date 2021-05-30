@@ -27,6 +27,7 @@ export default function ShipThirdParty(props) {
     ["Receive Product", "/ThirdParty/receive"],
     ["Ship Products", "/ThirdParty/ship"],
   ];
+  const [alertText, setalertText] = React.useState("");
   React.useEffect(() => {
     (async () => {
       setLoading(true);
@@ -71,13 +72,18 @@ export default function ShipThirdParty(props) {
   };
 
   const handleShipButton = async (id) => {
-    await supplyChainContract.methods
+    try{
+      await supplyChainContract.methods
       .shipByThirdParty(id)
       .send({ from: roles.thirdparty, gas: 1000000 })
       .on("transactionHash", function (hash) {
         handleSetTxhash(id, hash);
       });
-    setCount(0);
+     setCount(0);
+    }catch{
+      setalertText("You are not the owner of the Product")
+    }
+   
   };
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -100,7 +106,7 @@ export default function ShipThirdParty(props) {
     await setModalData(prod);
     setOpen(true);
   };
-
+  
   return (
     <>
       <div classname={classes.pageWrap}>
@@ -120,6 +126,7 @@ export default function ShipThirdParty(props) {
               </h3>
 
               <div>
+              <p><b style={{ color: "red" }}>{alertText.length !== 0 ? alertText : ""}</b></p>
                 <Paper className={classes.TableRoot}>
                   <TableContainer className={classes.TableContainer}>
                     <Table stickyHeader aria-label="sticky table">

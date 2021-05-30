@@ -29,6 +29,7 @@ export default function ReceiveCustomer(props) {
     ["Receive Product", "/Customer/receive"],
     ["Your Products", "/Customer/allReceived"],
   ];
+  const [alertText, setalertText] = React.useState("");
   React.useEffect(() => {
     (async () => {
       setLoading(true);
@@ -66,7 +67,8 @@ export default function ReceiveCustomer(props) {
   }, [count]);
 
   const handleReceiveButton = async (id) => {
-    await supplyChainContract.methods
+    try{
+      await supplyChainContract.methods
       .receiveByCustomer(parseInt(id))
       .send({ from: roles.customer, gas: 1000000 })
       .on("transactionHash", function (hash) {
@@ -74,6 +76,10 @@ export default function ReceiveCustomer(props) {
       });
     setCount(0);
     setOpen(false);
+    }catch{
+      setalertText("You are not the owner of the Product");
+    }
+    
   };
 
   const handleSetTxhash = async (id, hash) => {
@@ -113,6 +119,7 @@ export default function ReceiveCustomer(props) {
               open={open}
               handleClose={handleClose}
               handleReceiveButton={handleReceiveButton}
+              aText={alertText}
             />
 
             <h1 className={classes.pageHeading}>Products to be Received</h1>

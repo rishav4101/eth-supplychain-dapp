@@ -28,6 +28,7 @@ export default function ReceiveDeliveryHub(props) {
     ["Receive Product", "/DeliveryHub/receive"],
     ["Ship Product", "/DeliveryHub/ship"],
   ];
+  const [alertText, setalertText] = React.useState("");
   React.useEffect(() => {
     (async () => {
       setLoading(true);
@@ -71,14 +72,19 @@ export default function ReceiveDeliveryHub(props) {
   };
 
   const handleReceiveButton = async (id, long, lat) => {
-    await supplyChainContract.methods
+    try{
+      await supplyChainContract.methods
       .receiveByDeliveryHub(parseInt(id), long, lat)
       .send({ from: roles.deliveryhub, gas: 1000000 })
       .on("transactionHash", function (hash) {
         handleSetTxhash(id, hash);
       });
-    setCount(0);
-    setOpen(false);
+     setCount(0);
+     setOpen(false);
+    }catch{
+      setalertText("You are not the owner of the Product");
+    }
+    
   };
 
   const [page, setPage] = React.useState(0);
@@ -113,6 +119,7 @@ export default function ReceiveDeliveryHub(props) {
               open={open}
               handleClose={handleClose}
               handleReceiveButton={handleReceiveButton}
+              aText={alertText}
             />
 
             <h1 className={classes.pageHeading}>Products To be Received</h1>

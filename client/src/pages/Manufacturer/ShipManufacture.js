@@ -27,6 +27,7 @@ export default function ShipManufacture(props) {
     ["Ship Product", "/manufacturer/ship"],
     ["All Products", "/manufacturer/allManufacture"],
   ];
+  const [alertText, setalertText] = React.useState("");
   React.useEffect(() => {
     (async () => {
       setLoading(true);
@@ -93,13 +94,18 @@ export default function ShipManufacture(props) {
   };
 
   const handleShipButton = async (id) => {
-    await supplyChainContract.methods
+    try{
+      await supplyChainContract.methods
       .shipToThirdParty(id)
       .send({ from: roles.manufacturer, gas: 1000000 })
       .on("transactionHash", function (hash) {
         handleSetTxhash(id, hash);
       });
     setCount(0);
+    }catch{
+      setalertText("You are not the owner of the Product");
+    }
+    
   };
 
   return (
@@ -120,6 +126,7 @@ export default function ShipManufacture(props) {
             </h3>
 
             <div>
+            <p><b style={{ color: "red" }}>{alertText.length !== 0 ? alertText : ""}</b></p>
               <Paper className={classes.TableRoot}>
                 <TableContainer className={classes.TableContainer}>
                   <Table stickyHeader aria-label="sticky table">

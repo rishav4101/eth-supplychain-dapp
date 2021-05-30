@@ -68,7 +68,7 @@ function RoleAdmin(props) {
     customer : customerRole
   })
 
-  localStorage.setItem("cRole", customerRole);
+   localStorage.setItem("cRole", customerRole);
     await supplyChainContract.methods.addCustomerRole(customerRole).send({ from: accounts[0], gas:100000 })
     .then(console.log);
 

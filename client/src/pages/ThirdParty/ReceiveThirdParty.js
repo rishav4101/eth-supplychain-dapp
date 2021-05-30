@@ -24,6 +24,7 @@ export default function ReceiveThirdParty(props) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = React.useState(false);
   const classes = useStyles();
+  const [alertText, setalertText] = React.useState("");
   const navItem = [
     ["Buy Product", "/ThirdParty/allProducts"],
     ["Receive Product", "/ThirdParty/receive"],
@@ -67,14 +68,20 @@ export default function ReceiveThirdParty(props) {
   }, [count]);
 
   const handleReceiveButton = async (id, long, lat) => {
-    await supplyChainContract.methods
+    try{
+      await supplyChainContract.methods
       .receiveByThirdParty(parseInt(id), long, lat)
       .send({ from: roles.thirdparty, gas: 1000000 })
       .on("transactionHash", function (hash) {
         handleSetTxhash(id, hash);
       });
+    
     setCount(0);
     setOpen(false);
+    }catch{
+      setalertText("You are not the owner of the product");
+    }
+    
   };
 
   const handleSetTxhash = async (id, hash) => {
@@ -115,6 +122,7 @@ export default function ReceiveThirdParty(props) {
               open={open}
               handleClose={handleClose}
               handleReceiveButton={handleReceiveButton}
+              aText = {alertText}
             />
 
             <h1 className={classes.pageHeading}>Products to be Received</h1>

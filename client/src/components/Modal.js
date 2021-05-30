@@ -11,6 +11,7 @@ export default function ProductModal({
   open,
   handleClose,
   handleReceiveButton,
+  aText
 }) {
   const [rdata, setRdata] = React.useState({
     long: "",
@@ -206,6 +207,7 @@ export default function ProductModal({
                         >
                           Recieve
                         </Button>
+                        <p><b style={{ color: "red" }}>{aText.length !== 0 ? aText : ""}</b></p>
                       </>
                     ) : (
                       <> </>

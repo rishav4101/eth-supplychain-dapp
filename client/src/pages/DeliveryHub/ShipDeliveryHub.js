@@ -26,6 +26,7 @@ export default function ShipDeliveryHub(props) {
     ["Receive Product", "/DeliveryHub/receive"],
     ["Ship Product", "/DeliveryHub/ship"],
   ];
+  const [alertText, setalertText] = React.useState("");
   React.useEffect(() => {
     (async () => {
       setLoading(true);
@@ -69,13 +70,17 @@ export default function ShipDeliveryHub(props) {
   };
 
   const handleShipButton = async (id) => {
-    await supplyChainContract.methods
+    try{
+      await supplyChainContract.methods
       .shipByDeliveryHub(id)
       .send({ from: roles.deliveryhub, gas: 1000000 })
       .on("transactionHash", function (hash) {
         handleSetTxhash(id, hash);
       });
     setCount(0);
+    }catch{
+      setalertText("You are not the owner of the Product");
+    }
   };
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -118,6 +123,7 @@ export default function ShipDeliveryHub(props) {
               </h3>
 
               <div>
+              <p><b style={{ color: "red" }}>{alertText.length !== 0 ? alertText : ""}</b></p>
                 <Paper className={classes.TableRoot}>
                   <TableContainer className={classes.TableContainer}>
                     <Table stickyHeader aria-label="sticky table">
