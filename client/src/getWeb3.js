@@ -27,7 +27,7 @@ const getWeb3 = () =>
       // Fallback to localhost; use dev console port by default...
       else {
         const provider = new Web3.providers.HttpProvider(
-          "http://127.0.0.1:7545"
+         process.env.REACT_APP_RPC
         );
         const web3 = new Web3(provider);
         
