@@ -18,57 +18,61 @@ function RoleAdmin(props) {
   const navItem = [];
 
   const handleAddManufacturerRole = async () => {
-    await supplyChainContract.methods.addManufacturerRole(manufacturerRole).send({ from: accounts[0], gas:100000 })
-    .then(console.log);
-
     await setRoles({
       ...roles, 
       manufacturer : manufacturerRole
     })
 
     localStorage.setItem("mRole", manufacturerRole);
+    await supplyChainContract.methods.addManufacturerRole(manufacturerRole).send({ from: accounts[0], gas:100000 })
+    .then(console.log);
+
+    
 
     setManufacturerRole("");
   }
   
   const handleAddThirdPartyRole = async () => {
-    await supplyChainContract.methods.addThirdPartyRole(thirdPartyRole).send({ from: accounts[0], gas:100000 })
-    .then(console.log);
-
     await setRoles({
-        ...roles, 
-        thirdparty : thirdPartyRole
+      ...roles, 
+      thirdparty : thirdPartyRole
     })
 
     localStorage.setItem("tpRole", thirdPartyRole);
+    await supplyChainContract.methods.addThirdPartyRole(thirdPartyRole).send({ from: accounts[0], gas:100000 })
+    .then(console.log);
+
+    
 
     setThirdPartyRole("");
   }
 
   const handleAddDeliveryHubRole = async () => {
+    await setRoles({
+      ...roles, 
+      deliveryhub : deliveryHubRole
+  })
+
+   localStorage.setItem("dhRole", deliveryHubRole);
     await supplyChainContract.methods.addDeliveryHubRole(deliveryHubRole).send({ from: accounts[0], gas:100000 })
     .then(console.log);
 
-    await setRoles({
-        ...roles, 
-        deliveryhub : deliveryHubRole
-    })
-
-    localStorage.setItem("dhRole", deliveryHubRole);
+    
 
     setDeliveryHubRole("");
   }
 
   const handleAddCustomerRole = async () => {
+    await setRoles({
+      ...roles, 
+    customer : customerRole
+  })
+
+  localStorage.setItem("cRole", customerRole);
     await supplyChainContract.methods.addCustomerRole(customerRole).send({ from: accounts[0], gas:100000 })
     .then(console.log);
 
-    await setRoles({
-        ...roles, 
-      customer : customerRole
-    })
-
-    localStorage.setItem("cRole", customerRole);
+   
 
     setCustomerRole("");
   }
