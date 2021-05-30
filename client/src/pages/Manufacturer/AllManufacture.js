@@ -30,7 +30,6 @@ export default function AllManufacture(props) {
       setLoading(true);
       const cnt = await supplyChainContract.methods.fetchProductCount().call();
       setCount(cnt);
-      console.log(count);
     })();
 
     (async () => {
@@ -81,7 +80,6 @@ export default function AllManufacture(props) {
 
   const handleClick = async (prod) => {
     await setModalData(prod);
-    console.log(modalData);
     setOpen(true);
   };
 

@@ -13,7 +13,6 @@ export default function Manufacture(props) {
     const { roles } = useRole();
     const [loading, setLoading] = React.useState(false);
     const [fvalid, setfvalid] = React.useState(false);
-    console.log(roles);
     const navItem = [
         ["Add Product", "/manufacturer/manufacture"],
         ["Ship Product", "/manufacturer/ship"],
@@ -40,7 +39,7 @@ export default function Manufacture(props) {
 
     const handleSubmitManufacturerForm = async () => {
         setLoading(true);
-        console.log(parseInt(manuForm.id));
+        
         if (manuForm.manufacturerName !== "" && manuForm.manufacturerDetails !== "" && manuForm.manufacturerLongitude !== "" && manuForm.manufacturerLatitude !== "" && manuForm.productName !== "" && manuForm.productCode !== 0 && manuForm.productPrice !== 0 && manuForm.productCategory !== "") {
             setfvalid(false);
             await supplyChainContract.methods.manufactureProduct(manuForm.manufacturerName, manuForm.manufacturerDetails, manuForm.manufacturerLongitude, manuForm.manufacturerLatitude, manuForm.productName, parseInt(manuForm.productCode), parseInt(manuForm.productPrice), manuForm.productCategory).send({ from: roles.manufacturer, gas: 999999 })

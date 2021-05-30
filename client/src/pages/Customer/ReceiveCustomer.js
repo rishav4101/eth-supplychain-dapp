@@ -34,7 +34,6 @@ export default function ReceiveCustomer(props) {
       setLoading(true);
       const cnt = await supplyChainContract.methods.fetchProductCount().call();
       setCount(cnt);
-      console.log(count);
     })();
 
     (async () => {
@@ -99,7 +98,6 @@ export default function ReceiveCustomer(props) {
 
   const handleClick = async (prod) => {
     await setModalData(prod);
-    console.log(modalData);
     setOpen(true);
   };
 

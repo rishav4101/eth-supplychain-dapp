@@ -72,12 +72,10 @@ export default function Explorer(props) {
       temp.push(b);
       temp.push(c);
       setProductData(temp);
-      console.log(productData);
       arr = [];
       var l = await supplyChainContract.methods
         .fetchProductHistoryLength(parseInt(search))
         .call();
-      console.log(l);
 
       arr = [];
       for (var i = 0; i < l; i++) {
@@ -95,7 +93,6 @@ export default function Explorer(props) {
         temp.push(k);
         temp.push(j);
         arr.push(temp);
-        console.log(arr);
       }
       setProductHistory(arr);
     } catch (e) {
@@ -110,13 +107,11 @@ export default function Explorer(props) {
 
   const handleClick = async (prod) => {
     await setModalData(prod);
-    console.log(modalData);
     setOpen(true);
   };
 
   const fetchTxRecipt = async (hash) => {
     web3.eth.getTransaction(hash).then((recipt) => {
-      console.log(recipt);
       setModalReciptData(recipt);
       setOpenRecipt(true);
     });
