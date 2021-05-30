@@ -48,7 +48,17 @@ export default function Manufacture(props) {
                 .on('transactionHash', function (hash) {
                     handleSetTxhash(hash);
                 });
-
+                setManuForm({
+                    id: 0,
+                    manufacturerName: "",
+                    manufacturerDetails: "",
+                    manufacturerLongitude: "",
+                    manufacturerLatitude: "",
+                    productName: "",
+                    productCode: 0,
+                    productPrice: 0,
+                    productCategory: "",
+                })
         } else {
             setfvalid(true);
         }
