@@ -61,7 +61,7 @@
 
 ## Description
 Supply chain is always hard to manage and requires a lot of admistrative machinery. However, when managed with smart contracts using blockchain, a lot of the paperwork is reduced.
-Also it leads to an increase in transparency and helps to build an efficient Root of Trust. Spply-chain-dapp is such an implementation of a supply chian management system wich uses blockchain to ensure a transparent and secure transfer of product from the manufacturer to the customer via the online e-commerce websites. 
+Also it leads to an increase in the transparency and helps to build an efficient Root of Trust. Supply-chain-dapp is such an implementation of a supply chain management system which uses blockchain to ensure a transparent and secure transfer of product from the manufacturer to the customer via the online e-commerce websites. 
 ## Architecture
 The smart contract is being written with Solidity which is then compiled, migrated and deployed using Truffle.js on the local blockchain network created using Ganache-cli.The frontend uses Web3.js to communicate with the smart contract and local blockchain network and is written using React.js framework for better component and state lifecycle management.The requests from user are forwarded to frontend through Nginx(load balancer) and Express.js for dynamic routing.
 <p align="centre">  
@@ -141,6 +141,10 @@ ganache-cli --accounts 10 --gasLimit 6721975000
 If you want to run the ganache-cli on docker then use the following command
 ```Bash
 sudo docker run -d -p 8545:8545 trufflesuite/ganache-cli:latest -h 0.0.0.0 --accounts 10 --gasLimit 6721975000
+```
+Migrate the contracts
+```Bash
+truffle migrate --network=develop --reset
 ```
 Open a second terminal and enter the client folder
 ```Bash
