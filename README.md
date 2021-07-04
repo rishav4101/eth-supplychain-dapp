@@ -74,6 +74,9 @@ The smart contract is being written with Solidity which is then compiled, migrat
 </p>
 
 ## Working
+<img src="https://user-images.githubusercontent.com/55195287/124394128-9646a600-dd1b-11eb-8bf1-233320762f1c.png" />
+<img src="https://user-images.githubusercontent.com/55195287/124394171-d4dc6080-dd1b-11eb-87b2-127daa32481a.png" />
+
 <p>
   The lifecycle of a product starts when <strong>manufactureProduct()</strong> is called(while making an entry) after the final product is manufactured and the product and manufacturer details are entered in the blockchain. The <strong>productHistory[]</strong> gets initialized and the current product data is stored with the current owner(manufacturer).
 </p>
@@ -95,6 +98,7 @@ The smart contract is being written with Solidity which is then compiled, migrat
 <p>
   The hashes(read certificates) are generated using the Solidity cryptographic function <strong>keccak256()</strong> which implements a SHA-3 hash in the blockchain setup. <strong>keccak256()</strong> generates a secure 256-bit hash which is the main basis of security in the entire mainnet apart from the smart contracts being immutable. In our supply chain setup certificates are generated at every stage of shipping of the product. 
 </p>
+
 
 ## Contract Diagrams
 ### Activity Diagram
