@@ -4,62 +4,62 @@ import Backdrop from '@material-ui/core/Backdrop'
 import Fade from '@material-ui/core/Fade'
 import { useStyles } from './Styles'
 
-export default function ReciptModal({ recipt, openRecipt, handleCloseRecipt }) {
+const ReceiptModal = ({ receipt, openReceipt, handleCloseReceipt }) => {
   const classes = useStyles()
   return (
     <Modal
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       className={classes.modal}
-      open={openRecipt}
-      onClose={handleCloseRecipt}
+      open={openReceipt}
+      onClose={handleCloseReceipt}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
         timeout: 500
       }}
     >
-      <Fade in={openRecipt}>
-        <div className={classes.Reciptpaper}>
-          <h1 className={classes.pageHeading}>Recipt</h1>
+      <Fade in={openReceipt}>
+        <div className={classes.ReceiptPaper}>
+          <h1 className={classes.pageHeading}>Receipt</h1>
           <div>
-            {recipt !== null ? (
+            {receipt !== null ? (
               <>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Tx hash: </div>
-                  <div className={classes.dCol2}>{recipt.hash}</div>
+                  <div className={classes.dCol2}>{receipt.hash}</div>
                 </div>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Block hash: </div>
-                  <div className={classes.dCol2}>{recipt.blockHash}</div>
+                  <div className={classes.dCol2}>{receipt.blockHash}</div>
                 </div>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Block Number: </div>
-                  <div className={classes.dCol2}>{recipt.blockNumber}</div>
+                  <div className={classes.dCol2}>{receipt.blockNumber}</div>
                 </div>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>From: </div>
-                  <div className={classes.dCol2}>{recipt.from}</div>
+                  <div className={classes.dCol2}>{receipt.from}</div>
                 </div>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>To: </div>
-                  <div className={classes.dCol2}>{recipt.to}</div>
+                  <div className={classes.dCol2}>{receipt.to}</div>
                 </div>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Nonce: </div>
-                  <div className={classes.dCol2}>{recipt.nonce}</div>
+                  <div className={classes.dCol2}>{receipt.nonce}</div>
                 </div>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Input: </div>
-                  <div className={classes.dCol2}>{recipt.input}</div>
+                  <div className={classes.dCol2}>{receipt.input}</div>
                 </div>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Gas: </div>
-                  <div className={classes.dCol2}>{recipt.gas}</div>
+                  <div className={classes.dCol2}>{receipt.gas}</div>
                 </div>
                 <div className={classes.dRow}>
                   <div className={classes.dCol1}>Value: </div>
-                  <div className={classes.dCol2}>{recipt.value}</div>
+                  <div className={classes.dCol2}>{receipt.value}</div>
                 </div>
               </>
             ) : (
@@ -71,3 +71,5 @@ export default function ReciptModal({ recipt, openRecipt, handleCloseRecipt }) {
     </Modal>
   )
 }
+
+export default ReceiptModal

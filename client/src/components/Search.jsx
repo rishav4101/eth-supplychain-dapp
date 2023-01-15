@@ -32,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function CustomizedInputBase(props) {
+const CustomizedInputBase = (props) => {
   const classes = useStyles()
   const [search, setSearch] = React.useState('')
-  const onTextChage = async (e) => {
+  const onTextChange = async (e) => {
     setSearch(e.target.value)
   }
 
@@ -45,9 +45,9 @@ export default function CustomizedInputBase(props) {
         <input
           className={classes.input}
           placeholder="Enter Product Universal ID"
-          onChange={onTextChage}
-          onKeyDown={(e) =>
-            e.key === 'Enter' ? props.findProduct(search) : onTextChage
+          onChange={onTextChange}
+          onKeyUp={(e) =>
+            e.key === 'Enter' ? props.findProduct(search) : onTextChange
           }
         />
         <IconButton
@@ -62,3 +62,5 @@ export default function CustomizedInputBase(props) {
     </>
   )
 }
+
+export default CustomizedInputBase

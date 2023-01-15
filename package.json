@@ -1,8 +1,16 @@
 {
-    "name": "eth-supplychain-dapp",
-    "version": "0.1.0",
-    "dependencies": {
-        "solc": "^0.8.4",
-        "truffle": "^5.3.7"
-    }
+  "name": "truffle",
+  "version": "1.0.0",
+  "description": "Truffle project with SimpleStorage contract",
+  "main": "truffle-config.js",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "~2.0.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "truffle test",
+    "alsdfk": "dalsdkjf"
+  },
+  "author": "",
+  "license": "MIT"
 }

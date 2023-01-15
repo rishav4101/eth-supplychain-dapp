@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.21 <0.9.0;
+pragma solidity >=0.4.22 <0.9.0;
 
 library Structure {
     enum State {
@@ -13,51 +13,57 @@ library Structure {
         ShippedByDeliveryHub,
         ReceivedByCustomer
     }
-    struct ManufactureDetails {
-        address manufacturer;
-        string manufacturerName;
-        string manufacturerDetails;
-        string manufacturerLongitude;
-        string manufacturerLatitude;
-        uint256 manufacturedDate;
+
+    struct Company {
+        address payable addr;
+        string code;
+        string name;
+        string status;
+        string legalType;
+        string legalRepresentative;
+        uint256 startDate;
+        string longitude;
+        string latitude;
+        string role;
     }
-    struct ProductDetails {
-        string productName;
-        uint256 productCode;
-        uint256 productPrice;
-        string productCategory;
+
+    struct Customer {
+        address payable addr;
+        string id;
+        string name;
+        string status;
+        string addre;
+        string phoneNumber1;
+        string phoneNumber2;
+        string mail;
+        string role;
     }
-    struct ThirdPartyDetails {
-        address thirdParty;
-        string thirdPartyLongitude;
-        string thirdPartyLatitude;
+
+    struct ProductDetail {
+        string name;
+        uint256 price;
+        string category;
+        string status;
+        uint256 mfg;
+        uint256 exp;
+        uint256 createDate;
+        uint256 updateDate;
     }
-    struct DeliveryHubDetails {
-        address deliveryHub;
-        string deliveryHubLongitude;
-        string deliveryHubLatitude;
-    }
+
     struct Product {
         uint256 uid;
-        uint256 sku;
+        string sku;
         address owner;
         State productState;
-        ManufactureDetails manufacturer;
-        ThirdPartyDetails thirdparty;
-        ProductDetails productdet;
-        DeliveryHubDetails deliveryhub;
+        address manufacturer;
+        address thirdParty;
+        address deliveryHub;
+        ProductDetail productDetail;
         address customer;
         string transaction;
     }
 
     struct ProductHistory {
         Product[] history;
-    }
-
-    struct Roles {
-        bool Manufacturer;
-        bool ThirdParty;
-        bool DeliveryHub;
-        bool Customer;
     }
 }
